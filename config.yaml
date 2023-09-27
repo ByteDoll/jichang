@@ -3214,9 +3214,6 @@ proxy-groups:
   tolerance: 200
 
 rules:
-  - DOMAIN-SUFFIX,freeproxy.click,DIRECT
-  - DOMAIN-KEYWORD,freeproxy,DIRECT
-  - DOMAIN,freeproxy.click,DIRECT
   - DOMAIN-SUFFIX,google.com,auto
   - DOMAIN-KEYWORD,google,auto
   - DOMAIN,google.com,auto
