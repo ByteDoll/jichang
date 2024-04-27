@@ -1,855 +1,1009 @@
-# FreeProxy v1.1
 mixed-port: 7890
+allow-lan: true
+bind-address: '*'
 mode: rule
-external-controller: 127.0.0.1:9090
-
+log-level: info
+external-controller: '127.0.0.1:9090'
 dns:
-  enable: false
-  listen: 0.0.0.0:53
-  default-nameserver:
-    - 114.114.114.114
-    - 8.8.8.8
-  fake-ip-range: 198.18.0.1/16
-  nameserver:
-    - 114.114.114.114
-    - 8.8.8.8
-    - tls://dns.rubyfish.cn:853
-    - https://1.1.1.1/dns-query
-    - dhcp://en0
-
+    enable: false
+    ipv6: false
+    default-nameserver: [223.5.5.5, 119.29.29.29]
+    enhanced-mode: fake-ip
+    fake-ip-range: 198.18.0.1/16
+    use-hosts: true
+    nameserver: [114.114.114.114, 8.8.8.8]
+    fallback: ['https://doh.dns.sb/dns-query', 'https://dns.cloudflare.com/dns-query', 'https://dns.twnic.tw/dns-query', 'tls://8.8.4.4:853']
+    fallback-filter: { geoip: true, ipcidr: [240.0.0.0/4, 0.0.0.0/32] }
 proxies:
-  - {name: Test, server: 127.0.0.1, port: 7070, type: socks5}
-  - {"name": "🇨🇳Pool__01", "server": "222.186.20.102", "type": "ssr", "port": 41228, "password": "http://cc.ax/", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "165400:Hr2aXO", "obfs": "plain", "obfs-param": "data.bilibili.com/ed5a2165400"}
-  - {"name": "🇨🇳Pool__15 |259.00Mb", "server": "120.232.177.232", "type": "ssr", "port": 1088, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "7521:12HsOu", "obfs": "plain", "obfs-param": "TG@wangcai_1"}
-  - {"name": "🇫🇷Pool__27_ 2.31Mb | 9.24Mb", "server": "51.158.195.96", "type": "ss", "port": 110, "password": "asdKkaskJKfnsa", "cipher": "aes-256-cfb"}
-  - {"name": "🇫🇷Pool__46_ 2.74Mb |10.32Mb", "server": "51.158.195.96", "type": "ss", "port": 443, "password": "asdKkaskJKfnsa", "cipher": "aes-256-cfb"}
-  - {"name": "🇨🇳Pool_🇨🇳CN_125 |263.00Mb", "server": "120.232.177.250", "type": "ssr", "country": "🇨🇳CN", "port": 1083, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "40575:fV3Nxq", "obfs": "plain", "obfs-param": "TG@wangcai_1"}
-  - {"name": "🇨🇳Pool_🇨🇳CN_141 |254.00Mb", "server": "120.232.177.250", "type": "ssr", "country": "🇨🇳CN", "port": 1080, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "40575:fV3Nxq", "obfs": "plain"}
-  - {"name": "🇨🇳Pool_🇨🇳CN_154 |106.00Mb", "server": "120.232.177.250", "type": "ssr", "country": "🇨🇳CN", "port": 1092, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "7521:12HsOu", "obfs": "plain"}
-  - {"name": "🇨🇳Pool_🇨🇳CN_161 |107.00Mb", "server": "122.193.251.200", "type": "ssr", "country": "🇨🇳CN", "port": 5951, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "40575:fV3Nxq", "obfs": "plain"}
-  - {"name": "🇨🇳Pool_🇨🇳CN_166 |115.00Mb", "server": "120.232.177.250", "type": "ssr", "country": "🇨🇳CN", "port": 1090, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "7521:12HsOu", "obfs": "plain"}
-  - {"name": "🇨🇳Pool_🇨🇳CN_167 |87.00Mb", "server": "120.232.177.250", "type": "ssr", "country": "🇨🇳CN", "port": 1074, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "40575:fV3Nxq", "obfs": "plain"}
-  - {"name": "🇨🇳Pool_🇨🇳CN_170 |66.00Mb", "server": "122.193.251.200", "type": "ssr", "country": "🇨🇳CN", "port": 5950, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "40575:fV3Nxq", "obfs": "plain", "obfs-param": "TG@wangcai_1"}
-  - {"name": "🇨🇳Pool_🇨🇳CN_171 |103.00Mb", "server": "122.193.251.201", "type": "ssr", "country": "🇨🇳CN", "port": 5951, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "40575:fV3Nxq", "obfs": "plain", "obfs-param": "TG@wangcai_1"}
-  - {"name": "🇨🇳Pool_🇨🇳CN_172 |64.00Mb", "server": "122.193.251.200", "type": "ssr", "country": "🇨🇳CN", "port": 5958, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "40575:fV3Nxq", "obfs": "plain", "obfs-param": "TG@wangcai_1"}
-  - {"name": "🇨🇳Pool_🇨🇳CN_192 |111.00Mb", "server": "120.232.177.250", "type": "ssr", "country": "🇨🇳CN", "port": 1094, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "7521:12HsOu", "obfs": "plain"}
-  - {"name": "🇨🇳Pool_🇨🇳CN_194 |235.00Mb", "server": "120.232.177.250", "type": "ssr", "country": "🇨🇳CN", "port": 1082, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "40575:fV3Nxq", "obfs": "plain", "obfs-param": "TG@wangcai_1"}
-  - {"name": "🇨🇳Pool_🇨🇳CN_198 |95.00Mb", "server": "120.232.177.250", "type": "ssr", "country": "🇨🇳CN", "port": 1073, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "40575:fV3Nxq", "obfs": "plain"}
-  - {"name": "🇨🇳Pool_🇨🇳CN_199 |64.00Mb", "server": "122.193.251.200", "type": "ssr", "country": "🇨🇳CN", "port": 5957, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "40575:fV3Nxq", "obfs": "plain", "obfs-param": "TG@wangcai_1"}
-  - {"name": "🇨🇳Pool_🇨🇳CN_202 |109.00Mb", "server": "120.232.177.250", "type": "ssr", "country": "🇨🇳CN", "port": 1092, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "40575:fV3Nxq", "obfs": "plain", "obfs-param": "TG@wangcai_1"}
-  - {"name": "🇨🇳Pool_🇨🇳CN_203 |118.00Mb", "server": "122.193.251.200", "type": "ssr", "country": "🇨🇳CN", "port": 5952, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "7521:12HsOu", "obfs": "plain"}
-  - {"name": "🇨🇳Pool_🇨🇳CN_204 |77.00Mb", "server": "122.193.251.201", "type": "ssr", "country": "🇨🇳CN", "port": 5955, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "7521:12HsOu", "obfs": "plain"}
-  - {"name": "🇨🇳Pool_🇨🇳CN_207 |72.00Mb", "server": "122.193.251.200", "type": "ssr", "country": "🇨🇳CN", "port": 5955, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "7521:12HsOu", "obfs": "plain"}
-  - {"name": "🇨🇳Pool_🇨🇳CN_208 |69.00Mb", "server": "122.193.251.201", "type": "ssr", "country": "🇨🇳CN", "port": 5956, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "40575:fV3Nxq", "obfs": "plain", "obfs-param": "TG@wangcai_1"}
-  - {"name": "🇨🇳Pool_🇨🇳CN_209 |112.00Mb", "server": "122.193.251.200", "type": "ssr", "country": "🇨🇳CN", "port": 5951, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "7521:12HsOu", "obfs": "plain"}
-  - {"name": "🇨🇳Pool_🇨🇳CN_38 |91.00Mb", "server": "120.232.177.250", "type": "ssr", "country": "🇨🇳CN", "port": 1070, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "40575:fV3Nxq", "obfs": "plain"}
-  - {"name": "🇨🇳Pool_🇨🇳CN_39 |85.00Mb", "server": "120.232.177.250", "type": "ssr", "country": "🇨🇳CN", "port": 1072, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "40575:fV3Nxq", "obfs": "plain", "obfs-param": "TG@wangcai_1"}
-  - {"name": "🇨🇳Pool_🇨🇳CN_75 |84.00Mb", "server": "122.193.251.201", "type": "ssr", "country": "🇨🇳CN", "port": 5951, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "7521:12HsOu", "obfs": "plain"}
-  - {"name": "🇨🇳Pool_🇨🇳CN_76 |68.00Mb", "server": "122.193.251.201", "type": "ssr", "country": "🇨🇳CN", "port": 5959, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "7521:12HsOu", "obfs": "plain"}
-  - {"name": "🇨🇳Pool_🇨🇳CN_78 |66.00Mb", "server": "122.193.251.200", "type": "ssr", "country": "🇨🇳CN", "port": 5952, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "40575:fV3Nxq", "obfs": "plain"}
-  - {"name": "🇨🇳Pool_🇨🇳CN_79 |73.00Mb", "server": "122.193.251.201", "type": "ssr", "country": "🇨🇳CN", "port": 5952, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "40575:fV3Nxq", "obfs": "plain", "obfs-param": "TG@wangcai_1"}
-  - {"name": "🇨🇳Pool_🇨🇳CN_81 |71.00Mb", "server": "122.193.251.201", "type": "ssr", "country": "🇨🇳CN", "port": 5957, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "7521:12HsOu", "obfs": "plain", "obfs-param": "TG@wangcai_1"}
-  - {"name": "🇨🇳Pool_🇨🇳CN_83 |105.00Mb", "server": "120.232.177.250", "type": "ssr", "country": "🇨🇳CN", "port": 1093, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "40575:fV3Nxq", "obfs": "plain"}
-  - {"name": "🇫🇷Pool_🇫🇷FR_18", "server": "51.158.195.96", "type": "ss", "country": "🇫🇷FR", "port": 443, "password": "asdKkaskJKfnsa", "cipher": "aes-256-cfb"}
-  - {"name": "🇫🇷Pool_🇫🇷FR_19", "server": "51.158.195.96", "type": "ss", "country": "🇫🇷FR", "port": 80, "password": "asdKkaskJKfnsa", "cipher": "aes-256-cfb"}
-  - {"name": "🇫🇷Pool_🇫🇷FR_21", "server": "51.158.195.96", "type": "ss", "country": "🇫🇷FR", "port": 110, "password": "asdKkaskJKfnsa", "cipher": "aes-256-cfb"}
-  - {"name": "🇫🇷Pool_🇫🇷FR_240 |13.34Mb", "server": "51.158.195.96", "type": "ss", "country": "🇫🇷FR", "port": 80, "password": "asdKkaskJKfnsa", "cipher": "aes-256-cfb"}
-  - {"name": "🇭🇰Pool_🇭🇰HK_22", "server": "150.107.46.21", "type": "ssr", "country": "🇭🇰HK", "port": 8083, "password": "iFqnzSscN", "cipher": "aes-256-cfb", "protocol": "origin", "obfs": "tls1.2_ticket_auth", "group": "Update-二爷"}
-  - {"name": "🇭🇰Pool_🇭🇰HK_247 |436.00Mb", "server": "150.107.46.21", "type": "ssr", "country": "🇭🇰HK", "port": 8083, "password": "iFqnzSscN", "cipher": "aes-256-cfb", "protocol": "origin", "obfs": "tls1.2_ticket_auth", "group": "Update-二爷"}
-  - {"name": "🇫🇷Pool_🇳🇱 NL_267 |17.02Mb", "server": "51.158.195.96", "type": "ss", "country": "🇳🇱 NL", "port": 110, "password": "asdKkaskJKfnsa", "cipher": "aes-256-cfb"}
-  - {"name": "🇫🇷Pool_🇳🇱 NL_268 |11.42Mb", "server": "51.158.195.96", "type": "ss", "country": "🇳🇱 NL", "port": 443, "password": "asdKkaskJKfnsa", "cipher": "aes-256-cfb"}
-  - {"name": "🇨🇦Relay_ |18.72Mb", "server": "172.67.229.13", "type": "vmess", "port": 2086, "udp": true, "uuid": "58fe1542-5290-40ad-815a-77707a81afe5", "alterId": 0, "cipher": "chacha20-poly1305", "network": "ws", "http-opts": {}, "h2-opts": {}, "ws-opts": {"path": "/IOebhLMhl1CTbFHbL95myfRX2", "headers": {"Host": "ca6.tehme100.fun"}}}
-  - {"name": "🇨🇦Relay_ |30.22Mb", "server": "172.67.229.13", "type": "vmess", "port": 80, "uuid": "7300c5af-8657-48ea-ba35-4cc1176c5220", "alterId": 0, "cipher": "chacha20-poly1305", "network": "ws", "http-opts": {}, "h2-opts": {}, "skip-cert-verify": true, "ws-opts": {"path": "/RO4vpgRqVSLPRRQi97uOJujdeO", "headers": {"Host": "de55.v2-teh.fun"}}}
-  - {"name": "🇨🇳Relay_-🇨🇳CN_16 |57.30Mb", "server": "cm01.newcome.xyz", "type": "ssr", "port": 7704, "password": "jFa4F1", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "obfs": "plain", "group": "SSRProvider"}
-  - {"name": "🇦🇺Relay_-🇨🇳CN_17 |41.46Mb", "server": "snxao52s.xn--8zrwc997j78ud7a.com", "type": "ssr", "port": 12107, "password": "iuo7tbw4ks", "cipher": "aes-256-cfb", "protocol": "auth_aes128_sha1", "protocol-param": "90048:xqUpRL", "obfs": "plain", "obfs-param": "5e2e190048.baidu.com"}
-  - {"name": "🇨🇳Relay_-🇨🇳CN_19 |480.00Mb", "server": "bs3.jymzffbquawl.com", "type": "ssr", "port": 3025, "password": "renzhecloud", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "54984:89iw22e0jvl", "obfs": "plain", "obfs-param": "48d3854984.microsoft.com"}
-  - {"name": "🇫🇷Relay_-🇩🇪DE_04_ 2.20Mb | 7.95Mb", "server": "135.125.172.153", "type": "ss", "port": 443, "password": "asdKkaskJKfnsa", "cipher": "aes-256-cfb"}
-  - {"name": "🇨🇦Relay_🇨🇦CA |11.17Mb", "server": "23.227.39.84", "type": "vmess", "country": "🇨🇦CA", "port": 8080, "uuid": "969f1909-c0d3-4c30-813d-3aec5c838b7d", "alterId": 0, "cipher": "auto", "network": "ws", "servername": "dongtaiwang13.dtku47.xyz", "http-opts": {}, "h2-opts": {}, "skip-cert-verify": true, "ws-opts": {"path": "/1IKYjV0r/", "headers": {"HOST": "dongtaiwang13.dtku47.xyz"}}}
-  - {"name": "🇨🇦Relay_🇨🇦CA-🇨🇦CA_66_ 3.56Mb", "server": "dongtaiwang3.com", "type": "vmess", "country": "🇨🇦CA", "port": 8080, "uuid": "969f1909-c0d3-4c30-813d-3aec5c838b7d", "alterId": 0, "cipher": "auto", "network": "ws", "ws-path": "/1IKYjV0r/", "servername": "dongtaiwang13.dtku47.xyz", "ws-headers": {"HOST": "dongtaiwang13.dtku47.xyz"}, "http-opts": {}, "h2-opts": {}, "skip-cert-verify": true}
-  - {"name": "🇨🇳Relay_🇨🇳 CN | 5.56Mb", "server": "tg_mfbpn_m1.52vpn.eu.org", "type": "vmess", "country": "🇨🇳 CN", "port": 11006, "uuid": "07b3d36d-1bbb-3584-aabd-de2c77878934", "alterId": 0, "cipher": "auto", "network": "tcp", "http-opts": {}, "h2-opts": {}, "skip-cert-verify": true}
-  - {"name": "🇨🇳Relay_🇨🇳 CN | 6.14Mb", "server": "tg_mfbpn_m1.52vpn.eu.org", "type": "vmess", "country": "🇨🇳 CN", "port": 11106, "uuid": "07b3d36d-1bbb-3584-aabd-de2c77878934", "alterId": 0, "cipher": "auto", "network": "tcp", "http-opts": {}, "h2-opts": {}, "skip-cert-verify": true}
-  - {"name": "🇨🇳Relay_🇨🇳 CN |27.06Mb", "server": "tg_mfbpn_m1.52vpn.eu.org", "type": "vmess", "country": "🇨🇳 CN", "port": 11103, "uuid": "07b3d36d-1bbb-3584-aabd-de2c77878934", "alterId": 0, "cipher": "auto", "network": "tcp", "http-opts": {}, "h2-opts": {}, "skip-cert-verify": true}
-  - {"name": "🇨🇳Relay_🇨🇳 CN |32.32Mb", "server": "tg_mfbpn_m1.52vpn.eu.org", "type": "vmess", "country": "🇨🇳 CN", "port": 11104, "uuid": "07b3d36d-1bbb-3584-aabd-de2c77878934", "alterId": 0, "cipher": "auto", "network": "tcp", "http-opts": {}, "h2-opts": {}, "skip-cert-verify": true}
-  - {"name": "🇨🇳Relay_🇨🇳 CN |35.47Mb", "server": "tg_mfbpn_m1.52vpn.eu.org", "type": "vmess", "country": "🇨🇳 CN", "port": 11112, "uuid": "07b3d36d-1bbb-3584-aabd-de2c77878934", "alterId": 0, "cipher": "auto", "network": "tcp", "http-opts": {}, "h2-opts": {}, "skip-cert-verify": true}
-  - {"name": "🇨🇳Relay_🇨🇳 CN |52.88Mb", "server": "tg_mfbpn_m1.52vpn.eu.org", "type": "vmess", "country": "🇨🇳 CN", "port": 11005, "uuid": "07b3d36d-1bbb-3584-aabd-de2c77878934", "alterId": 0, "cipher": "auto", "network": "tcp", "http-opts": {}, "h2-opts": {}, "skip-cert-verify": true}
-  - {"name": "🇨🇳Relay_🇨🇳 CN-🇲🇾MY_32", "server": "tg_mfbpn_m1.52vpn.eu.org", "type": "vmess", "country": "🇨🇳 CN", "port": 11014, "uuid": "07b3d36d-1bbb-3584-aabd-de2c77878934", "alterId": 0, "cipher": "auto", "network": "tcp", "http-opts": {}, "h2-opts": {}, "skip-cert-verify": true}
-  - {"name": "🇨🇳Relay_🇨🇳CN |10.99Mb", "server": "112.28.208.10", "type": "vmess", "country": "🇨🇳CN", "port": 46602, "uuid": "418048af-a293-4b99-9b0c-98ca3580dd24", "alterId": 64, "cipher": "auto", "network": "tcp", "http-opts": {}, "h2-opts": {}, "skip-cert-verify": true}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_03", "server": "cm01.newcome.xyz", "type": "ssr", "country": "🇨🇳CN", "port": 3702, "password": "jFa4F1", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "46961:1210-Tha", "obfs": "plain", "obfs-param": "5d3ee46961.microsoft.com", "group": "Update-二爷"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_04", "server": "cm03.newcome.xyz", "type": "ssr", "country": "🇨🇳CN", "port": 6702, "password": "jFa4F1", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "84263:3gj7aB", "obfs": "plain", "obfs-param": "TG@ripaojiedian", "group": "Update-二爷"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_05", "server": "cm01.newcome.xyz", "type": "ssr", "country": "🇨🇳CN", "port": 7706, "password": "jFa4F1", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "84263:3gj7aB", "obfs": "plain", "obfs-param": "c75be84263.microsoft.com", "group": "Update-二爷"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_06", "server": "cm01.newcome.xyz", "type": "ssr", "country": "🇨🇳CN", "port": 7702, "password": "jFa4F1", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "50916:1129K_n259", "obfs": "plain", "obfs-param": "ffc9c50916.microsoft.com", "group": "Update-二爷"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_07", "server": "zx01.endhigh.xyz", "type": "ssr", "country": "🇨🇳CN", "port": 2404, "password": "jFa4F1", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "84263:3gj7aB", "obfs": "plain", "obfs-param": "c75be84263.microsoft.com", "group": "Update-二爷"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_08", "server": "zx01.endhigh.xyz", "type": "ssr", "country": "🇨🇳CN", "port": 2400, "password": "jFa4F1", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "46961:1210-Tha", "obfs": "plain", "obfs-param": "5d3ee46961.microsoft.com", "group": "Update-二爷"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_09", "server": "cm01.newcome.xyz", "type": "ssr", "country": "🇨🇳CN", "port": 7709, "password": "jFa4F1", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "50916:1129K_n259", "obfs": "plain", "obfs-param": "ffc9c50916.microsoft.com", "group": "Update-二爷"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_10", "server": "zx02.endhigh.xyz", "type": "ssr", "country": "🇨🇳CN", "port": 2409, "password": "jFa4F1", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "46961:1210-Tha", "obfs": "plain", "obfs-param": "5d3ee46961.microsoft.com", "group": "Update-二爷"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_100 |52.07Mb", "server": "angular-cdn-2.telescopes.work", "type": "ssr", "country": "🇨🇳CN", "port": 35242, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_101 |52.00Mb", "server": "angular-cdn-2.telescopes.work", "type": "ssr", "country": "🇨🇳CN", "port": 35244, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_102 |63.60Mb", "server": "angular-cdn-3.telescopeclothing.com", "type": "ssr", "country": "🇨🇳CN", "port": 35066, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_103 |56.00Mb", "server": "angular-cdn-2.telescopes.work", "type": "ssr", "country": "🇨🇳CN", "port": 35188, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_104 |123.00Mb", "server": "yd-03.paofunlink.com", "type": "ssr", "country": "🇨🇳CN", "port": 1056, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "7521:12HsOu", "obfs": "plain", "obfs-param": "fb7bc7521.microsoft.com", "group": "SSRProvider"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_105 |55.90Mb", "server": "angular-cdn-3.telescopeclothing.com", "type": "ssr", "country": "🇨🇳CN", "port": 35093, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_106 |223.00Mb", "server": "react-cdn-004.telescopeclothing.com", "type": "ssr", "country": "🇨🇳CN", "port": 45007, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_107 |73.00Mb", "server": "angular-cdn-3.telescopeclothing.com", "type": "ssr", "country": "🇨🇳CN", "port": 35046, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_108 |56.90Mb", "server": "angular-cdn-2.telescopes.work", "type": "ssr", "country": "🇨🇳CN", "port": 35157, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_109 |54.50Mb", "server": "angular-cdn-3.telescopeclothing.com", "type": "ssr", "country": "🇨🇳CN", "port": 35033, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_11", "server": "cm03.newcome.xyz", "type": "ssr", "country": "🇨🇳CN", "port": 6701, "password": "jFa4F1", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "46961:1210-Tha", "obfs": "plain", "obfs-param": "5d3ee46961.microsoft.com", "group": "Update-二爷"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_110 |91.00Mb", "server": "yd-05.paofunlink.com", "type": "ssr", "country": "🇨🇳CN", "port": 1072, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "7521:12HsOu", "obfs": "plain", "obfs-param": "fb7bc7521.microsoft.com", "group": "SSRProvider"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_111 |89.00Mb", "server": "yd-05.paofunlink.com", "type": "ssr", "country": "🇨🇳CN", "port": 1072, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "229225:zZ4fCm", "obfs": "plain", "obfs-param": "2b49f229225.microsoft.com", "group": "SSRProvider"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_112 |87.00Mb", "server": "yd-05.paofunlink.com", "type": "ssr", "country": "🇨🇳CN", "port": 1071, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "7521:12HsOu", "obfs": "plain", "obfs-param": "fb7bc7521.microsoft.com", "group": "SSRProvider"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_113 |56.00Mb", "server": "angular-cdn-2.telescopes.work", "type": "ssr", "country": "🇨🇳CN", "port": 35182, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_114 |124.00Mb", "server": "yd-05.paofunlink.com", "type": "ssr", "country": "🇨🇳CN", "port": 1051, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "7521:12HsOu", "obfs": "plain", "obfs-param": "fb7bc7521.microsoft.com", "group": "SSRProvider"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_115 |126.00Mb", "server": "yd-05.paofunlink.com", "type": "ssr", "country": "🇨🇳CN", "port": 1051, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "229225:zZ4fCm", "obfs": "plain", "obfs-param": "2b49f229225.microsoft.com", "group": "SSRProvider"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_116 |56.00Mb", "server": "angular-cdn-2.telescopes.work", "type": "ssr", "country": "🇨🇳CN", "port": 35067, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_117 |53.00Mb", "server": "angular-cdn-2.telescopes.work", "type": "ssr", "country": "🇨🇳CN", "port": 35209, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_118 |91.00Mb", "server": "yd-01.paofunlink.com", "type": "ssr", "country": "🇨🇳CN", "port": 5958, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "40575:fV3Nxq", "obfs": "plain", "obfs-param": "microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_119 |65.00Mb", "server": "yd-07.paofunlink.com", "type": "ssr", "country": "🇨🇳CN", "port": 5957, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "229225:zZ4fCm", "obfs": "plain", "obfs-param": "2b49f229225.microsoft.com", "group": "SSRProvider"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_12", "server": "cm03.newcome.xyz", "type": "ssr", "country": "🇨🇳CN", "port": 6703, "password": "jFa4F1", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "84263:3gj7aB", "obfs": "plain", "obfs-param": "c75be84263.microsoft.com", "group": "Update-二爷"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_120 |64.00Mb", "server": "yd-07.paofunlink.com", "type": "ssr", "country": "🇨🇳CN", "port": 5958, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "7521:12HsOu", "obfs": "plain", "obfs-param": "fb7bc7521.microsoft.com", "group": "SSRProvider"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_121 |76.00Mb", "server": "yd-01.paofunlink.com", "type": "ssr", "country": "🇨🇳CN", "port": 5951, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "40575:fV3Nxq", "obfs": "plain", "obfs-param": "microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_122 |69.00Mb", "server": "yd-07.paofunlink.com", "type": "ssr", "country": "🇨🇳CN", "port": 5956, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "7521:12HsOu", "obfs": "plain", "obfs-param": "fb7bc7521.microsoft.com", "group": "SSRProvider"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_123 |57.98Mb", "server": "angular-cdn-2.telescopes.work", "type": "ssr", "country": "🇨🇳CN", "port": 35020, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_124 |261.00Mb", "server": "yd-05.paofunlink.com", "type": "ssr", "country": "🇨🇳CN", "port": 1081, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "229225:zZ4fCm", "obfs": "plain", "obfs-param": "2b49f229225.microsoft.com", "group": "SSRProvider"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_126 |52.94Mb", "server": "angular-cdn-2.telescopes.work", "type": "ssr", "country": "🇨🇳CN", "port": 35033, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_127 |52.40Mb", "server": "angular-cdn-2.telescopes.work", "type": "ssr", "country": "🇨🇳CN", "port": 35230, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_128 |121.00Mb", "server": "yd-03.paofunlink.com", "type": "ssr", "country": "🇨🇳CN", "port": 1055, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "7521:12HsOu", "obfs": "plain", "obfs-param": "fb7bc7521.microsoft.com", "group": "SSRProvider"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_129 |229.00Mb", "server": "nn11.boom.skin", "type": "ssr", "country": "🇨🇳CN", "port": 50000, "password": "Uk92CS", "cipher": "aes-256-cfb", "protocol": "auth_aes128_sha1", "protocol-param": "952680:ujP060", "obfs": "http_simple", "obfs-param": "download.windowsupdate.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_13", "server": "cm01.newcome.xyz", "type": "ssr", "country": "🇨🇳CN", "port": 7705, "password": "jFa4F1", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "50916:1129K_n259", "obfs": "plain", "obfs-param": "ffc9c50916.microsoft.com", "group": "Update-二爷"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_130 |26.10Mb", "server": "nn8.boom.skin", "type": "ssr", "country": "🇨🇳CN", "port": 47000, "password": "Uk92CS", "cipher": "aes-256-cfb", "protocol": "auth_aes128_sha1", "protocol-param": "952680:ujP060", "obfs": "http_simple", "obfs-param": "download.windowsupdate.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_131 |57.30Mb", "server": "angular-cdn-2.telescopes.work", "type": "ssr", "country": "🇨🇳CN", "port": 35128, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_132 |235.00Mb", "server": "nn9.boom.skin", "type": "ssr", "country": "🇨🇳CN", "port": 48000, "password": "Uk92CS", "cipher": "aes-256-cfb", "protocol": "auth_aes128_sha1", "protocol-param": "952680:ujP060", "obfs": "http_simple", "obfs-param": "download.windowsupdate.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_133 |53.10Mb", "server": "angular-cdn-1.telescopes.work", "type": "ssr", "country": "🇨🇳CN", "port": 45002, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_134 |55.38Mb", "server": "angular-cdn-1.telescopes.work", "type": "ssr", "country": "🇨🇳CN", "port": 45006, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_135 |54.10Mb", "server": "angular-cdn-1.telescopes.work", "type": "ssr", "country": "🇨🇳CN", "port": 45016, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_136 |56.41Mb", "server": "angular-cdn-1.telescopes.work", "type": "ssr", "country": "🇨🇳CN", "port": 45008, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_137 |53.00Mb", "server": "angular-cdn-1.telescopes.work", "type": "ssr", "country": "🇨🇳CN", "port": 45007, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_138 |54.00Mb", "server": "angular-cdn-1.telescopes.work", "type": "ssr", "country": "🇨🇳CN", "port": 45005, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_139 |53.00Mb", "server": "angular-cdn-1.telescopes.work", "type": "ssr", "country": "🇨🇳CN", "port": 45013, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_14", "server": "cm03.newcome.xyz", "type": "ssr", "country": "🇨🇳CN", "port": 6707, "password": "jFa4F1", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "84263:3gj7aB", "obfs": "plain", "obfs-param": "c75be84263.microsoft.com", "group": "Update-二爷"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_140 |57.70Mb", "server": "angular-cdn-2.telescopes.work", "type": "ssr", "country": "🇨🇳CN", "port": 35234, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_142 |233.00Mb", "server": "eduall.buzzline.org", "type": "ssr", "country": "🇨🇳CN", "port": 561, "password": "mblank1port", "cipher": "chacha20-ietf", "protocol": "auth_aes128_md5", "protocol-param": "55956:111111", "obfs": "plain"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_143 |123.00Mb", "server": "yd-05.paofunlink.com", "type": "ssr", "country": "🇨🇳CN", "port": 1050, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "229225:zZ4fCm", "obfs": "plain", "obfs-param": "2b49f229225.microsoft.com", "group": "SSRProvider"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_144 |112.00Mb", "server": "yd-05.paofunlink.com", "type": "ssr", "country": "🇨🇳CN", "port": 1091, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "7521:12HsOu", "obfs": "plain", "obfs-param": "fb7bc7521.microsoft.com", "group": "SSRProvider"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_145 |254.00Mb", "server": "yd-04.paofunlink.com", "type": "ssr", "country": "🇨🇳CN", "port": 5956, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "229225:zZ4fCm", "obfs": "plain", "obfs-param": "2b49f229225.microsoft.com", "group": "SSRProvider"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_146 |167.00Mb", "server": "yd-04.paofunlink.com", "type": "ssr", "country": "🇨🇳CN", "port": 5950, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "7521:12HsOu", "obfs": "plain", "obfs-param": "fb7bc7521.microsoft.com", "group": "SSRProvider"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_147 |50.00Mb", "server": "oracle.accessconnect.cc", "type": "ssr", "country": "🇨🇳CN", "port": 1127, "password": "di15PV", "cipher": "rc4-md5", "protocol": "auth_aes128_md5", "protocol-param": "203723:kS6Oji", "obfs": "tls1.2_ticket_auth", "obfs-param": "72106203723.www.gov.hk", "group": "SSRProvider"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_148 |47.00Mb", "server": "oracle.accessconnect.cc", "type": "ssr", "country": "🇨🇳CN", "port": 1121, "password": "di15PV", "cipher": "rc4-md5", "protocol": "auth_aes128_md5", "protocol-param": "203723:kS6Oji", "obfs": "tls1.2_ticket_auth", "obfs-param": "72106203723.www.gov.hk", "group": "SSRProvider"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_149 |43.00Mb", "server": "oracle.accessconnect.cc", "type": "ssr", "country": "🇨🇳CN", "port": 1130, "password": "di15PV", "cipher": "rc4-md5", "protocol": "auth_aes128_md5", "protocol-param": "203723:kS6Oji", "obfs": "tls1.2_ticket_auth", "obfs-param": "72106203723.www.gov.hk", "group": "SSRProvider"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_150 |233.00Mb", "server": "zx01.endhigh.xyz", "type": "ssr", "country": "🇨🇳CN", "port": 2404, "password": "jFa4F1", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "84263:3gj7aB", "obfs": "plain", "obfs-param": "c75be84263.microsoft.com", "group": "Update-二爷"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_151 |227.00Mb", "server": "jp3.boom.skin", "type": "ssr", "country": "🇨🇳CN", "port": 32000, "password": "Uk92CS", "cipher": "aes-256-cfb", "protocol": "auth_aes128_sha1", "protocol-param": "952680:ujP060", "obfs": "http_simple", "obfs-param": "download.windowsupdate.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_152 |234.00Mb", "server": "jp4.boom.skin", "type": "ssr", "country": "🇨🇳CN", "port": 33000, "password": "Uk92CS", "cipher": "aes-256-cfb", "protocol": "auth_aes128_sha1", "protocol-param": "952680:ujP060", "obfs": "http_simple", "obfs-param": "download.windowsupdate.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_153 |65.00Mb", "server": "yd-06.paofunlink.com", "type": "ssr", "country": "🇨🇳CN", "port": 5953, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "229225:zZ4fCm", "obfs": "plain", "obfs-param": "2b49f229225.microsoft.com", "group": "SSRProvider"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_155 |97.00Mb", "server": "yd-02.paofunlink.com", "type": "ssr", "country": "🇨🇳CN", "port": 1073, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "229225:zZ4fCm", "obfs": "plain", "obfs-param": "2b49f229225.microsoft.com", "group": "SSRProvider"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_156 |114.00Mb", "server": "yd-02.paofunlink.com", "type": "ssr", "country": "🇨🇳CN", "port": 1092, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "229225:zZ4fCm", "obfs": "plain", "obfs-param": "2b49f229225.microsoft.com", "group": "SSRProvider"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_158 |125.00Mb", "server": "yd-02.paofunlink.com", "type": "ssr", "country": "🇨🇳CN", "port": 1053, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "7521:12HsOu", "obfs": "plain", "obfs-param": "fb7bc7521.microsoft.com", "group": "SSRProvider"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_160 |122.00Mb", "server": "yd-02.paofunlink.com", "type": "ssr", "country": "🇨🇳CN", "port": 1052, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "229225:zZ4fCm", "obfs": "plain", "obfs-param": "2b49f229225.microsoft.com", "group": "SSRProvider"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_162 |55.00Mb", "server": "cm01.newcome.xyz", "type": "ssr", "country": "🇨🇳CN", "port": 7705, "password": "jFa4F1", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "50916:1129K_n259", "obfs": "plain", "obfs-param": "ffc9c50916.microsoft.com", "group": "Update-二爷"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_163 |58.10Mb", "server": "cm01.newcome.xyz", "type": "ssr", "country": "🇨🇳CN", "port": 3704, "password": "jFa4F1", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "84263:3gj7aB", "obfs": "plain", "obfs-param": "TG@ccbaohe"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_164 |70.00Mb", "server": "cm01.newcome.xyz", "type": "ssr", "country": "🇨🇳CN", "port": 7706, "password": "jFa4F1", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "84263:3gj7aB", "obfs": "plain", "obfs-param": "c75be84263.microsoft.com", "group": "Update-二爷"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_165 |259.00Mb", "server": "yd-02.paofunlink.com", "type": "ssr", "country": "🇨🇳CN", "port": 1082, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "7521:12HsOu", "obfs": "plain", "obfs-param": "fb7bc7521.microsoft.com", "group": "SSRProvider"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_169 |62.50Mb", "server": "cm01.newcome.xyz", "type": "ssr", "country": "🇨🇳CN", "port": 7709, "password": "jFa4F1", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "50916:1129K_n259", "obfs": "plain", "obfs-param": "ffc9c50916.microsoft.com", "group": "Update-二爷"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_173 |64.00Mb", "server": "cm03.newcome.xyz", "type": "ssr", "country": "🇨🇳CN", "port": 6702, "password": "jFa4F1", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "84263:3gj7aB", "obfs": "plain", "obfs-param": "TG@ripaojiedian", "group": "Update-二爷"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_174 |58.00Mb", "server": "cm03.newcome.xyz", "type": "ssr", "country": "🇨🇳CN", "port": 6703, "password": "jFa4F1", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "84263:3gj7aB", "obfs": "plain", "obfs-param": "c75be84263.microsoft.com", "group": "Update-二爷"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_175 |52.40Mb", "server": "angular-cdn-1.telescopes.work", "type": "ssr", "country": "🇨🇳CN", "port": 45009, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_176 |50.60Mb", "server": "angular-cdn-1.telescopes.work", "type": "ssr", "country": "🇨🇳CN", "port": 45017, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_177 |317.10Mb", "server": "layercm05.initcloud.pro", "type": "ssr", "country": "🇨🇳CN", "port": 560, "password": "mblank1port", "cipher": "chacha20-ietf", "protocol": "auth_aes128_md5", "protocol-param": "3866:125458558", "obfs": "plain"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_178 |86.00Mb", "server": "yd-03.paofunlink.com", "type": "ssr", "country": "🇨🇳CN", "port": 1076, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "7521:12HsOu", "obfs": "plain", "obfs-param": "fb7bc7521.microsoft.com", "group": "SSRProvider"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_179 |89.00Mb", "server": "yd-03.paofunlink.com", "type": "ssr", "country": "🇨🇳CN", "port": 1075, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "229225:zZ4fCm", "obfs": "plain", "obfs-param": "2b49f229225.microsoft.com", "group": "SSRProvider"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_180 |288.00Mb", "server": "yd-03.paofunlink.com", "type": "ssr", "country": "🇨🇳CN", "port": 1096, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "7521:12HsOu", "obfs": "plain", "obfs-param": "fb7bc7521.microsoft.com", "group": "SSRProvider"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_181 |114.00Mb", "server": "yd-03.paofunlink.com", "type": "ssr", "country": "🇨🇳CN", "port": 1097, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "7521:12HsOu", "obfs": "plain", "obfs-param": "fb7bc7521.microsoft.com", "group": "SSRProvider"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_182 |122.00Mb", "server": "yd-03.paofunlink.com", "type": "ssr", "country": "🇨🇳CN", "port": 1057, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "229225:zZ4fCm", "obfs": "plain", "obfs-param": "2b49f229225.microsoft.com", "group": "SSRProvider"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_183 |502.00Mb", "server": "yd-03.paofunlink.com", "type": "ssr", "country": "🇨🇳CN", "port": 1056, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "229225:zZ4fCm", "obfs": "plain", "obfs-param": "2b49f229225.microsoft.com", "group": "SSRProvider"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_184 |60.00Mb", "server": "cm03.newcome.xyz", "type": "ssr", "country": "🇨🇳CN", "port": 6701, "password": "jFa4F1", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "46961:1210-Tha", "obfs": "plain", "obfs-param": "5d3ee46961.microsoft.com", "group": "Update-二爷"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_185 |116.00Mb", "server": "yd-06.paofunlink.com", "type": "ssr", "country": "🇨🇳CN", "port": 5954, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "40575:fV3Nxq", "obfs": "plain", "obfs-param": "TG@wangcai_1"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_186 |68.60Mb", "server": "angular-cdn-3.telescopeclothing.com", "type": "ssr", "country": "🇨🇳CN", "port": 35092, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_187 |243.00Mb", "server": "yd-03.paofunlink.com", "type": "ssr", "country": "🇨🇳CN", "port": 1086, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "7521:12HsOu", "obfs": "plain", "obfs-param": "fb7bc7521.microsoft.com", "group": "SSRProvider"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_188 |237.00Mb", "server": "yd-03.paofunlink.com", "type": "ssr", "country": "🇨🇳CN", "port": 1087, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "7521:12HsOu", "obfs": "plain", "obfs-param": "fb7bc7521.microsoft.com", "group": "SSRProvider"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_189 |264.00Mb", "server": "yd-03.paofunlink.com", "type": "ssr", "country": "🇨🇳CN", "port": 1087, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "229225:zZ4fCm", "obfs": "plain", "obfs-param": "2b49f229225.microsoft.com", "group": "SSRProvider"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_190 |122.00Mb", "server": "yd-02.paofunlink.com", "type": "ssr", "country": "🇨🇳CN", "port": 1054, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "229225:zZ4fCm", "obfs": "plain", "obfs-param": "2b49f229225.microsoft.com", "group": "SSRProvider"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_191 |65.00Mb", "server": "cm03.newcome.xyz", "type": "ssr", "country": "🇨🇳CN", "port": 6707, "password": "jFa4F1", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "84263:3gj7aB", "obfs": "plain", "obfs-param": "c75be84263.microsoft.com", "group": "Update-二爷"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_193 |83.00Mb", "server": "yd-01.paofunlink.com", "type": "ssr", "country": "🇨🇳CN", "port": 5954, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "7521:12HsOu", "obfs": "plain"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_195 |58.00Mb", "server": "cm01.newcome.xyz", "type": "ssr", "country": "🇨🇳CN", "port": 3705, "password": "jFa4F1", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "84263:3gj7aB", "obfs": "plain", "obfs-param": "TG@ccbaohe"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_196 |70.00Mb", "server": "cm01.newcome.xyz", "type": "ssr", "country": "🇨🇳CN", "port": 3701, "password": "jFa4F1", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "84263:3gj7aB", "obfs": "plain", "obfs-param": "TG@ccbaohe"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_197 |68.00Mb", "server": "cm01.newcome.xyz", "type": "ssr", "country": "🇨🇳CN", "port": 3700, "password": "jFa4F1", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "84263:3gj7aB", "obfs": "plain"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_200 |254.00Mb", "server": "zx02.endhigh.xyz", "type": "ssr", "country": "🇨🇳CN", "port": 6700, "password": "jFa4F1", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "84263:3gj7aB", "obfs": "plain", "obfs-param": "TG@wangcai_1"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_201 |211.00Mb", "server": "zx02.endhigh.xyz", "type": "ssr", "country": "🇨🇳CN", "port": 6709, "password": "jFa4F1", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "84263:3gj7aB", "obfs": "plain", "obfs-param": "TG@wangcai_1"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_205 |58.50Mb", "server": "cm01.newcome.xyz", "type": "ssr", "country": "🇨🇳CN", "port": 3702, "password": "jFa4F1", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "46961:1210-Tha", "obfs": "plain", "obfs-param": "5d3ee46961.microsoft.com", "group": "Update-二爷"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_206 |45.60Mb", "server": "oracle.accessconnect.cc", "type": "ssr", "country": "🇨🇳CN", "port": 1124, "password": "di15PV", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "203723:kS6Oji", "obfs": "tls1.2_ticket_auth", "obfs-param": "72106203723.www.gov.hk", "group": "SSRProvider"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_36 |57.00Mb", "server": "cm01.newcome.xyz", "type": "ssr", "country": "🇨🇳CN", "port": 7702, "password": "jFa4F1", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "50916:1129K_n259", "obfs": "plain", "obfs-param": "ffc9c50916.microsoft.com", "group": "Update-二爷"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_37 |50.00Mb", "server": "angular-cdn-1.telescopes.work", "type": "ssr", "country": "🇨🇳CN", "port": 45014, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_40 |198.30Mb", "server": "zx01.endhigh.xyz", "type": "ssr", "country": "🇨🇳CN", "port": 2400, "password": "jFa4F1", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "46961:1210-Tha", "obfs": "plain", "obfs-param": "5d3ee46961.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_41 |268.00Mb", "server": "opt13.boom.skin", "type": "ssr", "country": "🇨🇳CN", "port": 23000, "password": "Uk92CS", "cipher": "aes-256-cfb", "protocol": "auth_aes128_sha1", "protocol-param": "504067:BF73Al", "obfs": "http_simple", "obfs-param": "download.windowsupdate.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_42 |126.00Mb", "server": "yd-03.paofunlink.com", "type": "ssr", "country": "🇨🇳CN", "port": 1055, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "229225:zZ4fCm", "obfs": "plain", "obfs-param": "2b49f229225.microsoft.com", "group": "SSRProvider"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_43 |109.00Mb", "server": "yd-03.paofunlink.com", "type": "ssr", "country": "🇨🇳CN", "port": 1096, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "229225:zZ4fCm", "obfs": "plain", "obfs-param": "2b49f229225.microsoft.com", "group": "SSRProvider"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_44 |82.00Mb", "server": "pr2.jymzffbquawl.com", "type": "ssr", "country": "🇨🇳CN", "port": 3503, "password": "renzhecloud", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "277272:LzSb2q", "obfs": "plain", "obfs-param": "TG@wangcai_1"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_45 |65.00Mb", "server": "zx02.endhigh.xyz", "type": "ssr", "country": "🇨🇳CN", "port": 2409, "password": "jFa4F1", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "46961:1210-Tha", "obfs": "plain", "obfs-param": "5d3ee46961.microsoft.com", "group": "Update-二爷"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_46 |61.00Mb", "server": "zx02.endhigh.xyz", "type": "ssr", "country": "🇨🇳CN", "port": 6702, "password": "jFa4F1", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "84263:3gj7aB", "obfs": "plain", "obfs-param": "TG@wangcai_1"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_47 |122.00Mb", "server": "yd-02.paofunlink.com", "type": "ssr", "country": "🇨🇳CN", "port": 1052, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "7521:12HsOu", "obfs": "plain", "obfs-param": "fb7bc7521.microsoft.com", "group": "SSRProvider"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_48 |107.00Mb", "server": "yd-02.paofunlink.com", "type": "ssr", "country": "🇨🇳CN", "port": 1093, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "7521:12HsOu", "obfs": "plain", "obfs-param": "fb7bc7521.microsoft.com", "group": "SSRProvider"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_50 |228.00Mb", "server": "yd-05.paofunlink.com", "type": "ssr", "country": "🇨🇳CN", "port": 1080, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "7521:12HsOu", "obfs": "plain", "obfs-param": "fb7bc7521.microsoft.com", "group": "SSRProvider"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_51 |92.00Mb", "server": "yd-02.paofunlink.com", "type": "ssr", "country": "🇨🇳CN", "port": 1074, "password": "bxsnucrgk6hfish", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "229225:zZ4fCm", "obfs": "plain", "obfs-param": "2b49f229225.microsoft.com", "group": "SSRProvider"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_52 |50.50Mb", "server": "angular-cdn-3.telescopeclothing.com", "type": "ssr", "country": "🇨🇳CN", "port": 35151, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_53 |57.60Mb", "server": "angular-cdn-3.telescopeclothing.com", "type": "ssr", "country": "🇨🇳CN", "port": 35009, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_54 |53.00Mb", "server": "angular-cdn-3.telescopeclothing.com", "type": "ssr", "country": "🇨🇳CN", "port": 35173, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_55 |251.00Mb", "server": "angular-cdn-3.telescopeclothing.com", "type": "ssr", "country": "🇨🇳CN", "port": 35105, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_56 |84.00Mb", "server": "angular-cdn-3.telescopeclothing.com", "type": "ssr", "country": "🇨🇳CN", "port": 35101, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_57 |53.10Mb", "server": "react-cdn-004.telescopeclothing.com", "type": "ssr", "country": "🇨🇳CN", "port": 45014, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_58 |183.90Mb", "server": "react-cdn-004.telescopeclothing.com", "type": "ssr", "country": "🇨🇳CN", "port": 45009, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_59 |53.80Mb", "server": "react-cdn-004.telescopeclothing.com", "type": "ssr", "country": "🇨🇳CN", "port": 45026, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_60 |53.30Mb", "server": "react-cdn-004.telescopeclothing.com", "type": "ssr", "country": "🇨🇳CN", "port": 45011, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_61 |51.00Mb", "server": "angular-cdn-3.telescopeclothing.com", "type": "ssr", "country": "🇨🇳CN", "port": 35026, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_62 |56.70Mb", "server": "angular-cdn-3.telescopeclothing.com", "type": "ssr", "country": "🇨🇳CN", "port": 35245, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_63 |48.00Mb", "server": "angular-cdn-1.telescopes.work", "type": "ssr", "country": "🇨🇳CN", "port": 45011, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_64 |53.00Mb", "server": "angular-cdn-3.telescopeclothing.com", "type": "ssr", "country": "🇨🇳CN", "port": 35099, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_65 |93.00Mb", "server": "angular-cdn-3.telescopeclothing.com", "type": "ssr", "country": "🇨🇳CN", "port": 35025, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_66 |56.70Mb", "server": "angular-cdn-1.telescopes.work", "type": "ssr", "country": "🇨🇳CN", "port": 45010, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_67 |305.00Mb", "server": "angular-cdn-1.telescopes.work", "type": "ssr", "country": "🇨🇳CN", "port": 45026, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_68 |56.60Mb", "server": "angular-cdn-3.telescopeclothing.com", "type": "ssr", "country": "🇨🇳CN", "port": 35051, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_69 |61.00Mb", "server": "angular-cdn-2.telescopes.work", "type": "ssr", "country": "🇨🇳CN", "port": 35183, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_70 |53.64Mb", "server": "angular-cdn-2.telescopes.work", "type": "ssr", "country": "🇨🇳CN", "port": 35101, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_71 |53.00Mb", "server": "angular-cdn-3.telescopeclothing.com", "type": "ssr", "country": "🇨🇳CN", "port": 35038, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_72 |62.00Mb", "server": "cm01.newcome.xyz", "type": "ssr", "country": "🇨🇳CN", "port": 5701, "password": "jFa4F1", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "84263:3gj7aB", "obfs": "plain", "obfs-param": "TG@ccbaohe"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_73 |55.90Mb", "server": "cm01.newcome.xyz", "type": "ssr", "country": "🇨🇳CN", "port": 3703, "password": "jFa4F1", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "84263:3gj7aB", "obfs": "plain"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_74 |56.60Mb", "server": "angular-cdn-2.telescopes.work", "type": "ssr", "country": "🇨🇳CN", "port": 35180, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_77 |58.00Mb", "server": "cm01.newcome.xyz", "type": "ssr", "country": "🇨🇳CN", "port": 3709, "password": "jFa4F1", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "84263:3gj7aB", "obfs": "plain", "obfs-param": "TG@ccbaohe"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_80 |61.00Mb", "server": "angular-cdn-2.telescopes.work", "type": "ssr", "country": "🇨🇳CN", "port": 35240, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_82 |56.00Mb", "server": "angular-cdn-2.telescopes.work", "type": "ssr", "country": "🇨🇳CN", "port": 35231, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_84 |52.82Mb", "server": "angular-cdn-2.telescopes.work", "type": "ssr", "country": "🇨🇳CN", "port": 35208, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_85 |51.00Mb", "server": "angular-cdn-2.telescopes.work", "type": "ssr", "country": "🇨🇳CN", "port": 35185, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_86 |54.00Mb", "server": "angular-cdn-3.telescopeclothing.com", "type": "ssr", "country": "🇨🇳CN", "port": 35103, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_87 |52.36Mb", "server": "angular-cdn-2.telescopes.work", "type": "ssr", "country": "🇨🇳CN", "port": 35179, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_88 |78.00Mb", "server": "hn.mamashuomingziqideyuechangjiuyuebuhuibeirenfaxian.com", "type": "ssr", "country": "🇨🇳CN", "port": 33040, "password": "XEIk73", "cipher": "chacha20-ietf", "protocol": "auth_aes128_md5", "protocol-param": "24782:IjIZ3k", "obfs": "tls1.2_ticket_auth"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_89 |62.90Mb", "server": "hn.mamashuomingziqideyuechangjiuyuebuhuibeirenfaxian.com", "type": "ssr", "country": "🇨🇳CN", "port": 33072, "password": "XEIk73", "cipher": "chacha20-ietf", "protocol": "auth_aes128_md5", "protocol-param": "24782:IjIZ3k", "obfs": "tls1.2_ticket_auth"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_90 |32.10Mb", "server": "hn.mamashuomingziqideyuechangjiuyuebuhuibeirenfaxian.com", "type": "ssr", "country": "🇨🇳CN", "port": 33036, "password": "XEIk73", "cipher": "chacha20-ietf", "protocol": "auth_aes128_md5", "protocol-param": "24782:IjIZ3k", "obfs": "tls1.2_ticket_auth"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_91 |57.00Mb", "server": "angular-cdn-2.telescopes.work", "type": "ssr", "country": "🇨🇳CN", "port": 35241, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_92 |46.00Mb", "server": "sql.accessconnect.cc", "type": "ssr", "country": "🇨🇳CN", "port": 999, "password": "di15PV", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "203723:kS6Oji", "obfs": "tls1.2_ticket_auth", "obfs-param": "72106203723.www.gov.hk", "group": "SSRProvider"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_93 |224.00Mb", "server": "tg_mfbpn_pr1.52vpn.eu.org", "type": "ssr", "country": "🇨🇳CN", "port": 16811, "password": "k3U8z2ZGi78D", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "27932:AlGpxmXOFqNQ", "obfs": "tls1.2_ticket_auth", "obfs-param": "3922d27932.microsoft.com", "group": "SSRProvider"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_94 |54.61Mb", "server": "angular-cdn-3.telescopeclothing.com", "type": "ssr", "country": "🇨🇳CN", "port": 35249, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_95 |54.00Mb", "server": "angular-cdn-2.telescopes.work", "type": "ssr", "country": "🇨🇳CN", "port": 35025, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_96 |57.20Mb", "server": "angular-cdn-3.telescopeclothing.com", "type": "ssr", "country": "🇨🇳CN", "port": 35232, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_97 |62.00Mb", "server": "angular-cdn-2.telescopes.work", "type": "ssr", "country": "🇨🇳CN", "port": 35093, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_98 |53.10Mb", "server": "angular-cdn-2.telescopes.work", "type": "ssr", "country": "🇨🇳CN", "port": 35066, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇨🇳CN_99 |54.44Mb", "server": "angular-cdn-2.telescopes.work", "type": "ssr", "country": "🇨🇳CN", "port": 35137, "password": "hGkQ6915tD", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "325761:aPhmHIL5Ax", "obfs": "tls1.2_ticket_auth", "obfs-param": "ajax.microsoft.com"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇭🇰HK_16", "server": "112.28.208.10", "type": "vmess", "country": "🇨🇳CN", "port": 42055, "uuid": "418048af-a293-4b99-9b0c-98ca3580dd24", "alterId": 64, "cipher": "auto", "network": "tcp", "http-opts": {}, "h2-opts": {}, "skip-cert-verify": true}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇷🇴RO_02", "server": "91d71684cea0a49a.cdn.jiashule.com", "type": "ss", "country": "🇨🇳CN", "port": 13907, "password": "3f9dc5c4-85ad-461a-95af-68712eb6ad74", "cipher": "chacha20-ietf-poly1305"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇸🇬SG_100_ 1.88Mb | 0.51Mb", "server": "zx02.endhigh.xyz", "type": "ssr", "country": "🇨🇳CN", "port": 6705, "password": "jFa4F1", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "84263:3gj7aB", "obfs": "plain", "obfs-param": "TG@wangcai_1"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇸🇬SG_75_ 0.35Mb | 7.27Mb", "server": "cm03.newcome.xyz", "type": "ssr", "country": "🇨🇳CN", "port": 6701, "password": "jFa4F1", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "84263:3gj7aB", "obfs": "plain", "obfs-param": "TG@wangcai_1"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇸🇬SG_79_ 1.37Mb |14.03Mb", "server": "cm03.newcome.xyz", "type": "ssr", "country": "🇨🇳CN", "port": 6708, "password": "jFa4F1", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "84263:3gj7aB", "obfs": "plain", "obfs-param": "TG@wangcai_1"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇸🇬SG_82_ 2.46Mb | 4.64Mb", "server": "zx02.endhigh.xyz", "type": "ssr", "country": "🇨🇳CN", "port": 6709, "password": "jFa4F1", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "84263:3gj7aB", "obfs": "plain", "obfs-param": "TG@wangcai_1"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇸🇬SG_83_ 2.69Mb | 6.47Mb", "server": "cm03.newcome.xyz", "type": "ssr", "country": "🇨🇳CN", "port": 6703, "password": "jFa4F1", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "84263:3gj7aB", "obfs": "plain", "obfs-param": "TG@wangcai_1"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇸🇬SG_84_ 3.61Mb | 1.08Mb", "server": "zx02.endhigh.xyz", "type": "ssr", "country": "🇨🇳CN", "port": 6702, "password": "jFa4F1", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "84263:3gj7aB", "obfs": "plain", "obfs-param": "TG@wangcai_1"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇸🇬SG_85_ 3.06Mb | 3.86Mb", "server": "zx02.endhigh.xyz", "type": "ssr", "country": "🇨🇳CN", "port": 6703, "password": "jFa4F1", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "84263:3gj7aB", "obfs": "plain", "obfs-param": "TG@wangcai_1"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇸🇬SG_88_ 4.84Mb |16.18Mb", "server": "cm03.newcome.xyz", "type": "ssr", "country": "🇨🇳CN", "port": 6709, "password": "jFa4F1", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "84263:3gj7aB", "obfs": "plain", "obfs-param": "TG@wangcai_1"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇸🇬SG_90_ 2.66Mb |62.52Mb", "server": "cm03.newcome.xyz", "type": "ssr", "country": "🇨🇳CN", "port": 6702, "password": "jFa4F1", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "84263:3gj7aB", "obfs": "plain", "obfs-param": "TG@wangcai_1"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇸🇬SG_91_ 2.75Mb | 9.95Mb", "server": "cm03.newcome.xyz", "type": "ssr", "country": "🇨🇳CN", "port": 6700, "password": "jFa4F1", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "84263:3gj7aB", "obfs": "plain", "obfs-param": "TG@wangcai_1"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇸🇬SG_92_ 2.24Mb | 9.18Mb", "server": "zx02.endhigh.xyz", "type": "ssr", "country": "🇨🇳CN", "port": 6700, "password": "jFa4F1", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "84263:3gj7aB", "obfs": "plain", "obfs-param": "TG@wangcai_1"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇸🇬SG_94_ 1.55Mb | 6.12Mb", "server": "cm03.newcome.xyz", "type": "ssr", "country": "🇨🇳CN", "port": 6705, "password": "jFa4F1", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "84263:3gj7aB", "obfs": "plain", "obfs-param": "TG@wangcai_1"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇸🇬SG_99_ 3.71Mb | 0.80Mb", "server": "zx02.endhigh.xyz", "type": "ssr", "country": "🇨🇳CN", "port": 6701, "password": "jFa4F1", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "84263:3gj7aB", "obfs": "plain", "obfs-param": "TG@wangcai_1"}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇺🇸US_15", "server": "183.240.232.93", "type": "vmess", "country": "🇨🇳CN", "port": 34001, "uuid": "418048af-a293-4b99-9b0c-98ca3580dd24", "alterId": 64, "cipher": "auto", "network": "tcp", "http-opts": {}, "h2-opts": {}, "skip-cert-verify": true}
-  - {"name": "🇨🇳Relay_🇨🇳CN-🇺🇸US_35 |13.29Mb", "server": "p1.bxy-fun3.com", "type": "ss", "country": "🇨🇳CN", "port": 26106, "password": "d7bee830-09aa-43b2-8945-3b341b8787db", "cipher": "chacha20-ietf-poly1305"}
-  - {"name": "🇫🇷Relay_🇩🇪 DE-🇫🇷FR_213 |16.34Mb", "server": "135.125.172.139", "type": "ss", "country": "🇩🇪 DE", "port": 443, "password": "asdKkaskJKfnsa", "cipher": "aes-256-cfb"}
-  - {"name": "🇫🇷Relay_🇫🇷 FR-🇫🇷FR_228 |15.59Mb", "server": "135.125.172.153", "type": "ss", "country": "🇫🇷 FR", "port": 443, "password": "asdKkaskJKfnsa", "cipher": "aes-256-cfb"}
-  - {"name": "🇨🇦Relay_🇯🇵JP-🇺🇸US_245_ 4.12Mb | 4.54Mb", "server": "frontend.kuangbiaoyun.com", "type": "trojan", "country": "🇯🇵JP", "port": 40006, "password": "57edfecf-5694-4a34-8072-54a4f0636a62", "skip-cert-verify": true, "udp": true}
-  - {"name": "🇰🇷Relay_🇰🇷 KR-🇰🇷KR_261 | 4.53Mb", "server": "tg_mfbpn_atw1.52vpn.eu.org", "type": "ss", "country": "🇰🇷 KR", "port": 443, "password": "amazonskr05", "cipher": "aes-256-cfb"}
-  - {"name": "🇰🇷Relay_🇰🇷 KR-🇰🇷KR_264 | 5.95Mb", "server": "tg_mfbpn_ajp2.52vpn.eu.org", "type": "ss", "country": "🇰🇷 KR", "port": 443, "password": "amazonskr05", "cipher": "aes-256-cfb"}
-  - {"name": "🇩🇪Relay_🇰🇷 KR-🇸🇬SG_266", "server": "sg5.421421.xyz", "type": "trojan", "country": "🇰🇷 KR", "port": 20230, "password": "3869cf51-5c65-4dac-a4ef-33e49b6ebb4b", "sni": "421421.xyz", "skip-cert-verify": true, "udp": true}
-  - {"name": "🇰🇷Relay_🇰🇷 KR-🇺🇸US_258 | 2.03Mb", "server": "tg_mfbpn_ahk1.52vpn.eu.org", "type": "ss", "country": "🇰🇷 KR", "port": 443, "password": "amazonskr05", "cipher": "aes-256-cfb"}
-  - {"name": "🇰🇷Relay_🇰🇷 KR-🇺🇸US_263 | 9.78Mb", "server": "tg_mfbpn_atw2.52vpn.eu.org", "type": "ss", "country": "🇰🇷 KR", "port": 443, "password": "amazonskr05", "cipher": "aes-256-cfb"}
-  - {"name": "🇨🇳Relay_🇸🇦 SA-🇨🇳CN_271 |229.00Mb", "server": "cm01.newcome.xyz", "type": "ssr", "country": "🇸🇦 SA", "port": 7703, "password": "jFa4F1", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "84263:3gj7aB", "obfs": "plain", "obfs-param": "TG@wangcai_1"}
-  - {"name": "🇨🇳Relay_🇸🇦 SA-🇨🇳CN_272 |250.00Mb", "server": "cm01.newcome.xyz", "type": "ssr", "country": "🇸🇦 SA", "port": 7708, "password": "jFa4F1", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "84263:3gj7aB", "obfs": "plain", "obfs-param": "TG@wangcai_1"}
-  - {"name": "🇨🇳Relay_🇸🇦 SA-🇨🇳CN_273 |51.00Mb", "server": "cm01.newcome.xyz", "type": "ssr", "country": "🇸🇦 SA", "port": 7700, "password": "jFa4F1", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "84263:3gj7aB", "obfs": "plain", "obfs-param": "TG@wangcai_1"}
-  - {"name": "🇨🇳Relay_🇸🇦 SA-🇨🇳CN_274 |240.00Mb", "server": "cm01.newcome.xyz", "type": "ssr", "country": "🇸🇦 SA", "port": 7709, "password": "jFa4F1", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "84263:3gj7aB", "obfs": "plain", "obfs-param": "TG@wangcai_1"}
-  - {"name": "🇨🇦Relay_🇸🇬 SG | 9.18Mb", "server": "frontend.kuangbiaoyun.com", "type": "trojan", "country": "🇸🇬 SG", "port": 40006, "password": "57edfecf-5694-4a34-8072-54a4f0636a62", "skip-cert-verify": true, "udp": true}
-  - {"name": "🇦🇺Relay_🇸🇬SG-🇨🇳CN_280 |427.00Mb", "server": "iplc.xn--8zrwc997j78ud7a.com", "type": "ssr", "country": "🇸🇬SG", "port": 13104, "password": "iuo7tbw4ks", "cipher": "aes-256-cfb", "protocol": "auth_aes128_sha1", "protocol-param": "65537:JEiqlL", "obfs": "plain"}
-  - {"name": "🇦🇺Relay_🇸🇬SG-🇨🇳CN_281 |499.00Mb", "server": "snxao52s.xn--8zrwc997j78ud7a.com", "type": "ssr", "country": "🇸🇬SG", "port": 12106, "password": "iuo7tbw4ks", "cipher": "aes-256-cfb", "protocol": "auth_aes128_sha1", "protocol-param": "65537:JEiqlL", "obfs": "plain"}
-  - {"name": "🇦🇺Relay_🇸🇬SG-🇨🇳CN_283 |183.60Mb", "server": "u73kpx2s.xn--8zrwc997j78ud7a.com", "type": "ssr", "country": "🇸🇬SG", "port": 11109, "password": "iuo7tbw4ks", "cipher": "aes-256-cfb", "protocol": "auth_aes128_sha1", "protocol-param": "65537:JEiqlL", "obfs": "plain"}
-  - {"name": "🇦🇺Relay_🇸🇬SG-🇨🇳CN_284 |963.17Mb", "server": "snxao52s.xn--8zrwc997j78ud7a.com", "type": "ssr", "country": "🇸🇬SG", "port": 12107, "password": "iuo7tbw4ks", "cipher": "aes-256-cfb", "protocol": "auth_aes128_sha1", "protocol-param": "65537:JEiqlL", "obfs": "plain"}
-  - {"name": "🇸🇬Relay_🇸🇬SG-🇸🇬SG_285", "server": "sg7.421421.xyz", "type": "trojan", "country": "🇸🇬SG", "port": 20230, "password": "3869cf51-5c65-4dac-a4ef-33e49b6ebb4b", "sni": "421421.xyz", "skip-cert-verify": true, "udp": true}
-  - {"name": "🇨🇳Relay_🇺🇸 US-🇨🇳CN_287 |57.00Mb", "server": "cm01.newcome.xyz", "type": "ssr", "country": "🇺🇸 US", "port": 7701, "password": "jFa4F1", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "84263:3gj7aB", "obfs": "plain", "obfs-param": "TG@wangcai_1"}
-  - {"name": "🇨🇳Relay_🇺🇸 US-🇨🇳CN_288 |66.00Mb", "server": "cm01.newcome.xyz", "type": "ssr", "country": "🇺🇸 US", "port": 7704, "password": "jFa4F1", "cipher": "chacha20-ietf", "protocol": "auth_aes128_sha1", "protocol-param": "84263:3gj7aB", "obfs": "plain", "obfs-param": "TG@wangcai_1"}
-  - {"name": "🇰🇷Relay_🇺🇸US | 2.04Mb", "server": "UNLK1.LVWF8N-HH8E-2300-NMOO-D2E9NAOBEACN.9D8F269F96B25232-759CBB36D6548597.KAUFEN", "type": "trojan", "country": "🇺🇸US", "port": 20152, "password": "928dc6ee-495b-446f-9f20-883dedce564a", "sni": "13-231-155-134.nhost.00cdn.com", "skip-cert-verify": true, "udp": true}
-  - {"name": "🇺🇸Relay_🇺🇸US | 3.55Mb", "server": "cold-dawn-9246.fly.dev", "type": "vmess", "country": "🇺🇸US", "port": 443, "uuid": "ea4909ef-7ca6-4b46-bf2e-6c07896ef338", "alterId": 0, "cipher": "auto", "network": "ws", "servername": "cold-dawn-9246.fly.dev", "http-opts": {}, "h2-opts": {}, "tls": true, "skip-cert-verify": true, "ws-opts": {"path": "/ea4909ef-7ca6-4b46-bf2e-6c07896ef338-vm", "headers": {"HOST": "cold-dawn-9246.fly.dev"}}}
-  - {"name": "🇨🇦Relay_🇺🇸US | 3.62Mb", "server": "frontend.kuangbiaoyun.com", "type": "trojan", "country": "🇺🇸US", "port": 40003, "password": "57edfecf-5694-4a34-8072-54a4f0636a62", "sni": "frontend.kuangbiaoyun.com", "skip-cert-verify": true, "udp": true}
-  - {"name": "🇨🇦Relay_🇺🇸US |18.36Mb", "server": "frontend.kuangbiaoyun.com", "type": "trojan", "country": "🇺🇸US", "port": 40004, "password": "57edfecf-5694-4a34-8072-54a4f0636a62", "skip-cert-verify": true, "udp": true}
-  - {"name": "🇨🇦Relay_🇺🇸US |20.94Mb", "server": "mkh.nimserver.top", "type": "vmess", "country": "🇺🇸US", "port": 443, "uuid": "1887abb3-2c28-4c54-9b3f-d776b3c31662", "alterId": 0, "cipher": "auto", "network": "ws", "servername": "us1-vmess.greenssh.xyz", "http-opts": {}, "h2-opts": {}, "tls": true, "skip-cert-verify": true, "ws-opts": {"path": "/vmess", "headers": {"HOST": "us1-vmess.greenssh.xyz"}}}
-  - {"name": "🇨🇦Relay_🇺🇸US |29.34Mb", "server": "amini2.ddns.net", "type": "vmess", "country": "🇺🇸US", "port": 2087, "uuid": "5cd723e8-6f2b-45fc-bb07-07af31a106eb", "alterId": 0, "cipher": "auto", "network": "ws", "servername": "paNeL168.MOoKoMeilz.homes", "http-opts": {}, "h2-opts": {}, "tls": true, "skip-cert-verify": true, "ws-opts": {"path": "/wlwowo", "headers": {"HOST": "paNeL168.MOoKoMeilz.homes"}}}
-  - {"name": "🇦🇺Relay_🇺🇸US-🇨🇳CN_291 |103.28Mb", "server": "u73kpx2s.xn--8zrwc997j78ud7a.com", "type": "ssr", "country": "🇺🇸US", "port": 11109, "password": "iuo7tbw4ks", "cipher": "aes-256-cfb", "protocol": "auth_aes128_sha1", "protocol-param": "91911:uFGcmn", "obfs": "plain"}
-  - {"name": "🇦🇺Relay_🇺🇸US-🇨🇳CN_292 |35.31Mb", "server": "u73kpx2s.xn--8zrwc997j78ud7a.com", "type": "ssr", "country": "🇺🇸US", "port": 11106, "password": "iuo7tbw4ks", "cipher": "aes-256-cfb", "protocol": "auth_aes128_sha1", "protocol-param": "91911:uFGcmn", "obfs": "plain"}
-  - {"name": "🇦🇺Relay_🇺🇸US-🇨🇳CN_293 |98.70Mb", "server": "iplc.xn--8zrwc997j78ud7a.com", "type": "ssr", "country": "🇺🇸US", "port": 13102, "password": "iuo7tbw4ks", "cipher": "aes-256-cfb", "protocol": "auth_aes128_sha1", "protocol-param": "91911:uFGcmn", "obfs": "plain"}
-  - {"name": "🇦🇺Relay_🇺🇸US-🇨🇳CN_294 |49.70Mb", "server": "iplc.xn--8zrwc997j78ud7a.com", "type": "ssr", "country": "🇺🇸US", "port": 13101, "password": "iuo7tbw4ks", "cipher": "aes-256-cfb", "protocol": "auth_aes128_sha1", "protocol-param": "91911:uFGcmn", "obfs": "plain"}
-  - {"name": "🇦🇺Relay_🇺🇸US-🇨🇳CN_295 |36.35Mb", "server": "u73kpx2s.xn--8zrwc997j78ud7a.com", "type": "ssr", "country": "🇺🇸US", "port": 11115, "password": "iuo7tbw4ks", "cipher": "aes-256-cfb", "protocol": "auth_aes128_sha1", "protocol-param": "91911:uFGcmn", "obfs": "plain"}
-  - {"name": "🇦🇺Relay_🇺🇸US-🇨🇳CN_296 |34.73Mb", "server": "snxao52s.xn--8zrwc997j78ud7a.com", "type": "ssr", "country": "🇺🇸US", "port": 12102, "password": "iuo7tbw4ks", "cipher": "aes-256-cfb", "protocol": "auth_aes128_sha1", "protocol-param": "91911:uFGcmn", "obfs": "plain"}
-  - {"name": "🇦🇺Relay_🇺🇸US-🇨🇳CN_297 |33.21Mb", "server": "u73kpx2s.xn--8zrwc997j78ud7a.com", "type": "ssr", "country": "🇺🇸US", "port": 11107, "password": "iuo7tbw4ks", "cipher": "aes-256-cfb", "protocol": "auth_aes128_sha1", "protocol-param": "91911:uFGcmn", "obfs": "plain"}
-  - {"name": "🇦🇺Relay_🇺🇸US-🇨🇳CN_298 |34.44Mb", "server": "snxao52s.xn--8zrwc997j78ud7a.com", "type": "ssr", "country": "🇺🇸US", "port": 12106, "password": "iuo7tbw4ks", "cipher": "aes-256-cfb", "protocol": "auth_aes128_sha1", "protocol-param": "91911:uFGcmn", "obfs": "plain"}
-  - {"name": "🇦🇺Relay_🇺🇸US-🇨🇳CN_299 |49.17Mb", "server": "iplc.xn--8zrwc997j78ud7a.com", "type": "ssr", "country": "🇺🇸US", "port": 13104, "password": "iuo7tbw4ks", "cipher": "aes-256-cfb", "protocol": "auth_aes128_sha1", "protocol-param": "91911:uFGcmn", "obfs": "plain"}
-  - {"name": "🇦🇺Relay_🇺🇸US-🇨🇳CN_300 |33.80Mb", "server": "u73kpx2s.xn--8zrwc997j78ud7a.com", "type": "ssr", "country": "🇺🇸US", "port": 11111, "password": "iuo7tbw4ks", "cipher": "aes-256-cfb", "protocol": "auth_aes128_sha1", "protocol-param": "91911:uFGcmn", "obfs": "plain"}
-  - {"name": "🇦🇺Relay_🇺🇸US-🇨🇳CN_301 |34.84Mb", "server": "snxao52s.xn--8zrwc997j78ud7a.com", "type": "ssr", "country": "🇺🇸US", "port": 12104, "password": "iuo7tbw4ks", "cipher": "aes-256-cfb", "protocol": "auth_aes128_sha1", "protocol-param": "91911:uFGcmn", "obfs": "plain"}
-  - {"name": "🇦🇺Relay_🇺🇸US-🇨🇳CN_302 |33.30Mb", "server": "u73kpx2s.xn--8zrwc997j78ud7a.com", "type": "ssr", "country": "🇺🇸US", "port": 11110, "password": "iuo7tbw4ks", "cipher": "aes-256-cfb", "protocol": "auth_aes128_sha1", "protocol-param": "91911:uFGcmn", "obfs": "plain"}
-  - {"name": "🇦🇺Relay_🇺🇸US-🇨🇳CN_303 |36.60Mb", "server": "snxao52s.xn--8zrwc997j78ud7a.com", "type": "ssr", "country": "🇺🇸US", "port": 12110, "password": "iuo7tbw4ks", "cipher": "aes-256-cfb", "protocol": "auth_aes128_sha1", "protocol-param": "91911:uFGcmn", "obfs": "plain"}
-  - {"name": "🇦🇺Relay_🇺🇸US-🇨🇳CN_304 |34.52Mb", "server": "u73kpx2s.xn--8zrwc997j78ud7a.com", "type": "ssr", "country": "🇺🇸US", "port": 11118, "password": "iuo7tbw4ks", "cipher": "aes-256-cfb", "protocol": "auth_aes128_sha1", "protocol-param": "91911:uFGcmn", "obfs": "plain"}
-  - {"name": "🇦🇺Relay_🇺🇸US-🇨🇳CN_305 |34.36Mb", "server": "snxao52s.xn--8zrwc997j78ud7a.com", "type": "ssr", "country": "🇺🇸US", "port": 12105, "password": "iuo7tbw4ks", "cipher": "aes-256-cfb", "protocol": "auth_aes128_sha1", "protocol-param": "91911:uFGcmn", "obfs": "plain"}
-  - {"name": "🇦🇺Relay_🇺🇸US-🇨🇳CN_306 |32.30Mb", "server": "u73kpx2s.xn--8zrwc997j78ud7a.com", "type": "ssr", "country": "🇺🇸US", "port": 11111, "password": "iuo7tbw4ks", "cipher": "aes-256-cfb", "protocol": "auth_aes128_sha1", "protocol-param": "65537:JEiqlL", "obfs": "plain"}
-  - {"name": "🇦🇺Relay_🇺🇸US-🇨🇳CN_307 |32.88Mb", "server": "u73kpx2s.xn--8zrwc997j78ud7a.com", "type": "ssr", "country": "🇺🇸US", "port": 11112, "password": "iuo7tbw4ks", "cipher": "aes-256-cfb", "protocol": "auth_aes128_sha1", "protocol-param": "91911:uFGcmn", "obfs": "plain"}
-  - {"name": "🇦🇺Relay_🇺🇸US-🇨🇳CN_308 |36.30Mb", "server": "u73kpx2s.xn--8zrwc997j78ud7a.com", "type": "ssr", "country": "🇺🇸US", "port": 11113, "password": "iuo7tbw4ks", "cipher": "aes-256-cfb", "protocol": "auth_aes128_sha1", "protocol-param": "91911:uFGcmn", "obfs": "plain"}
-  - {"name": "🇨🇦Relay_🇺🇸US-🇩🇪DE_316 |31.83Mb", "server": "172.67.229.13", "type": "vmess", "country": "🇺🇸US", "port": 80, "uuid": "7300c5af-8657-48ea-ba35-4cc1176c5220", "alterId": 0, "cipher": "auto", "network": "ws", "servername": "de55.v2-teh.fun", "http-opts": {}, "h2-opts": {}, "skip-cert-verify": true, "ws-opts": {"path": "/RO4vpgRqVSLPRRQi97uOJujdeO", "headers": {"HOST": "de55.v2-teh.fun"}}}
-  - {"name": "🇨🇦Relay_🇺🇸US-🇯🇵JP_640_ 2.68Mb | 2.84Mb", "server": "frontend.kuangbiaoyun.com", "type": "trojan", "country": "🇺🇸US", "port": 40003, "password": "57edfecf-5694-4a34-8072-54a4f0636a62", "sni": "frontend.kuangbiaoyun.com", "skip-cert-verify": true, "udp": true}
-  - {"name": "🇨🇦Relay_🇺🇸US-🇰🇷KR_33", "server": "frontend.kuangbiaoyun.com", "type": "trojan", "country": "🇺🇸US", "port": 40003, "password": "57edfecf-5694-4a34-8072-54a4f0636a62", "sni": "frontend.kuangbiaoyun.com", "skip-cert-verify": true, "udp": true}
-  - {"name": "🇨🇦Relay_🇺🇸US-🇳🇱NL_472_ 3.90Mb | 1.13Mb", "server": "singapore.com", "type": "vmess", "country": "🇺🇸US", "port": 80, "uuid": "b1e30339-a603-47d1-b31c-1d0ceb59952e", "alterId": 0, "cipher": "auto", "network": "ws", "ws-path": "/api/v3/download.getFile", "servername": "ssrsub.v004.ssrsub.com", "ws-headers": {"HOST": "ssrsub.v004.ssrsub.com"}, "http-opts": {}, "h2-opts": {}, "skip-cert-verify": true}
-  - {"name": "🇨🇦Relay_🇺🇸US-🇳🇴NO_564", "server": "172.67.229.33", "type": "vmess", "country": "🇺🇸US", "port": 8880, "uuid": "617c9bc4-4116-41c6-99e0-ace49a38fcdb", "alterId": 0, "cipher": "auto", "network": "ws", "ws-path": "/Jnv8ViZOUVgijjOh0p5uGjHnXIiY", "servername": "fr7.tehme100.fun", "ws-headers": {"HOST": "fr7.tehme100.fun"}, "http-opts": {}, "h2-opts": {}, "skip-cert-verify": true}
-  - {"name": "🇰🇷Relay_🇺🇸US-🇺🇸US_27", "server": "tg_mfbpn_atw2.52vpn.eu.org", "type": "ss", "country": "🇺🇸US", "port": 443, "password": "amazonskr05", "cipher": "aes-256-cfb"}
-  - {"name": "🇨🇦Relay_🇺🇸US-🇺🇸US_309", "server": "fr-new01.gujuji.top", "type": "vmess", "country": "🇺🇸US", "port": 8080, "uuid": "757ac6da-4435-4822-9c65-5f5a482356ad", "alterId": 0, "cipher": "auto", "network": "ws", "servername": "fr-new01.gujuji.top", "http-opts": {}, "h2-opts": {}, "skip-cert-verify": true, "ws-opts": {"path": "/", "headers": {"HOST": "fr-new01.gujuji.top"}}}
-  - {"name": "🇨🇦Relay_🇺🇸US-🇺🇸US_31", "server": "frontend.kuangbiaoyun.com", "type": "trojan", "country": "🇺🇸US", "port": 40007, "password": "57edfecf-5694-4a34-8072-54a4f0636a62", "sni": "frontend.kuangbiaoyun.com", "skip-cert-verify": true, "udp": true}
-  - {"name": "🇨🇦Relay_🇺🇸US-🇺🇸US_312", "server": "d.mac2win.top", "type": "vmess", "country": "🇺🇸US", "port": 8080, "uuid": "ba1aa9ae-3cad-46a5-8dfa-b0973c35abeb", "alterId": 0, "cipher": "auto", "network": "ws", "servername": "acquire-cleaners-camel-terror.trycloudflare.com", "http-opts": {}, "h2-opts": {}, "skip-cert-verify": true, "ws-opts": {"path": "/argox-vm?ed=2048", "headers": {"HOST": "acquire-cleaners-camel-terror.trycloudflare.com"}}}
-  - {"name": "🇺🇸Relay_🇺🇸US-🇺🇸US_313 |19.74Mb", "server": "b.mac2win.top", "type": "vmess", "country": "🇺🇸US", "port": 8080, "uuid": "ba1aa9ae-3cad-46a5-8dfa-b0973c35abeb", "alterId": 0, "cipher": "auto", "network": "ws", "servername": "acquire-cleaners-camel-terror.trycloudflare.com", "http-opts": {}, "h2-opts": {}, "skip-cert-verify": true, "ws-opts": {"path": "/argox-vm?ed=2048", "headers": {"HOST": "acquire-cleaners-camel-terror.trycloudflare.com"}}}
-  - {"name": "🇺🇸Relay_🇺🇸US-🇺🇸US_314 |21.59Mb", "server": "c.mac2win.top", "type": "vmess", "country": "🇺🇸US", "port": 8080, "uuid": "ba1aa9ae-3cad-46a5-8dfa-b0973c35abeb", "alterId": 0, "cipher": "auto", "network": "ws", "servername": "acquire-cleaners-camel-terror.trycloudflare.com", "http-opts": {}, "h2-opts": {}, "skip-cert-verify": true, "ws-opts": {"path": "/argox-vm?ed=2048", "headers": {"HOST": "acquire-cleaners-camel-terror.trycloudflare.com"}}}
-  - {"name": "🇨🇦Relay_🇺🇸US-🇺🇸US_32", "server": "frontend.kuangbiaoyun.com", "type": "trojan", "country": "🇺🇸US", "port": 40004, "password": "57edfecf-5694-4a34-8072-54a4f0636a62", "skip-cert-verify": true, "udp": true}
-  - {"name": "🇨🇦Relay_🇺🇸US-🇺🇸US_34", "server": "frontend.kuangbiaoyun.com", "type": "trojan", "country": "🇺🇸US", "port": 40006, "password": "57edfecf-5694-4a34-8072-54a4f0636a62", "skip-cert-verify": true, "udp": true}
-  - {"name": "🇨🇦Relay_🇺🇸US-🇺🇸US_491_ 2.32Mb |21.05Mb", "server": "shouerbb.76898102.xyz", "type": "vmess", "country": "🇺🇸US", "port": 2095, "uuid": "54e78c8e-2c4c-301e-bc5d-bb27409a240a", "alterId": 0, "cipher": "auto", "network": "ws", "ws-path": "/funsdfrh", "servername": "shouerb.76898102.xyz", "ws-headers": {"HOST": "shouerb.76898102.xyz"}, "http-opts": {}, "h2-opts": {}, "skip-cert-verify": true}
-  - {"name": "🇨🇦Relay_🇺🇸US-🇺🇸US_502_ 2.46Mb", "server": "104.18.202.232", "type": "vmess", "country": "🇺🇸US", "port": 80, "uuid": "58fe1542-5290-40ad-815a-77707a81afe5", "alterId": 0, "cipher": "auto", "network": "ws", "ws-path": "/IOebhLMhl1CTbFHbL95myfRX2", "servername": "ca4.tehme2.fun", "ws-headers": {"HOST": "ca4.tehme2.fun"}, "http-opts": {}, "h2-opts": {}, "skip-cert-verify": true}
-  - {"name": "🇨🇦Relay_🇺🇸US-🇺🇸US_550_ 3.71Mb | 3.45Mb", "server": "hkpro.win", "type": "vmess", "country": "🇺🇸US", "port": 443, "uuid": "9DC41E4B-53A8-A442-E911-4BC5F490F2CD", "alterId": 0, "cipher": "auto", "network": "ws", "ws-path": "/myblog", "http-opts": {}, "h2-opts": {}, "tls": true, "skip-cert-verify": true}
-  - {"name": "🇨🇦Relay_🇿🇦 ZA-🇿🇦ZA_328 | 1.99Mb", "server": "yhnsb3.shabijichang.com", "type": "vmess", "country": "🇿🇦 ZA", "port": 80, "uuid": "c458695d-6908-45c3-9512-e0c46418454c", "alterId": 0, "cipher": "auto", "network": "ws", "servername": "yhnsb3.shabijichang.com", "http-opts": {}, "h2-opts": {}, "skip-cert-verify": true, "ws-opts": {"path": "/", "headers": {"HOST": "yhnsb3.shabijichang.com"}}}
-  - {"name": "🇨🇦Relay_🏁ZZ |26.53Mb", "server": "us-new04.gujuji.top", "type": "vmess", "country": "🏁ZZ", "port": 8080, "uuid": "757ac6da-4435-4822-9c65-5f5a482356ad", "alterId": 0, "cipher": "auto", "network": "ws", "servername": "us-new04.gujuji.top", "http-opts": {}, "h2-opts": {}, "skip-cert-verify": true, "ws-opts": {"path": "/", "headers": {"HOST": "us-new04.gujuji.top"}}}
-  - {"name": "🇨🇦Relay_🏁ZZ |30.15Mb", "server": "de-new01.gujuji.top", "type": "vmess", "country": "🏁ZZ", "port": 8080, "uuid": "757ac6da-4435-4822-9c65-5f5a482356ad", "alterId": 0, "cipher": "auto", "network": "ws", "servername": "de-new01.gujuji.top", "http-opts": {}, "h2-opts": {}, "skip-cert-verify": true, "ws-opts": {"path": "/", "headers": {"HOST": "de-new01.gujuji.top"}}}
-  - {"name": "🇨🇦Relay_🏁ZZ-🇷🇴RO_331", "server": "104.21.80.89", "type": "vmess", "country": "🏁ZZ", "port": 2095, "uuid": "4fa35ea4-668e-4d7b-9bbc-b83681060617", "alterId": 0, "cipher": "auto", "network": "ws", "servername": "erfannewfreenodes.vdmmswyzmzigonvnjk443.workers.dev", "http-opts": {}, "h2-opts": {}, "skip-cert-verify": true, "ws-opts": {"path": "/xsasowspdqz.site/kwhmvws", "headers": {"HOST": "erfannewfreenodes.vdmmswyzmzigonvnjk443.workers.dev"}}}
-  - {"name": "🇨🇦Relay_🏁ZZ-🇷🇴RO_333", "server": "104.21.12.148", "type": "vmess", "country": "🏁ZZ", "port": 2052, "uuid": "4fa35ea4-668e-4d7b-9bbc-b83681060617", "alterId": 0, "cipher": "auto", "network": "ws", "servername": "erfannewfreenodes.vdmmswyzmzigonvnjk443.workers.dev", "http-opts": {}, "h2-opts": {}, "skip-cert-verify": true, "ws-opts": {"path": "/tehgsykbzb.site/kwhmvws", "headers": {"HOST": "erfannewfreenodes.vdmmswyzmzigonvnjk443.workers.dev"}}}
-  - {"name": "🇨🇦Relay_🏁ZZ-🇺🇸US_332 | 8.53Mb", "server": "104.17.129.28", "type": "vmess", "country": "🏁ZZ", "port": 8080, "uuid": "94242109-0930-427f-f899-15d34021130c", "alterId": 0, "cipher": "auto", "network": "ws", "servername": "eu2.openxai.link", "http-opts": {}, "h2-opts": {}, "skip-cert-verify": true, "ws-opts": {"path": "/", "headers": {"HOST": "eu2.openxai.link"}}}
-  - {"name": "🇸🇬_01 | 4.55Mb", "server": "54.151.131.43", "type": "ss", "port": 443, "password": "amazonskr05", "cipher": "aes-256-cfb"}
-  - {"name": "🇰🇷_02 |16.94Mb", "server": "43.201.53.4", "type": "ss", "port": 443, "password": "amazonskr05", "cipher": "aes-256-cfb"}
-  - {"name": "🇺🇸_02_ 2.54Mb |24.87Mb", "server": "tg_mfbpn_aus2.52vpn.eu.org", "type": "ss", "port": 443, "password": "amazonskr05", "cipher": "aes-256-cfb"}
-  - {"name": "🇰🇷_03_ 2.41Mb | 8.29Mb", "server": "43.201.53.4", "type": "ss", "port": 443, "password": "amazonskr05", "cipher": "aes-256-cfb"}
-  - {"name": "🇰🇷_04 |18.08Mb", "server": "13.209.9.130", "type": "ss", "port": 443, "password": "amazonskr05", "cipher": "aes-256-cfb"}
-  - {"name": "🇸🇬_05 | 0.38Mb", "server": "18.141.147.244", "type": "ss", "port": 443, "password": "amazonskr05", "cipher": "aes-256-cfb"}
-  - {"name": "🇯🇵_05_ 2.19Mb |17.48Mb", "server": "13.112.160.25", "type": "ss", "port": 443, "password": "amazonskr05", "cipher": "aes-256-cfb"}
-  - {"name": "🇯🇵_06 |67.69Mb", "server": "43.206.229.73", "type": "ss", "port": 443, "password": "amazonskr05", "cipher": "aes-256-cfb"}
-  - {"name": "🇯🇵_06_ 2.65Mb |16.05Mb", "server": "54.248.16.149", "type": "ss", "port": 443, "password": "amazonskr05", "cipher": "aes-256-cfb"}
-  - {"name": "🇸🇬_07 |14.13Mb", "server": "52.221.191.251", "type": "ss", "port": 443, "password": "amazonskr05", "cipher": "aes-256-cfb"}
-  - {"name": "🇸🇬_07_ 1.93Mb |55.48Mb", "server": "13.250.55.22", "type": "ss", "port": 443, "password": "amazonskr05", "cipher": "aes-256-cfb"}
-  - {"name": "🇸🇬_08 |52.97Mb", "server": "13.212.204.117", "type": "ss", "port": 443, "password": "amazonskr05", "cipher": "aes-256-cfb"}
-  - {"name": "🇰🇷_09 | 5.76Mb", "server": "43.201.82.233", "type": "ss", "port": 443, "password": "amazonskr05", "cipher": "aes-256-cfb"}
-  - {"name": "🇺🇸_10 | 4.60Mb", "server": "47.76.44.217", "type": "ss", "port": 80, "password": "a-wym4ovY4Yw", "cipher": "aes-128-gcm", "plugin": "obfs", "plugin-opts": {"host": "", "mode": "http"}}
-  - {"name": "🇸🇬_10_ 2.66Mb |23.37Mb", "server": "18.142.250.63", "type": "ss", "port": 443, "password": "amazonskr05", "cipher": "aes-256-cfb"}
-  - {"name": "🇰🇷_11 | 5.68Mb", "server": "43.201.55.242", "type": "ss", "port": 443, "password": "amazonskr05", "cipher": "aes-256-cfb"}
-  - {"name": "🇰🇷_11_ 1.88Mb | 6.81Mb", "server": "43.202.3.93", "type": "ss", "port": 443, "password": "amazonskr05", "cipher": "aes-256-cfb"}
-  - {"name": "🇸🇬_12 |65.26Mb", "server": "13.250.30.209", "type": "ss", "port": 443, "password": "amazonskr05", "cipher": "aes-256-cfb"}
-  - {"name": "🇸🇬_13 |58.61Mb", "server": "18.141.204.149", "type": "ss", "port": 443, "password": "amazonskr05", "cipher": "aes-256-cfb"}
-  - {"name": "🇭🇰_13_ 2.51Mb |11.41Mb", "server": "1.65.139.94", "type": "ss", "port": 443, "password": "a-wym4ovY4Yw", "cipher": "aes-128-gcm", "plugin": "v2ray-plugin", "plugin-opts": {"host": "", "mode": "websocket", "mux": true, "path": "", "skip-cert-verify": true, "tls": false}}
-  - {"name": "🇺🇸_14 |14.53Mb", "server": "52.33.95.19", "type": "ss", "port": 443, "password": "amazonskr05", "cipher": "aes-256-cfb"}
-  - {"name": "🇨🇳_18 |27.00Mb", "server": "222.186.20.102", "type": "ssr", "port": 41228, "password": "http://cc.ax/", "cipher": "aes-256-cfb", "protocol": "auth_aes128_md5", "protocol-param": "165400:Hr2aXO", "obfs": "plain", "obfs-param": "data.bilibili.com/ed5a2165400"}
-  - {"name": "🇨🇦_21", "server": "172.67.229.35", "type": "vmess", "port": 2086, "udp": true, "uuid": "58fe1542-5290-40ad-815a-77707a81afe5", "alterId": 0, "cipher": "chacha20-poly1305", "network": "ws", "http-opts": {}, "h2-opts": {}, "ws-opts": {"path": "/IOebhLMhl1CTbFHbL95myfRX2", "headers": {"Host": "ca6.tehme100.fun"}}}
-  - {"name": "🇭🇰_21_ 2.47Mb | 0.27Mb", "server": "47.243.34.184", "type": "ss", "port": 80, "password": "a-wym4ovY4Yw", "cipher": "aes-128-gcm", "plugin": "obfs", "plugin-opts": {"host": "", "mode": "http"}}
-  - {"name": "🇨🇦_23", "server": "frontend.yijianlian.app", "type": "trojan", "port": 54430, "password": "b5e4e360-5946-470b-aad0-db98f50faa57", "skip-cert-verify": true}
-  - {"name": "🇺🇸_47_ 5.15Mb | 8.11Mb", "server": "35.87.39.181", "type": "ss", "port": 443, "password": "amazonskr05", "cipher": "aes-256-cfb"}
-  - {"name": "🇸🇬_56_ 2.83Mb |57.18Mb", "server": "52.221.200.66", "type": "ss", "port": 443, "password": "amazonskr05", "cipher": "aes-256-cfb"}
-  - {"name": "🇧🇾🇧🇾BY_24 | 1.68Mb", "server": "178.172.217.15", "type": "ss", "country": "🇧🇾BY", "port": 51348, "password": "wCaozrFeyIc19uHTc3sQqhPfy35IwsJGJ1BBhbS7qH4JLZDj", "cipher": "chacha20-ietf-poly1305"}
-  - {"name": "🇨🇳🇨🇳 TW_33 |33.05Mb", "server": "tg_mfbpn_m1.52vpn.eu.org", "type": "vmess", "country": "🇨🇳 TW", "port": 11002, "uuid": "07b3d36d-1bbb-3584-aabd-de2c77878934", "alterId": 0, "cipher": "auto", "network": "tcp", "http-opts": {}, "h2-opts": {}, "skip-cert-verify": true}
-  - {"name": "🇩🇪🇩🇪DE |38.08Mb", "server": "3.78.235.121", "type": "trojan", "country": "🇩🇪DE", "port": 22222, "password": "telegram-id-privatevpns", "skip-cert-verify": true, "udp": true}
-  - {"name": "🇸🇬🇩🇪DE_214", "server": "sg3.421421.xyz", "type": "trojan", "country": "🇩🇪DE", "port": 20230, "password": "3869cf51-5c65-4dac-a4ef-33e49b6ebb4b", "sni": "421421.xyz", "skip-cert-verify": true, "udp": true}
-  - {"name": "🇵🇱🇫🇷 FR_216", "server": "54.36.174.181", "type": "ss", "country": "🇫🇷 FR", "port": 2376, "password": "faBAoD54k87UJG7", "cipher": "aes-256-gcm"}
-  - {"name": "🇵🇱🇫🇷 FR_218", "server": "54.36.174.181", "type": "ss", "country": "🇫🇷 FR", "port": 8009, "password": "XKFKl2rULjIp74", "cipher": "aes-256-gcm"}
-  - {"name": "🇵🇱🇫🇷 FR_219", "server": "54.36.174.181", "type": "ss", "country": "🇫🇷 FR", "port": 9102, "password": "e4FCWrgpkji3QY", "cipher": "aes-256-gcm"}
-  - {"name": "🇵🇱🇫🇷 FR_220 | 6.53Mb", "server": "54.36.174.181", "type": "ss", "country": "🇫🇷 FR", "port": 7306, "password": "FoOiGlkAA9yPEGP", "cipher": "aes-256-gcm"}
-  - {"name": "🇵🇱🇫🇷 FR_221", "server": "54.36.174.181", "type": "ss", "country": "🇫🇷 FR", "port": 8008, "udp": true, "password": "XKFKl2rULjIp74", "cipher": "aes-256-gcm"}
-  - {"name": "🇵🇱🇫🇷 FR_222", "server": "54.36.174.181", "type": "ss", "country": "🇫🇷 FR", "port": 3389, "password": "Y6R9pAtvxxzmGC", "cipher": "aes-256-gcm"}
-  - {"name": "🇫🇷🇫🇷 FR_223", "server": "51.159.221.224", "type": "ss", "country": "🇫🇷 FR", "port": 443, "password": "asdKkaskJKfnsa", "cipher": "aes-256-cfb"}
-  - {"name": "🇵🇱🇫🇷 FR_224", "server": "54.36.174.181", "type": "ss", "country": "🇫🇷 FR", "port": 8080, "password": "KixLvKzwjekG00rm", "cipher": "aes-256-gcm"}
-  - {"name": "🇵🇱🇫🇷 FR_226", "server": "54.36.174.181", "type": "ss", "country": "🇫🇷 FR", "port": 6379, "udp": true, "password": "zDNVedRFPQexG9v", "cipher": "aes-256-gcm"}
-  - {"name": "🇫🇷🇫🇷 FR_227", "server": "185.231.205.80", "type": "ss", "country": "🇫🇷 FR", "port": 1443, "password": "MGQwNTgw", "cipher": "chacha20-ietf-poly1305"}
-  - {"name": "🇵🇱🇫🇷 FR_229", "server": "54.36.174.181", "type": "ss", "country": "🇫🇷 FR", "port": 8118, "password": "cdBIDV42DCwnfIN", "cipher": "aes-256-gcm"}
-  - {"name": "🇵🇱🇫🇷 FR_230 | 7.87Mb", "server": "54.36.174.181", "type": "ss", "country": "🇫🇷 FR", "port": 6679, "password": "TEzjfAYq2IjtuoS", "cipher": "aes-256-gcm"}
-  - {"name": "🇵🇱🇫🇷 FR_231 | 1.86Mb", "server": "54.36.174.181", "type": "ss", "country": "🇫🇷 FR", "port": 7001, "password": "RexnBgU7EV5ADxG", "cipher": "aes-256-gcm"}
-  - {"name": "🇵🇱🇫🇷 FR_232 | 8.32Mb", "server": "54.36.174.181", "type": "ss", "country": "🇫🇷 FR", "port": 8119, "password": "cdBIDV42DCwnfIN", "cipher": "aes-256-gcm"}
-  - {"name": "🇵🇱🇫🇷 FR_233 | 7.14Mb", "server": "54.36.174.181", "type": "ss", "country": "🇫🇷 FR", "port": 5000, "password": "Y6R9pAtvxxzmGC", "cipher": "aes-256-gcm"}
-  - {"name": "🇵🇱🇫🇷 FR_234", "server": "54.36.174.181", "type": "ss", "country": "🇫🇷 FR", "port": 3306, "password": "Y6R9pAtvxxzmGC", "cipher": "aes-256-gcm"}
-  - {"name": "🇵🇱🇫🇷 FR_235", "server": "54.36.174.181", "type": "ss", "country": "🇫🇷 FR", "port": 443, "password": "pKEW8JPByTVTLtM", "cipher": "aes-256-gcm"}
-  - {"name": "🇵🇱🇫🇷 FR_236", "server": "54.36.174.181", "type": "ss", "country": "🇫🇷 FR", "port": 6697, "password": "TEzjfAYq2IjtuoS", "cipher": "aes-256-gcm"}
-  - {"name": "🇵🇱🇫🇷 FR_238 | 6.13Mb", "server": "54.36.174.181", "type": "ss", "country": "🇫🇷 FR", "port": 9101, "password": "e4FCWrgpkji3QY", "cipher": "aes-256-gcm"}
-  - {"name": "🇵🇱🇫🇷 FR_239", "server": "54.36.174.181", "type": "ss", "country": "🇫🇷 FR", "port": 8881, "password": "kDWvXYZoTBcGkC4", "cipher": "aes-256-gcm"}
-  - {"name": "🇵🇱🇫🇷FR_120_ 2.41Mb | 0.44Mb", "server": "54.36.174.181", "type": "ss", "country": "🇫🇷FR", "port": 5000, "password": "Y6R9pAtvxxzmGC", "cipher": "aes-256-gcm"}
-  - {"name": "🇵🇱🇫🇷FR_129_ 2.16Mb | 0.29Mb", "server": "54.36.174.181", "type": "ss", "country": "🇫🇷FR", "port": 2375, "password": "faBAoD54k87UJG7", "cipher": "aes-256-gcm"}
-  - {"name": "🇵🇱🇫🇷FR_131_ 2.62Mb | 2.17Mb", "server": "54.36.174.181", "type": "ss", "country": "🇫🇷FR", "port": 6379, "password": "zDNVedRFPQexG9v", "cipher": "aes-256-gcm"}
-  - {"name": "🇵🇱🇫🇷FR_147_ 2.33Mb | 0.29Mb", "server": "54.36.174.181", "type": "ss", "country": "🇫🇷FR", "port": 7306, "password": "FoOiGlkAA9yPEGP", "cipher": "aes-256-gcm"}
-  - {"name": "🇵🇱🇫🇷FR_151_ 2.26Mb | 4.63Mb", "server": "54.36.174.181", "type": "ss", "country": "🇫🇷FR", "port": 5001, "password": "Y6R9pAtvxxzmGC", "cipher": "aes-256-gcm"}
-  - {"name": "🇵🇱🇫🇷FR_152_ 2.42Mb | 0.62Mb", "server": "54.36.174.181", "type": "ss", "country": "🇫🇷FR", "port": 8881, "password": "kDWvXYZoTBcGkC4", "cipher": "aes-256-gcm"}
-  - {"name": "🇵🇱🇫🇷FR_153_ 2.61Mb | 4.50Mb", "server": "54.36.174.181", "type": "ss", "country": "🇫🇷FR", "port": 5600, "password": "Y6R9pAtvxxzmGC", "cipher": "aes-256-gcm"}
-  - {"name": "🇵🇱🇫🇷FR_159_ 4.70Mb | 0.23Mb", "server": "54.36.174.181", "type": "ss", "country": "🇫🇷FR", "port": 443, "password": "pKEW8JPByTVTLtM", "cipher": "aes-256-gcm"}
-  - {"name": "🇵🇱🇫🇷FR_164_ 2.79Mb | 4.37Mb", "server": "54.36.174.181", "type": "ss", "country": "🇫🇷FR", "port": 8000, "password": "KixLvKzwjekG00rm", "cipher": "aes-256-gcm"}
-  - {"name": "🇵🇱🇫🇷FR_169_ 2.62Mb | 4.94Mb", "server": "54.36.174.181", "type": "ss", "country": "🇫🇷FR", "port": 3306, "password": "Y6R9pAtvxxzmGC", "cipher": "aes-256-gcm"}
-  - {"name": "🇵🇱🇫🇷FR_17", "server": "54.36.174.181", "type": "ss", "country": "🇫🇷FR", "port": 5600, "password": "Y6R9pAtvxxzmGC", "cipher": "aes-256-gcm"}
-  - {"name": "🇵🇱🇫🇷FR_175_ 2.37Mb | 0.38Mb", "server": "54.36.174.181", "type": "ss", "country": "🇫🇷FR", "port": 2376, "password": "faBAoD54k87UJG7", "cipher": "aes-256-gcm"}
-  - {"name": "🇵🇱🇫🇷FR_176_ 2.78Mb | 0.46Mb", "server": "54.36.174.181", "type": "ss", "country": "🇫🇷FR", "port": 8091, "password": "PCnnH6SQSnfoS27", "cipher": "aes-256-gcm"}
-  - {"name": "🇵🇱🇫🇷FR_178_ 2.20Mb | 1.24Mb", "server": "54.36.174.181", "type": "ss", "country": "🇫🇷FR", "port": 3389, "password": "Y6R9pAtvxxzmGC", "cipher": "aes-256-gcm"}
-  - {"name": "🇵🇱🇫🇷FR_186_ 4.66Mb | 3.47Mb", "server": "54.36.174.181", "type": "ss", "country": "🇫🇷FR", "port": 8882, "password": "kDWvXYZoTBcGkC4", "cipher": "aes-256-gcm"}
-  - {"name": "🇵🇱🇫🇷FR_187_ 2.36Mb | 0.59Mb", "server": "54.36.174.181", "type": "ss", "country": "🇫🇷FR", "port": 9102, "password": "e4FCWrgpkji3QY", "cipher": "aes-256-gcm"}
-  - {"name": "🇵🇱🇫🇷FR_188_ 2.70Mb | 2.37Mb", "server": "54.36.174.181", "type": "ss", "country": "🇫🇷FR", "port": 8080, "password": "KixLvKzwjekG00rm", "cipher": "aes-256-gcm"}
-  - {"name": "🇵🇱🇫🇷FR_191_ 1.97Mb | 2.95Mb", "server": "54.36.174.181", "type": "ss", "country": "🇫🇷FR", "port": 6679, "password": "TEzjfAYq2IjtuoS", "cipher": "aes-256-gcm"}
-  - {"name": "🇵🇱🇫🇷FR_20", "server": "54.36.174.181", "type": "ss", "country": "🇫🇷FR", "port": 9101, "password": "e4FCWrgpkji3QY", "cipher": "aes-256-gcm"}
-  - {"name": "🇵🇱🇫🇷FR_241", "server": "54.36.174.181", "type": "ss", "country": "🇫🇷FR", "port": 8090, "password": "PCnnH6SQSnfoS27", "cipher": "aes-256-gcm"}
-  - {"name": "🇫🇷🇫🇷FR_242", "server": "13.39.15.143", "type": "trojan", "country": "🇫🇷FR", "port": 22222, "password": "telegram-id-privatevpns", "skip-cert-verify": true, "udp": true}
-  - {"name": "🇫🇷🇫🇷FR_243", "server": "13.39.179.119", "type": "trojan", "country": "🇫🇷FR", "port": 22222, "password": "telegram-id-privatevpns", "skip-cert-verify": true, "udp": true}
-  - {"name": "🇬🇧🇬🇧GB |14.40Mb", "server": "18.135.206.171", "type": "trojan", "country": "🇬🇧GB", "port": 22222, "password": "telegram-id-directvpn", "skip-cert-verify": true, "udp": true}
-  - {"name": "🇭🇰🇭🇰 HK_245 |26.55Mb", "server": "1.65.139.94", "type": "ss", "country": "🇭🇰 HK", "port": 443, "password": "a-wym4ovY4Yw", "cipher": "aes-128-gcm", "plugin": "v2ray-plugin", "plugin-opts": {"host": "", "mode": "websocket", "mux": true, "path": "", "skip-cert-verify": true, "tls": false}}
-  - {"name": "🇮🇷🇮🇷 IR_249 | 6.31Mb", "server": "62.60.131.238", "type": "vmess", "country": "🇮🇷 IR", "port": 12888, "uuid": "66214d78-b33c-459a-a7b9-e50ab19d16b9", "alterId": 0, "cipher": "auto", "network": "tcp", "http-opts": {}, "h2-opts": {}, "skip-cert-verify": true}
-  - {"name": "🇯🇵🇯🇵 JP_250 |32.15Mb", "server": "43.206.212.255", "type": "ss", "country": "🇯🇵 JP", "port": 443, "password": "amazonskr05", "cipher": "aes-256-cfb"}
-  - {"name": "🇯🇵🇯🇵 JP_251 |53.60Mb", "server": "52.195.170.51", "type": "ss", "country": "🇯🇵 JP", "port": 443, "password": "amazonskr05", "cipher": "aes-256-cfb"}
-  - {"name": "🇺🇸🇯🇵 JP_252", "server": "jp1.421421.xyz", "type": "trojan", "country": "🇯🇵 JP", "port": 20230, "password": "3869cf51-5c65-4dac-a4ef-33e49b6ebb4b", "sni": "421421.xyz", "skip-cert-verify": true, "udp": true}
-  - {"name": "🇯🇵🇯🇵JP_23", "server": "13.112.160.25", "type": "ss", "country": "🇯🇵JP", "port": 443, "password": "amazonskr05", "cipher": "aes-256-cfb"}
-  - {"name": "🇨🇦🇯🇵JP_246", "server": "frontend.yijianlian.app", "type": "trojan", "country": "🇯🇵JP", "port": 54540, "password": "1d29537a-3ec0-4775-97ec-c5773b6e4103", "skip-cert-verify": true, "udp": true}
-  - {"name": "🇯🇵🇯🇵JP_253 |58.91Mb", "server": "52.194.252.137", "type": "ss", "country": "🇯🇵JP", "port": 443, "password": "amazonskr05", "cipher": "aes-256-cfb"}
-  - {"name": "🇯🇵🇯🇵JP_254", "server": "13.230.132.209", "type": "ss", "country": "🇯🇵JP", "port": 443, "password": "amazonskr05", "cipher": "aes-256-cfb"}
-  - {"name": "🇨🇦🇯🇵JP_255", "server": "frontend.yijianlian.app", "type": "trojan", "country": "🇯🇵JP", "port": 54530, "password": "cf82acfc-7b90-445e-ac4a-56ce0a48305a", "skip-cert-verify": true, "udp": true}
-  - {"name": "🇨🇦🇯🇵JP_256", "server": "frontend.yijianlian.app", "type": "trojan", "country": "🇯🇵JP", "port": 54540, "password": "1d29537a-3ec0-4775-97ec-c5773b6e4103", "skip-cert-verify": true, "udp": true}
-  - {"name": "🇨🇦🇯🇵JP_257", "server": "frontend.yijianlian.app", "type": "trojan", "country": "🇯🇵JP", "port": 54530, "password": "85ba209b-54d1-4aad-871e-98df4eb224bf", "sni": "frontend.yijianlian.app", "skip-cert-verify": true, "udp": true}
-  - {"name": "🇰🇷🇰🇷 KR_259 |30.08Mb", "server": "43.201.104.144", "type": "ss", "country": "🇰🇷 KR", "port": 443, "password": "amazonskr05", "cipher": "aes-256-cfb"}
-  - {"name": "🇰🇷🇰🇷 KR_260 | 9.99Mb", "server": "43.200.253.6", "type": "ss", "country": "🇰🇷 KR", "port": 443, "password": "amazonskr05", "cipher": "aes-256-cfb"}
-  - {"name": "🇰🇷🇰🇷 KR_262 | 4.58Mb", "server": "43.201.46.242", "type": "ss", "country": "🇰🇷 KR", "port": 443, "password": "amazonskr05", "cipher": "aes-256-cfb"}
-  - {"name": "🇰🇷🇰🇷 KR_265 | 4.85Mb", "server": "3.36.77.202", "type": "ss", "country": "🇰🇷 KR", "port": 443, "password": "amazonskr05", "cipher": "aes-256-cfb"}
-  - {"name": "🇳🇱🇳🇱NL |20.82Mb", "server": "51.15.19.206", "type": "vmess", "country": "🇳🇱NL", "port": 2086, "uuid": "6704eed0-97a6-11ee-b632-205c6d5f5d78", "alterId": 0, "cipher": "auto", "network": "ws", "http-opts": {}, "h2-opts": {}, "skip-cert-verify": true, "ws-opts": {"path": "/k487e2od"}}
-  - {"name": "🇨🇦🇳🇱NL_270", "server": "frontend.yijianlian.app", "type": "trojan", "country": "🇳🇱NL", "port": 54530, "password": "1468eae4-eb01-4b9f-ae8f-ce55c372d1af", "skip-cert-verify": true, "udp": true}
-  - {"name": "🇸🇬🇸🇬 SG_275 |27.04Mb", "server": "13.213.1.132", "type": "ss", "country": "🇸🇬 SG", "port": 443, "password": "amazonskr05", "cipher": "aes-256-cfb"}
-  - {"name": "🇸🇬🇸🇬 SG_276 |59.04Mb", "server": "13.250.125.29", "type": "ss", "country": "🇸🇬 SG", "port": 443, "password": "amazonskr05", "cipher": "aes-256-cfb"}
-  - {"name": "🇸🇬🇸🇬SG_24", "server": "13.250.55.22", "type": "ss", "country": "🇸🇬SG", "port": 443, "password": "amazonskr05", "cipher": "aes-256-cfb"}
-  - {"name": "🇸🇬🇸🇬SG_25", "server": "18.142.250.63", "type": "ss", "country": "🇸🇬SG", "port": 443, "password": "amazonskr05", "cipher": "aes-256-cfb"}
-  - {"name": "🇸🇬🇸🇬SG_26", "server": "52.221.200.66", "type": "ss", "country": "🇸🇬SG", "port": 443, "password": "amazonskr05", "cipher": "aes-256-cfb"}
-  - {"name": "🇸🇬🇸🇬SG_278 |61.78Mb", "server": "18.142.250.63", "type": "ss", "country": "🇸🇬SG", "port": 443, "password": "amazonskr05", "cipher": "aes-256-cfb"}
-  - {"name": "🇸🇬🇸🇬SG_279 | 2.28Mb", "server": "13.250.55.22", "type": "ss", "country": "🇸🇬SG", "port": 443, "password": "amazonskr05", "cipher": "aes-256-cfb"}
-  - {"name": "🇰🇷🇺🇸US_28", "server": "43.200.253.6", "type": "ss", "country": "🇺🇸US", "port": 443, "password": "amazonskr05", "cipher": "aes-256-cfb"}
-  - {"name": "🇰🇷🇺🇸US_29", "server": "43.202.3.93", "type": "ss", "country": "🇺🇸US", "port": 443, "password": "amazonskr05", "cipher": "aes-256-cfb"}
-  - {"name": "🇰🇷🇺🇸US_290 | 3.74Mb", "server": "43.202.3.93", "type": "ss", "country": "🇺🇸US", "port": 443, "password": "amazonskr05", "cipher": "aes-256-cfb"}
-  - {"name": "🇯🇵🇺🇸US_30", "server": "152.69.197.60", "type": "vmess", "country": "🇺🇸US", "port": 1069, "uuid": "ac8e26fe-8150-4b60-ae64-82fc77eba2cf", "alterId": 0, "cipher": "auto", "network": "tcp", "http-opts": {}, "h2-opts": {}, "skip-cert-verify": true}
-  - {"name": "🇺🇸🇺🇸US_317", "server": "144.202.84.47", "type": "vmess", "country": "🇺🇸US", "port": 57848, "uuid": "e48643e7-0462-4055-f796-6ca6aa9f946d", "alterId": 0, "cipher": "auto", "network": "tcp", "http-opts": {}, "h2-opts": {}, "skip-cert-verify": true}
-  - {"name": "🇨🇦🇺🇸US_319", "server": "cf2.492745.xyz", "type": "vmess", "country": "🇺🇸US", "port": 8080, "uuid": "579fd6f1-7618-4fff-8635-9dba4a61df96", "alterId": 0, "cipher": "auto", "network": "ws", "servername": "cc.992688.xyz", "http-opts": {}, "h2-opts": {}, "skip-cert-verify": true, "ws-opts": {"path": "/", "headers": {"HOST": "cc.992688.xyz"}}}
-  - {"name": "🇨🇦🇺🇸US_320", "server": "frontend.yijianlian.app", "type": "trojan", "country": "🇺🇸US", "port": 54430, "password": "17b7208e-bbe1-47dc-8068-bc18b1682686", "skip-cert-verify": true, "udp": true}
-  - {"name": "🇸🇪🇺🇸US_321 |11.85Mb", "server": "51.21.55.105", "type": "trojan", "country": "🇺🇸US", "port": 22222, "password": "telegram-id-privatevpns", "skip-cert-verify": true, "udp": true}
-  - {"name": "🇨🇦🇺🇸US_322", "server": "frontend.yijianlian.app", "type": "trojan", "country": "🇺🇸US", "port": 54420, "password": "c75da6ec-2151-4191-bcde-1778a5c12cf7", "sni": "frontend.yijianlian.app", "skip-cert-verify": true, "udp": true}
-  - {"name": "🇨🇦🇺🇸US_323", "server": "frontend.yijianlian.app", "type": "trojan", "country": "🇺🇸US", "port": 54540, "password": "c75da6ec-2151-4191-bcde-1778a5c12cf7", "skip-cert-verify": true, "udp": true}
-  - {"name": "🇨🇦🇺🇸US_327", "server": "frontend.yijianlian.app", "type": "trojan", "country": "🇺🇸US", "port": 54530, "password": "c75da6ec-2151-4191-bcde-1778a5c12cf7", "sni": "frontend.yijianlian.app", "skip-cert-verify": true, "udp": true}
-  - {"name": "🇨🇦🇺🇸US_639", "server": "frontend.yijianlian.app", "type": "trojan", "country": "🇺🇸US", "port": 54540, "password": "c75da6ec-2151-4191-bcde-1778a5c12cf7", "skip-cert-verify": true, "udp": true}
-  - {"name": "🇨🇦🇺🇸US_654", "server": "frontend.yijianlian.app", "type": "trojan", "country": "🇺🇸US", "port": 54420, "password": "c75da6ec-2151-4191-bcde-1778a5c12cf7", "sni": "frontend.yijianlian.app", "skip-cert-verify": true, "udp": true}
-
+- name: 82ee0b73e00f50cf8ed6abaa76ef5afd
+  password: e9edd1db-e6f0-4c37-9be7-135335a81e6c
+  port: 30020
+  server: 128.199.13.40
+  skip-cert-verify: 0
+  sni: us05.freeflyingcloud.xyz
+  type: trojan
+  udp: true
+- name: 4c8a36a0c6865a891e1264d9e8f72993
+  password: 15f804fa-27be-4b0f-85d4-cead43a483ef
+  port: 30020
+  server: us05.freeflyingcloud.xyz
+  skip-cert-verify: 0
+  sni: us05.freeflyingcloud.xyz
+  type: trojan
+  udp: true
+- name: 93a6ae2b526d746c302b40a8dc127e97
+  password: huge123456
+  port: 60954
+  server: h.iveze.com
+  skip-cert-verify: 1
+  sni: null
+  type: trojan
+  udp: true
+- name: 33c347cf6d1fd5ddaf91a0c80595e9cd
+  password: zIvR7ryOXv
+  port: 34428
+  server: 159.223.207.182
+  skip-cert-verify: 1
+  sni: 159.223.207.182
+  type: trojan
+  udp: true
+- name: 9de930fad3c912a6bc97bd6780827c56
+  password: wkmY1R4EcP
+  port: 443
+  server: 216.128.147.13
+  skip-cert-verify: 1
+  sni: z-v2-003274.kailib.com
+  type: trojan
+  udp: true
+- name: ccbdb1187175f005dad199390cb5bb6c
+  password: 9e6999d5-eae0-4b2d-81cb-404f203ecc58
+  port: 30020
+  server: us05.freeflyingcloud.xyz
+  skip-cert-verify: 1
+  sni: us05.freeflyingcloud.xyz
+  type: trojan
+  udp: true
+- name: 8b32d4884660c49acff62432e425acb9
+  password: 15f804fa-27be-4b0f-85d4-cead43a483ef
+  port: 30018
+  server: sg04.freeflyingcloud.xyz
+  skip-cert-verify: 1
+  sni: sg04.freeflyingcloud.xyz
+  type: trojan
+  udp: true
+- name: 6b7c7d410088405226cc9d1f008d8e2b
+  password: e9edd1db-e6f0-4c37-9be7-135335a81e6c
+  port: 30020
+  server: us05.freeflyingcloud.xyz
+  skip-cert-verify: 1
+  sni: null
+  type: trojan
+  udp: true
+- name: faf79b3b99fd5a95397a9391cfc50f9d
+  password: wkmY1R4EcP
+  port: 443
+  server: 207.148.1.78
+  skip-cert-verify: 1
+  sni: null
+  type: trojan
+  udp: true
+- name: 978a5b9d0a6a2ebab263c3f0c56dd9bb
+  password: tXRjrTHttx
+  port: 443
+  server: 167.71.220.39
+  skip-cert-verify: 1
+  sni: aka.ms
+  type: trojan
+  udp: true
+- name: 623fec75f588b54b4d1a2196cf8191b9
+  password: wkmY1R4EcP
+  port: 443
+  server: 149.28.82.202
+  skip-cert-verify: 1
+  sni: wrmelmwxlf.gktevlrqznwqqozy.fabpfs66gizmnojhcvqxwl.kytrcfzqla87gvgvs6c7kjnrubuh.cc
+  type: trojan
+  udp: true
+- name: 1b3535e3d776df20dfcd83f73189f504
+  password: 15f804fa-27be-4b0f-85d4-cead43a483ef
+  port: 30020
+  server: 128.199.13.40
+  skip-cert-verify: 1
+  sni: us05.freeflyingcloud.xyz
+  type: trojan
+  udp: true
+- name: 246f4e1ae3c4cbbaf2e9b003a058e313
+  password: huge123456
+  port: 60954
+  server: 131.186.21.135
+  skip-cert-verify: 1
+  sni: h.iveze.com
+  type: trojan
+  udp: true
+- name: 409e93ddd66167308a6f58b0b30a3e1d
+  password: telegram-id-directvpn
+  port: 22222
+  server: 54.184.84.153
+  skip-cert-verify: 0
+  sni: trojan.burgerip.co.uk
+  type: trojan
+  udp: true
+- name: 57224e3f05bd93ea55c4af63b0ad9bf2
+  password: wkmY1R4EcP
+  port: 443
+  server: 137.220.42.248
+  skip-cert-verify: 1
+  sni: z-v2-002802.kailib.com
+  type: trojan
+  udp: true
+- name: 45cc3d036de1e784471aa5d06fc8ea6b
+  password: 4aa9ee7a-ffee-4ca4-a588-f5fa9e979c38
+  port: 20230
+  server: us03.421421.xyz
+  skip-cert-verify: 1
+  sni: 421421.xyz
+  type: trojan
+  udp: true
+- name: 568fe669b17b0a36171006056e1e73ee
+  password: wkmY1R4EcP
+  port: 443
+  server: 45.76.228.197
+  skip-cert-verify: 1
+  sni: z-v2-003263.kailib.com
+  type: trojan
+  udp: true
+- name: fcf9a3fb402b54a35b91e2fdd1b58a85
+  password: wkmY1R4EcP
+  port: 443
+  server: 66.42.84.121
+  skip-cert-verify: 1
+  sni: z-v2-002797.kailib.com
+  type: trojan
+  udp: true
+- name: 9af2f24cf424592c43a8ddf17e1de8db
+  password: wkmY1R4EcP
+  port: 443
+  server: 45.77.167.12
+  skip-cert-verify: 1
+  sni: z-v2-003319.kailib.com
+  type: trojan
+  udp: true
+- name: ca12ae441024528867addebad905e635
+  password: wkmY1R4EcP
+  port: 443
+  server: 45.63.110.20
+  skip-cert-verify: 1
+  sni: z-v2-003281.kailib.com
+  type: trojan
+  udp: true
+- name: 99e6432c8a672b2327d031a7ffcb5e77
+  password: 6fa8e32d-ae4a-491c-b6a0-0f26cd5cad8d
+  port: 18701
+  server: b23.ntbq.dynu.net
+  skip-cert-verify: 1
+  sni: b23.ntbq.dynu.net
+  type: trojan
+  udp: true
+- name: 8c69e9f0f2f2d059f1a7dfb25663cf47
+  password: 6fa8e32d-ae4a-491c-b6a0-0f26cd5cad8d
+  port: 19489
+  server: b22.ntbq.dynu.net
+  skip-cert-verify: 1
+  sni: b22.ntbq.dynu.net
+  type: trojan
+  udp: true
+- name: 19a73f2151a84bfc16218a3ab58bc009
+  password: wkmY1R4EcP
+  port: 443
+  server: 45.76.241.66
+  skip-cert-verify: 1
+  sni: wrmelmwxlf.gktevlrqznwqqozy.fabpfs66gizmnojhcvqxwl.kytrcfzqla87gvgvs6c7kjnrubuh.cc
+  type: trojan
+  udp: true
+- name: f3307c9f7168dc581a5398d14a03cce8
+  password: 50cbd14f-187c-4a11-859e-8312917366d6
+  port: 20230
+  server: sg08.421421.xyz
+  skip-cert-verify: 1
+  sni: 421421.xyz
+  type: trojan
+  udp: true
+- name: a34ac5c774f62e1e8498bc5788c76730
+  password: telegram-id-directvpn
+  port: 22222
+  server: 99.79.22.16
+  skip-cert-verify: 0
+  sni: trojan.burgerip.co.uk
+  type: trojan
+  udp: true
+- name: 4f15fa4fc1da2573512dbb32a5e57252
+  password: 7In4Fbdpb1L8
+  port: 12943
+  server: 54.169.0.183
+  skip-cert-verify: 1
+  sni: appsvs.shop
+  type: trojan
+  udp: true
+- name: 18ca2448aeb8ccd0c4a5b6f66a855dc4
+  password: wch4dBD6Jp34
+  port: 12950
+  server: 43.207.121.102
+  skip-cert-verify: 1
+  sni: appsvs.shop
+  type: trojan
+  udp: true
+- name: 12f312bd9d10b1fd98ce6339d532a285
+  password: 6fa8e32d-ae4a-491c-b6a0-0f26cd5cad8d
+  port: 3271
+  server: b24.ntbq.dynu.net
+  skip-cert-verify: 1
+  sni: b24.ntbq.dynu.net
+  type: trojan
+  udp: true
+- name: 20665360800a7e72ee182a55026dc1d4
+  password: 6fa8e32d-ae4a-491c-b6a0-0f26cd5cad8d
+  port: 13761
+  server: ty11t.twty.dynu.net
+  skip-cert-verify: 1
+  sni: ty11t.twty.dynu.net
+  type: trojan
+  udp: true
+- name: 68952da52dad17da91eb63faf79f91be
+  password: 6fa8e32d-ae4a-491c-b6a0-0f26cd5cad8d
+  port: 14656
+  server: nc12.twtc.dynu.net
+  skip-cert-verify: 1
+  sni: nc12.twtc.dynu.net
+  type: trojan
+  udp: true
+- name: 1b2b084d259ddca0cbe4be5b96857e79
+  password: 6fa8e32d-ae4a-491c-b6a0-0f26cd5cad8d
+  port: 13989
+  server: c11.twtc.dynu.net
+  skip-cert-verify: 1
+  sni: c11.twtc.dynu.net
+  type: trojan
+  udp: true
+- name: 7eeccbfe0aae1770f41d1aeb41a124a0
+  password: d2382a15-ae45-40ab-8925-84792b584bd8
+  port: 20230
+  server: sg07.421421.xyz
+  skip-cert-verify: 1
+  sni: 421421.xyz
+  type: trojan
+  udp: true
+- name: d7c039e93a3d8c19c059f29ee35ff33f
+  password: 0bfa2050-b165-4156-859c-70f36d300dce
+  port: 20230
+  server: us04.421421.xyz
+  skip-cert-verify: 1
+  sni: 421421.xyz
+  type: trojan
+  udp: true
+- name: e22a9a49d5a412702842f9d09b02255f
+  password: d2382a15-ae45-40ab-8925-84792b584bd8
+  port: 20230
+  server: jp05.421421.xyz
+  skip-cert-verify: 1
+  sni: 421421.xyz
+  type: trojan
+  udp: true
+- name: 819c557761d5a1025c3c03d9445f7cb4
+  password: 4aa9ee7a-ffee-4ca4-a588-f5fa9e979c38
+  port: 20230
+  server: jp05.421421.xyz
+  skip-cert-verify: 1
+  sni: 421421.xyz
+  type: trojan
+  udp: true
+- name: e49d2eb0eefd238b385318ba61e81994
+  password: 4aa9ee7a-ffee-4ca4-a588-f5fa9e979c38
+  port: 20230
+  server: jp08.421421.xyz
+  skip-cert-verify: 1
+  sni: 421421.xyz
+  type: trojan
+  udp: true
+- alterId: 0
+  cipher: auto
+  name: c22d0d0ae789acae332efb4c1ebdda44
+  network: tcp
+  port: 3389
+  server: 45.82.31.164
+  tls: 0
+  type: vmess
+  udp: true
+  uuid: 9c050a86-d612-48f1-ec32-e573df08a1b7
+- alterId: 0
+  cipher: auto
+  name: e936cbb4f7bd93e13c285f4d9a2a4c40
+  network: ws
+  port: 13337
+  server: 64.23.196.139
+  servername: 'null'
+  skip-cert-verify: true
+  tls: 1
+  type: vmess
+  udp: true
+  uuid: bdd22841-c4d2-4aa8-acf2-95aa9125f159
+- alterId: 0
+  cipher: auto
+  name: 4bc1d10bfcc3b4ca0733a96b72b1e8e3
+  network: tcp
+  port: 47555
+  server: 46.29.166.237
+  tls: 0
+  type: vmess
+  udp: true
+  uuid: 0c49cd19-2758-4d38-e6a8-11f2d6635860
+- alterId: 0
+  cipher: auto
+  name: 3ee1e5bc128ef380ff058e6c41af046f
+  network: tcp
+  port: 80
+  server: 152.42.216.240
+  tls: 0
+  type: vmess
+  udp: true
+  uuid: 714e44f9-ff62-4a4c-cb2e-3f2a7dbc444c
+- alterId: 0
+  cipher: auto
+  name: 318186953e0a2b1be0ec6ee853fe425c
+  network: tcp
+  port: 80
+  server: 152.42.218.53
+  tls: 0
+  type: vmess
+  udp: true
+  uuid: 48a16dc9-40e7-4270-925e-b7fcef9bc4c6
+- alterId: 0
+  cipher: auto
+  name: ac5d12261b64047919ad569c8e42319b
+  network: tcp
+  port: 12810
+  server: 45.77.218.99
+  tls: 0
+  type: vmess
+  udp: true
+  uuid: 469daa04-235a-47be-fdf8-41a9a72f8be2
+- alterId: 0
+  cipher: auto
+  name: e684870b9800b522fa200eca7a9a6ed3
+  network: tcp
+  port: 25087
+  server: 140.82.8.218
+  tls: 0
+  type: vmess
+  udp: true
+  uuid: 3e3a4f91-160c-4967-c2d7-5aebf6faf0c9
+- alterId: 0
+  cipher: auto
+  name: de1f8a11f7fc743c1a5d5fdf7e8cd424
+  network: tcp
+  port: 21636
+  server: 207.246.102.64
+  tls: 0
+  type: vmess
+  udp: true
+  uuid: 53d57cfb-189f-4a9f-b620-a3ca168b7ac1
+- alterId: 0
+  cipher: auto
+  name: 23b2ba031aad8d206727f2f31a40ef0e
+  network: tcp
+  port: 35995
+  server: 51.195.140.87
+  tls: 0
+  type: vmess
+  udp: true
+  uuid: 28f08493-de6d-486e-84f5-5abe092ff78b
+- alterId: 0
+  cipher: auto
+  name: e413686a2fba90f12ea65e71715e1197
+  network: tcp
+  port: 45617
+  server: 149.28.58.129
+  tls: 0
+  type: vmess
+  udp: true
+  uuid: 59c95ca3-babe-466a-9a5b-4761e575caf8
+- alterId: 0
+  cipher: auto
+  name: 81c2a3a3a13f42ad820a3491034867c6
+  network: tcp
+  port: 18134
+  server: 154.62.185.2
+  tls: 0
+  type: vmess
+  udp: true
+  uuid: 0da00a40-7dc6-413f-f8dd-6ed42dd50c06
+- alterId: 0
+  cipher: auto
+  name: 2c3289263f0501384caff6017c72f7f9
+  network: tcp
+  port: 12732
+  server: 75.102.51.61
+  tls: 0
+  type: vmess
+  udp: true
+  uuid: 191ba971-0f63-402e-bbc9-9e9eb2604b0c
+- alterId: 0
+  cipher: auto
+  name: ad8d474f004ad72b4fb6c556e9358848
+  network: tcp
+  port: 26022
+  server: 152.70.39.9
+  tls: 0
+  type: vmess
+  udp: true
+  uuid: e0254dda-dc8c-46b0-8df8-07c453aaafd7
+- alterId: 0
+  cipher: auto
+  name: 46c8f5b2377891c245faf3927eccb327
+  network: tcp
+  port: 44990
+  server: 66.135.3.168
+  tls: 0
+  type: vmess
+  udp: true
+  uuid: 88623615-0713-497a-9233-755a33cc7080
+- alterId: 0
+  cipher: auto
+  name: be3e0f4fad2eccec6ede4d1577568a2f
+  network: tcp
+  port: 15843
+  server: 156.253.5.63
+  tls: 0
+  type: vmess
+  udp: true
+  uuid: 63d39605-332b-4e67-aa33-aa142d897730
+- alterId: 0
+  cipher: auto
+  name: a7eadf8f7ebc71cf2f0dd80b0189660e
+  network: tcp
+  port: 28953
+  server: 172.105.150.181
+  tls: 0
+  type: vmess
+  udp: true
+  uuid: d1f31766-564a-47ab-88cc-0721145b78b8
+- alterId: 0
+  cipher: auto
+  name: a657adfe16818ab0da1814e2238d5573
+  network: ws
+  port: 14555
+  server: 2.58.87.221
+  servername: 'null'
+  skip-cert-verify: true
+  tls: 1
+  type: vmess
+  udp: true
+  uuid: 6c764a03-bb1a-4bc6-baca-452453fce1ae
+- alterId: 0
+  cipher: auto
+  name: b536a243e3dc29201a0cba52440d3735
+  network: ws
+  port: 443
+  server: 47.76.186.215
+  servername: n1710825489.aaigefm.cn
+  skip-cert-verify: true
+  tls: 1
+  type: vmess
+  udp: true
+  uuid: 0dd3ac59-78e9-43d5-bd3f-53f2863cffd7
 
 proxy-groups:
-- name: auto
-  proxies:
-  - "🇨🇳Pool__01"
-  - "🇨🇳Pool__15 |259.00Mb"
-  - "🇫🇷Pool__27_ 2.31Mb | 9.24Mb"
-  - "🇫🇷Pool__46_ 2.74Mb |10.32Mb"
-  - "🇨🇳Pool_🇨🇳CN_125 |263.00Mb"
-  - "🇨🇳Pool_🇨🇳CN_141 |254.00Mb"
-  - "🇨🇳Pool_🇨🇳CN_154 |106.00Mb"
-  - "🇨🇳Pool_🇨🇳CN_161 |107.00Mb"
-  - "🇨🇳Pool_🇨🇳CN_166 |115.00Mb"
-  - "🇨🇳Pool_🇨🇳CN_167 |87.00Mb"
-  - "🇨🇳Pool_🇨🇳CN_170 |66.00Mb"
-  - "🇨🇳Pool_🇨🇳CN_171 |103.00Mb"
-  - "🇨🇳Pool_🇨🇳CN_172 |64.00Mb"
-  - "🇨🇳Pool_🇨🇳CN_192 |111.00Mb"
-  - "🇨🇳Pool_🇨🇳CN_194 |235.00Mb"
-  - "🇨🇳Pool_🇨🇳CN_198 |95.00Mb"
-  - "🇨🇳Pool_🇨🇳CN_199 |64.00Mb"
-  - "🇨🇳Pool_🇨🇳CN_202 |109.00Mb"
-  - "🇨🇳Pool_🇨🇳CN_203 |118.00Mb"
-  - "🇨🇳Pool_🇨🇳CN_204 |77.00Mb"
-  - "🇨🇳Pool_🇨🇳CN_207 |72.00Mb"
-  - "🇨🇳Pool_🇨🇳CN_208 |69.00Mb"
-  - "🇨🇳Pool_🇨🇳CN_209 |112.00Mb"
-  - "🇨🇳Pool_🇨🇳CN_38 |91.00Mb"
-  - "🇨🇳Pool_🇨🇳CN_39 |85.00Mb"
-  - "🇨🇳Pool_🇨🇳CN_75 |84.00Mb"
-  - "🇨🇳Pool_🇨🇳CN_76 |68.00Mb"
-  - "🇨🇳Pool_🇨🇳CN_78 |66.00Mb"
-  - "🇨🇳Pool_🇨🇳CN_79 |73.00Mb"
-  - "🇨🇳Pool_🇨🇳CN_81 |71.00Mb"
-  - "🇨🇳Pool_🇨🇳CN_83 |105.00Mb"
-  - "🇫🇷Pool_🇫🇷FR_18"
-  - "🇫🇷Pool_🇫🇷FR_19"
-  - "🇫🇷Pool_🇫🇷FR_21"
-  - "🇫🇷Pool_🇫🇷FR_240 |13.34Mb"
-  - "🇭🇰Pool_🇭🇰HK_22"
-  - "🇭🇰Pool_🇭🇰HK_247 |436.00Mb"
-  - "🇫🇷Pool_🇳🇱 NL_267 |17.02Mb"
-  - "🇫🇷Pool_🇳🇱 NL_268 |11.42Mb"
-  - "🇨🇦Relay_ |18.72Mb"
-  - "🇨🇦Relay_ |30.22Mb"
-  - "🇨🇳Relay_-🇨🇳CN_16 |57.30Mb"
-  - "🇦🇺Relay_-🇨🇳CN_17 |41.46Mb"
-  - "🇨🇳Relay_-🇨🇳CN_19 |480.00Mb"
-  - "🇫🇷Relay_-🇩🇪DE_04_ 2.20Mb | 7.95Mb"
-  - "🇨🇦Relay_🇨🇦CA |11.17Mb"
-  - "🇨🇦Relay_🇨🇦CA-🇨🇦CA_66_ 3.56Mb"
-  - "🇨🇳Relay_🇨🇳 CN | 5.56Mb"
-  - "🇨🇳Relay_🇨🇳 CN | 6.14Mb"
-  - "🇨🇳Relay_🇨🇳 CN |27.06Mb"
-  - "🇨🇳Relay_🇨🇳 CN |32.32Mb"
-  - "🇨🇳Relay_🇨🇳 CN |35.47Mb"
-  - "🇨🇳Relay_🇨🇳 CN |52.88Mb"
-  - "🇨🇳Relay_🇨🇳 CN-🇲🇾MY_32"
-  - "🇨🇳Relay_🇨🇳CN |10.99Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_03"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_04"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_05"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_06"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_07"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_08"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_09"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_10"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_100 |52.07Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_101 |52.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_102 |63.60Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_103 |56.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_104 |123.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_105 |55.90Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_106 |223.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_107 |73.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_108 |56.90Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_109 |54.50Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_11"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_110 |91.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_111 |89.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_112 |87.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_113 |56.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_114 |124.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_115 |126.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_116 |56.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_117 |53.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_118 |91.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_119 |65.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_12"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_120 |64.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_121 |76.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_122 |69.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_123 |57.98Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_124 |261.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_126 |52.94Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_127 |52.40Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_128 |121.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_129 |229.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_13"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_130 |26.10Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_131 |57.30Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_132 |235.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_133 |53.10Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_134 |55.38Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_135 |54.10Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_136 |56.41Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_137 |53.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_138 |54.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_139 |53.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_14"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_140 |57.70Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_142 |233.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_143 |123.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_144 |112.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_145 |254.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_146 |167.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_147 |50.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_148 |47.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_149 |43.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_150 |233.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_151 |227.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_152 |234.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_153 |65.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_155 |97.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_156 |114.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_158 |125.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_160 |122.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_162 |55.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_163 |58.10Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_164 |70.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_165 |259.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_169 |62.50Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_173 |64.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_174 |58.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_175 |52.40Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_176 |50.60Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_177 |317.10Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_178 |86.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_179 |89.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_180 |288.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_181 |114.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_182 |122.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_183 |502.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_184 |60.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_185 |116.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_186 |68.60Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_187 |243.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_188 |237.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_189 |264.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_190 |122.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_191 |65.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_193 |83.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_195 |58.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_196 |70.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_197 |68.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_200 |254.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_201 |211.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_205 |58.50Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_206 |45.60Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_36 |57.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_37 |50.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_40 |198.30Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_41 |268.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_42 |126.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_43 |109.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_44 |82.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_45 |65.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_46 |61.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_47 |122.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_48 |107.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_50 |228.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_51 |92.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_52 |50.50Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_53 |57.60Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_54 |53.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_55 |251.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_56 |84.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_57 |53.10Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_58 |183.90Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_59 |53.80Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_60 |53.30Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_61 |51.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_62 |56.70Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_63 |48.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_64 |53.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_65 |93.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_66 |56.70Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_67 |305.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_68 |56.60Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_69 |61.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_70 |53.64Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_71 |53.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_72 |62.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_73 |55.90Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_74 |56.60Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_77 |58.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_80 |61.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_82 |56.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_84 |52.82Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_85 |51.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_86 |54.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_87 |52.36Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_88 |78.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_89 |62.90Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_90 |32.10Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_91 |57.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_92 |46.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_93 |224.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_94 |54.61Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_95 |54.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_96 |57.20Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_97 |62.00Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_98 |53.10Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇨🇳CN_99 |54.44Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇭🇰HK_16"
-  - "🇨🇳Relay_🇨🇳CN-🇷🇴RO_02"
-  - "🇨🇳Relay_🇨🇳CN-🇸🇬SG_100_ 1.88Mb | 0.51Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇸🇬SG_75_ 0.35Mb | 7.27Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇸🇬SG_79_ 1.37Mb |14.03Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇸🇬SG_82_ 2.46Mb | 4.64Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇸🇬SG_83_ 2.69Mb | 6.47Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇸🇬SG_84_ 3.61Mb | 1.08Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇸🇬SG_85_ 3.06Mb | 3.86Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇸🇬SG_88_ 4.84Mb |16.18Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇸🇬SG_90_ 2.66Mb |62.52Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇸🇬SG_91_ 2.75Mb | 9.95Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇸🇬SG_92_ 2.24Mb | 9.18Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇸🇬SG_94_ 1.55Mb | 6.12Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇸🇬SG_99_ 3.71Mb | 0.80Mb"
-  - "🇨🇳Relay_🇨🇳CN-🇺🇸US_15"
-  - "🇨🇳Relay_🇨🇳CN-🇺🇸US_35 |13.29Mb"
-  - "🇫🇷Relay_🇩🇪 DE-🇫🇷FR_213 |16.34Mb"
-  - "🇫🇷Relay_🇫🇷 FR-🇫🇷FR_228 |15.59Mb"
-  - "🇨🇦Relay_🇯🇵JP-🇺🇸US_245_ 4.12Mb | 4.54Mb"
-  - "🇰🇷Relay_🇰🇷 KR-🇰🇷KR_261 | 4.53Mb"
-  - "🇰🇷Relay_🇰🇷 KR-🇰🇷KR_264 | 5.95Mb"
-  - "🇩🇪Relay_🇰🇷 KR-🇸🇬SG_266"
-  - "🇰🇷Relay_🇰🇷 KR-🇺🇸US_258 | 2.03Mb"
-  - "🇰🇷Relay_🇰🇷 KR-🇺🇸US_263 | 9.78Mb"
-  - "🇨🇳Relay_🇸🇦 SA-🇨🇳CN_271 |229.00Mb"
-  - "🇨🇳Relay_🇸🇦 SA-🇨🇳CN_272 |250.00Mb"
-  - "🇨🇳Relay_🇸🇦 SA-🇨🇳CN_273 |51.00Mb"
-  - "🇨🇳Relay_🇸🇦 SA-🇨🇳CN_274 |240.00Mb"
-  - "🇨🇦Relay_🇸🇬 SG | 9.18Mb"
-  - "🇦🇺Relay_🇸🇬SG-🇨🇳CN_280 |427.00Mb"
-  - "🇦🇺Relay_🇸🇬SG-🇨🇳CN_281 |499.00Mb"
-  - "🇦🇺Relay_🇸🇬SG-🇨🇳CN_283 |183.60Mb"
-  - "🇦🇺Relay_🇸🇬SG-🇨🇳CN_284 |963.17Mb"
-  - "🇸🇬Relay_🇸🇬SG-🇸🇬SG_285"
-  - "🇨🇳Relay_🇺🇸 US-🇨🇳CN_287 |57.00Mb"
-  - "🇨🇳Relay_🇺🇸 US-🇨🇳CN_288 |66.00Mb"
-  - "🇰🇷Relay_🇺🇸US | 2.04Mb"
-  - "🇺🇸Relay_🇺🇸US | 3.55Mb"
-  - "🇨🇦Relay_🇺🇸US | 3.62Mb"
-  - "🇨🇦Relay_🇺🇸US |18.36Mb"
-  - "🇨🇦Relay_🇺🇸US |20.94Mb"
-  - "🇨🇦Relay_🇺🇸US |29.34Mb"
-  - "🇦🇺Relay_🇺🇸US-🇨🇳CN_291 |103.28Mb"
-  - "🇦🇺Relay_🇺🇸US-🇨🇳CN_292 |35.31Mb"
-  - "🇦🇺Relay_🇺🇸US-🇨🇳CN_293 |98.70Mb"
-  - "🇦🇺Relay_🇺🇸US-🇨🇳CN_294 |49.70Mb"
-  - "🇦🇺Relay_🇺🇸US-🇨🇳CN_295 |36.35Mb"
-  - "🇦🇺Relay_🇺🇸US-🇨🇳CN_296 |34.73Mb"
-  - "🇦🇺Relay_🇺🇸US-🇨🇳CN_297 |33.21Mb"
-  - "🇦🇺Relay_🇺🇸US-🇨🇳CN_298 |34.44Mb"
-  - "🇦🇺Relay_🇺🇸US-🇨🇳CN_299 |49.17Mb"
-  - "🇦🇺Relay_🇺🇸US-🇨🇳CN_300 |33.80Mb"
-  - "🇦🇺Relay_🇺🇸US-🇨🇳CN_301 |34.84Mb"
-  - "🇦🇺Relay_🇺🇸US-🇨🇳CN_302 |33.30Mb"
-  - "🇦🇺Relay_🇺🇸US-🇨🇳CN_303 |36.60Mb"
-  - "🇦🇺Relay_🇺🇸US-🇨🇳CN_304 |34.52Mb"
-  - "🇦🇺Relay_🇺🇸US-🇨🇳CN_305 |34.36Mb"
-  - "🇦🇺Relay_🇺🇸US-🇨🇳CN_306 |32.30Mb"
-  - "🇦🇺Relay_🇺🇸US-🇨🇳CN_307 |32.88Mb"
-  - "🇦🇺Relay_🇺🇸US-🇨🇳CN_308 |36.30Mb"
-  - "🇨🇦Relay_🇺🇸US-🇩🇪DE_316 |31.83Mb"
-  - "🇨🇦Relay_🇺🇸US-🇯🇵JP_640_ 2.68Mb | 2.84Mb"
-  - "🇨🇦Relay_🇺🇸US-🇰🇷KR_33"
-  - "🇨🇦Relay_🇺🇸US-🇳🇱NL_472_ 3.90Mb | 1.13Mb"
-  - "🇨🇦Relay_🇺🇸US-🇳🇴NO_564"
-  - "🇰🇷Relay_🇺🇸US-🇺🇸US_27"
-  - "🇨🇦Relay_🇺🇸US-🇺🇸US_309"
-  - "🇨🇦Relay_🇺🇸US-🇺🇸US_31"
-  - "🇨🇦Relay_🇺🇸US-🇺🇸US_312"
-  - "🇺🇸Relay_🇺🇸US-🇺🇸US_313 |19.74Mb"
-  - "🇺🇸Relay_🇺🇸US-🇺🇸US_314 |21.59Mb"
-  - "🇨🇦Relay_🇺🇸US-🇺🇸US_32"
-  - "🇨🇦Relay_🇺🇸US-🇺🇸US_34"
-  - "🇨🇦Relay_🇺🇸US-🇺🇸US_491_ 2.32Mb |21.05Mb"
-  - "🇨🇦Relay_🇺🇸US-🇺🇸US_502_ 2.46Mb"
-  - "🇨🇦Relay_🇺🇸US-🇺🇸US_550_ 3.71Mb | 3.45Mb"
-  - "🇨🇦Relay_🇿🇦 ZA-🇿🇦ZA_328 | 1.99Mb"
-  - "🇨🇦Relay_🏁ZZ |26.53Mb"
-  - "🇨🇦Relay_🏁ZZ |30.15Mb"
-  - "🇨🇦Relay_🏁ZZ-🇷🇴RO_331"
-  - "🇨🇦Relay_🏁ZZ-🇷🇴RO_333"
-  - "🇨🇦Relay_🏁ZZ-🇺🇸US_332 | 8.53Mb"
-  - "🇸🇬_01 | 4.55Mb"
-  - "🇰🇷_02 |16.94Mb"
-  - "🇺🇸_02_ 2.54Mb |24.87Mb"
-  - "🇰🇷_03_ 2.41Mb | 8.29Mb"
-  - "🇰🇷_04 |18.08Mb"
-  - "🇸🇬_05 | 0.38Mb"
-  - "🇯🇵_05_ 2.19Mb |17.48Mb"
-  - "🇯🇵_06 |67.69Mb"
-  - "🇯🇵_06_ 2.65Mb |16.05Mb"
-  - "🇸🇬_07 |14.13Mb"
-  - "🇸🇬_07_ 1.93Mb |55.48Mb"
-  - "🇸🇬_08 |52.97Mb"
-  - "🇰🇷_09 | 5.76Mb"
-  - "🇺🇸_10 | 4.60Mb"
-  - "🇸🇬_10_ 2.66Mb |23.37Mb"
-  - "🇰🇷_11 | 5.68Mb"
-  - "🇰🇷_11_ 1.88Mb | 6.81Mb"
-  - "🇸🇬_12 |65.26Mb"
-  - "🇸🇬_13 |58.61Mb"
-  - "🇭🇰_13_ 2.51Mb |11.41Mb"
-  - "🇺🇸_14 |14.53Mb"
-  - "🇨🇳_18 |27.00Mb"
-  - "🇨🇦_21"
-  - "🇭🇰_21_ 2.47Mb | 0.27Mb"
-  - "🇨🇦_23"
-  - "🇺🇸_47_ 5.15Mb | 8.11Mb"
-  - "🇸🇬_56_ 2.83Mb |57.18Mb"
-  - "🇧🇾🇧🇾BY_24 | 1.68Mb"
-  - "🇨🇳🇨🇳 TW_33 |33.05Mb"
-  - "🇩🇪🇩🇪DE |38.08Mb"
-  - "🇸🇬🇩🇪DE_214"
-  - "🇵🇱🇫🇷 FR_216"
-  - "🇵🇱🇫🇷 FR_218"
-  - "🇵🇱🇫🇷 FR_219"
-  - "🇵🇱🇫🇷 FR_220 | 6.53Mb"
-  - "🇵🇱🇫🇷 FR_221"
-  - "🇵🇱🇫🇷 FR_222"
-  - "🇫🇷🇫🇷 FR_223"
-  - "🇵🇱🇫🇷 FR_224"
-  - "🇵🇱🇫🇷 FR_226"
-  - "🇫🇷🇫🇷 FR_227"
-  - "🇵🇱🇫🇷 FR_229"
-  - "🇵🇱🇫🇷 FR_230 | 7.87Mb"
-  - "🇵🇱🇫🇷 FR_231 | 1.86Mb"
-  - "🇵🇱🇫🇷 FR_232 | 8.32Mb"
-  - "🇵🇱🇫🇷 FR_233 | 7.14Mb"
-  - "🇵🇱🇫🇷 FR_234"
-  - "🇵🇱🇫🇷 FR_235"
-  - "🇵🇱🇫🇷 FR_236"
-  - "🇵🇱🇫🇷 FR_238 | 6.13Mb"
-  - "🇵🇱🇫🇷 FR_239"
-  - "🇵🇱🇫🇷FR_120_ 2.41Mb | 0.44Mb"
-  - "🇵🇱🇫🇷FR_129_ 2.16Mb | 0.29Mb"
-  - "🇵🇱🇫🇷FR_131_ 2.62Mb | 2.17Mb"
-  - "🇵🇱🇫🇷FR_147_ 2.33Mb | 0.29Mb"
-  - "🇵🇱🇫🇷FR_151_ 2.26Mb | 4.63Mb"
-  - "🇵🇱🇫🇷FR_152_ 2.42Mb | 0.62Mb"
-  - "🇵🇱🇫🇷FR_153_ 2.61Mb | 4.50Mb"
-  - "🇵🇱🇫🇷FR_159_ 4.70Mb | 0.23Mb"
-  - "🇵🇱🇫🇷FR_164_ 2.79Mb | 4.37Mb"
-  - "🇵🇱🇫🇷FR_169_ 2.62Mb | 4.94Mb"
-  - "🇵🇱🇫🇷FR_17"
-  - "🇵🇱🇫🇷FR_175_ 2.37Mb | 0.38Mb"
-  - "🇵🇱🇫🇷FR_176_ 2.78Mb | 0.46Mb"
-  - "🇵🇱🇫🇷FR_178_ 2.20Mb | 1.24Mb"
-  - "🇵🇱🇫🇷FR_186_ 4.66Mb | 3.47Mb"
-  - "🇵🇱🇫🇷FR_187_ 2.36Mb | 0.59Mb"
-  - "🇵🇱🇫🇷FR_188_ 2.70Mb | 2.37Mb"
-  - "🇵🇱🇫🇷FR_191_ 1.97Mb | 2.95Mb"
-  - "🇵🇱🇫🇷FR_20"
-  - "🇵🇱🇫🇷FR_241"
-  - "🇫🇷🇫🇷FR_242"
-  - "🇫🇷🇫🇷FR_243"
-  - "🇬🇧🇬🇧GB |14.40Mb"
-  - "🇭🇰🇭🇰 HK_245 |26.55Mb"
-  - "🇮🇷🇮🇷 IR_249 | 6.31Mb"
-  - "🇯🇵🇯🇵 JP_250 |32.15Mb"
-  - "🇯🇵🇯🇵 JP_251 |53.60Mb"
-  - "🇺🇸🇯🇵 JP_252"
-  - "🇯🇵🇯🇵JP_23"
-  - "🇨🇦🇯🇵JP_246"
-  - "🇯🇵🇯🇵JP_253 |58.91Mb"
-  - "🇯🇵🇯🇵JP_254"
-  - "🇨🇦🇯🇵JP_255"
-  - "🇨🇦🇯🇵JP_256"
-  - "🇨🇦🇯🇵JP_257"
-  - "🇰🇷🇰🇷 KR_259 |30.08Mb"
-  - "🇰🇷🇰🇷 KR_260 | 9.99Mb"
-  - "🇰🇷🇰🇷 KR_262 | 4.58Mb"
-  - "🇰🇷🇰🇷 KR_265 | 4.85Mb"
-  - "🇳🇱🇳🇱NL |20.82Mb"
-  - "🇨🇦🇳🇱NL_270"
-  - "🇸🇬🇸🇬 SG_275 |27.04Mb"
-  - "🇸🇬🇸🇬 SG_276 |59.04Mb"
-  - "🇸🇬🇸🇬SG_24"
-  - "🇸🇬🇸🇬SG_25"
-  - "🇸🇬🇸🇬SG_26"
-  - "🇸🇬🇸🇬SG_278 |61.78Mb"
-  - "🇸🇬🇸🇬SG_279 | 2.28Mb"
-  - "🇰🇷🇺🇸US_28"
-  - "🇰🇷🇺🇸US_29"
-  - "🇰🇷🇺🇸US_290 | 3.74Mb"
-  - "🇯🇵🇺🇸US_30"
-  - "🇺🇸🇺🇸US_317"
-  - "🇨🇦🇺🇸US_319"
-  - "🇨🇦🇺🇸US_320"
-  - "🇸🇪🇺🇸US_321 |11.85Mb"
-  - "🇨🇦🇺🇸US_322"
-  - "🇨🇦🇺🇸US_323"
-  - "🇨🇦🇺🇸US_327"
-  - "🇨🇦🇺🇸US_639"
-  - "🇨🇦🇺🇸US_654"
-  url: https://www.google.com/client_204
-  interval: 60
-  type: url-test
-  tolerance: 200
-
+    - { name: 暴富云, type: fallback, proxies: [12f312bd9d10b1fd98ce6339d532a285, 18ca2448aeb8ccd0c4a5b6f66a855dc4, 19a73f2151a84bfc16218a3ab58bc009, 1b2b084d259ddca0cbe4be5b96857e79, 1b3535e3d776df20dfcd83f73189f504, 20665360800a7e72ee182a55026dc1d4, 23b2ba031aad8d206727f2f31a40ef0e, 246f4e1ae3c4cbbaf2e9b003a058e313, 2c3289263f0501384caff6017c72f7f9, 318186953e0a2b1be0ec6ee853fe425c, 33c347cf6d1fd5ddaf91a0c80595e9cd, 3ee1e5bc128ef380ff058e6c41af046f, 409e93ddd66167308a6f58b0b30a3e1d, 45cc3d036de1e784471aa5d06fc8ea6b, 46c8f5b2377891c245faf3927eccb327, 4bc1d10bfcc3b4ca0733a96b72b1e8e3, 4c8a36a0c6865a891e1264d9e8f72993, 4f15fa4fc1da2573512dbb32a5e57252, 568fe669b17b0a36171006056e1e73ee, 57224e3f05bd93ea55c4af63b0ad9bf2, 623fec75f588b54b4d1a2196cf8191b9, 68952da52dad17da91eb63faf79f91be, 6b7c7d410088405226cc9d1f008d8e2b, 7eeccbfe0aae1770f41d1aeb41a124a0, 819c557761d5a1025c3c03d9445f7cb4, 81c2a3a3a13f42ad820a3491034867c6, 82ee0b73e00f50cf8ed6abaa76ef5afd, 8b32d4884660c49acff62432e425acb9, 8c69e9f0f2f2d059f1a7dfb25663cf47, 93a6ae2b526d746c302b40a8dc127e97, 978a5b9d0a6a2ebab263c3f0c56dd9bb, 99e6432c8a672b2327d031a7ffcb5e77, 9af2f24cf424592c43a8ddf17e1de8db, 9de930fad3c912a6bc97bd6780827c56, a34ac5c774f62e1e8498bc5788c76730, a657adfe16818ab0da1814e2238d5573, a7eadf8f7ebc71cf2f0dd80b0189660e, ac5d12261b64047919ad569c8e42319b, ad8d474f004ad72b4fb6c556e9358848, b536a243e3dc29201a0cba52440d3735, be3e0f4fad2eccec6ede4d1577568a2f, c22d0d0ae789acae332efb4c1ebdda44, ca12ae441024528867addebad905e635, ccbdb1187175f005dad199390cb5bb6c, d7c039e93a3d8c19c059f29ee35ff33f, de1f8a11f7fc743c1a5d5fdf7e8cd424, e22a9a49d5a412702842f9d09b02255f, e413686a2fba90f12ea65e71715e1197, e49d2eb0eefd238b385318ba61e81994, e684870b9800b522fa200eca7a9a6ed3, e936cbb4f7bd93e13c285f4d9a2a4c40, f3307c9f7168dc581a5398d14a03cce8, faf79b3b99fd5a95397a9391cfc50f9d, fcf9a3fb402b54a35b91e2fdd1b58a85, 318186953e0a2b1be0ec6ee853fe425c, 3ee1e5bc128ef380ff058e6c41af046f, 978a5b9d0a6a2ebab263c3f0c56dd9bb, 20665360800a7e72ee182a55026dc1d4, f3307c9f7168dc581a5398d14a03cce8, 8c69e9f0f2f2d059f1a7dfb25663cf47, 12f312bd9d10b1fd98ce6339d532a285, 93a6ae2b526d746c302b40a8dc127e97, 99e6432c8a672b2327d031a7ffcb5e77, 8b32d4884660c49acff62432e425acb9, 68952da52dad17da91eb63faf79f91be, 1b2b084d259ddca0cbe4be5b96857e79, a7eadf8f7ebc71cf2f0dd80b0189660e, e684870b9800b522fa200eca7a9a6ed3, 46c8f5b2377891c245faf3927eccb327, 19a73f2151a84bfc16218a3ab58bc009, ad8d474f004ad72b4fb6c556e9358848, 9de930fad3c912a6bc97bd6780827c56, d7c039e93a3d8c19c059f29ee35ff33f, faf79b3b99fd5a95397a9391cfc50f9d, fcf9a3fb402b54a35b91e2fdd1b58a85, c22d0d0ae789acae332efb4c1ebdda44, 4bc1d10bfcc3b4ca0733a96b72b1e8e3, 4f15fa4fc1da2573512dbb32a5e57252, 7eeccbfe0aae1770f41d1aeb41a124a0, 82ee0b73e00f50cf8ed6abaa76ef5afd, 6b7c7d410088405226cc9d1f008d8e2b, be3e0f4fad2eccec6ede4d1577568a2f, 23b2ba031aad8d206727f2f31a40ef0e, e413686a2fba90f12ea65e71715e1197, e936cbb4f7bd93e13c285f4d9a2a4c40, ccbdb1187175f005dad199390cb5bb6c, 1b3535e3d776df20dfcd83f73189f504, 568fe669b17b0a36171006056e1e73ee, ac5d12261b64047919ad569c8e42319b, b536a243e3dc29201a0cba52440d3735, 33c347cf6d1fd5ddaf91a0c80595e9cd, 18ca2448aeb8ccd0c4a5b6f66a855dc4, 57224e3f05bd93ea55c4af63b0ad9bf2, 4c8a36a0c6865a891e1264d9e8f72993, 623fec75f588b54b4d1a2196cf8191b9, ca12ae441024528867addebad905e635, 246f4e1ae3c4cbbaf2e9b003a058e313, e22a9a49d5a412702842f9d09b02255f, 9af2f24cf424592c43a8ddf17e1de8db, de1f8a11f7fc743c1a5d5fdf7e8cd424, e49d2eb0eefd238b385318ba61e81994, 2c3289263f0501384caff6017c72f7f9, 409e93ddd66167308a6f58b0b30a3e1d, 819c557761d5a1025c3c03d9445f7cb4, a657adfe16818ab0da1814e2238d5573, 81c2a3a3a13f42ad820a3491034867c6, 45cc3d036de1e784471aa5d06fc8ea6b, a34ac5c774f62e1e8498bc5788c76730], url: 'http://www.google.com/generate_204', interval: 10 }
 rules:
-#  - DOMAIN-SUFFIX,freeproxy.click,DIRECT
-#  - DOMAIN-KEYWORD,freeproxy,DIRECT
-#  - DOMAIN,freeproxy.click,DIRECT
-  - DOMAIN-SUFFIX,google.com,auto
-  - DOMAIN-KEYWORD,google,auto
-  - DOMAIN,google.com,auto
-  - DOMAIN-SUFFIX,ad.com,REJECT
-  - SRC-IP-CIDR,192.168.1.201/32,DIRECT
-  - IP-CIDR,127.0.0.0/8,DIRECT
-  - GEOIP,CN,DIRECT
-  - DST-PORT,80,DIRECT
-  - SRC-PORT,7777,DIRECT
-  - MATCH,auto
+    - 'DOMAIN,feiniaoyun.xyz,DIRECT'
+    - 'DOMAIN-SUFFIX,services.googleapis.cn,暴富云'
+    - 'DOMAIN-SUFFIX,xn--ngstr-lra8j.com,暴富云'
+    - 'DOMAIN,safebrowsing.urlsec.qq.com,DIRECT'
+    - 'DOMAIN,safebrowsing.googleapis.com,DIRECT'
+    - 'DOMAIN,developer.apple.com,暴富云'
+    - 'DOMAIN-SUFFIX,digicert.com,暴富云'
+    - 'DOMAIN,ocsp.apple.com,暴富云'
+    - 'DOMAIN,ocsp.comodoca.com,暴富云'
+    - 'DOMAIN,ocsp.usertrust.com,暴富云'
+    - 'DOMAIN,ocsp.sectigo.com,暴富云'
+    - 'DOMAIN,ocsp.verisign.net,暴富云'
+    - 'DOMAIN-SUFFIX,apple-dns.net,暴富云'
+    - 'DOMAIN,testflight.apple.com,暴富云'
+    - 'DOMAIN,sandbox.itunes.apple.com,暴富云'
+    - 'DOMAIN,itunes.apple.com,暴富云'
+    - 'DOMAIN-SUFFIX,apps.apple.com,暴富云'
+    - 'DOMAIN-SUFFIX,blobstore.apple.com,暴富云'
+    - 'DOMAIN,cvws.icloud-content.com,暴富云'
+    - 'DOMAIN-SUFFIX,mzstatic.com,DIRECT'
+    - 'DOMAIN-SUFFIX,itunes.apple.com,DIRECT'
+    - 'DOMAIN-SUFFIX,icloud.com,DIRECT'
+    - 'DOMAIN-SUFFIX,icloud-content.com,DIRECT'
+    - 'DOMAIN-SUFFIX,me.com,DIRECT'
+    - 'DOMAIN-SUFFIX,aaplimg.com,DIRECT'
+    - 'DOMAIN-SUFFIX,cdn20.com,DIRECT'
+    - 'DOMAIN-SUFFIX,cdn-apple.com,DIRECT'
+    - 'DOMAIN-SUFFIX,akadns.net,DIRECT'
+    - 'DOMAIN-SUFFIX,akamaiedge.net,DIRECT'
+    - 'DOMAIN-SUFFIX,edgekey.net,DIRECT'
+    - 'DOMAIN-SUFFIX,mwcloudcdn.com,DIRECT'
+    - 'DOMAIN-SUFFIX,mwcname.com,DIRECT'
+    - 'DOMAIN-SUFFIX,apple.com,DIRECT'
+    - 'DOMAIN-SUFFIX,apple-cloudkit.com,DIRECT'
+    - 'DOMAIN-SUFFIX,apple-mapkit.com,DIRECT'
+    - 'DOMAIN-SUFFIX,126.com,DIRECT'
+    - 'DOMAIN-SUFFIX,126.net,DIRECT'
+    - 'DOMAIN-SUFFIX,127.net,DIRECT'
+    - 'DOMAIN-SUFFIX,163.com,DIRECT'
+    - 'DOMAIN-SUFFIX,360buyimg.com,DIRECT'
+    - 'DOMAIN-SUFFIX,36kr.com,DIRECT'
+    - 'DOMAIN-SUFFIX,acfun.tv,DIRECT'
+    - 'DOMAIN-SUFFIX,air-matters.com,DIRECT'
+    - 'DOMAIN-SUFFIX,aixifan.com,DIRECT'
+    - 'DOMAIN-KEYWORD,alicdn,DIRECT'
+    - 'DOMAIN-KEYWORD,alipay,DIRECT'
+    - 'DOMAIN-KEYWORD,taobao,DIRECT'
+    - 'DOMAIN-SUFFIX,amap.com,DIRECT'
+    - 'DOMAIN-SUFFIX,autonavi.com,DIRECT'
+    - 'DOMAIN-KEYWORD,baidu,DIRECT'
+    - 'DOMAIN-SUFFIX,bdimg.com,DIRECT'
+    - 'DOMAIN-SUFFIX,bdstatic.com,DIRECT'
+    - 'DOMAIN-SUFFIX,bilibili.com,DIRECT'
+    - 'DOMAIN-SUFFIX,bilivideo.com,DIRECT'
+    - 'DOMAIN-SUFFIX,caiyunapp.com,DIRECT'
+    - 'DOMAIN-SUFFIX,clouddn.com,DIRECT'
+    - 'DOMAIN-SUFFIX,cnbeta.com,DIRECT'
+    - 'DOMAIN-SUFFIX,cnbetacdn.com,DIRECT'
+    - 'DOMAIN-SUFFIX,cootekservice.com,DIRECT'
+    - 'DOMAIN-SUFFIX,csdn.net,DIRECT'
+    - 'DOMAIN-SUFFIX,ctrip.com,DIRECT'
+    - 'DOMAIN-SUFFIX,dgtle.com,DIRECT'
+    - 'DOMAIN-SUFFIX,dianping.com,DIRECT'
+    - 'DOMAIN-SUFFIX,douban.com,DIRECT'
+    - 'DOMAIN-SUFFIX,doubanio.com,DIRECT'
+    - 'DOMAIN-SUFFIX,duokan.com,DIRECT'
+    - 'DOMAIN-SUFFIX,easou.com,DIRECT'
+    - 'DOMAIN-SUFFIX,ele.me,DIRECT'
+    - 'DOMAIN-SUFFIX,feng.com,DIRECT'
+    - 'DOMAIN-SUFFIX,fir.im,DIRECT'
+    - 'DOMAIN-SUFFIX,frdic.com,DIRECT'
+    - 'DOMAIN-SUFFIX,g-cores.com,DIRECT'
+    - 'DOMAIN-SUFFIX,godic.net,DIRECT'
+    - 'DOMAIN-SUFFIX,gtimg.com,DIRECT'
+    - 'DOMAIN,cdn.hockeyapp.net,DIRECT'
+    - 'DOMAIN-SUFFIX,hongxiu.com,DIRECT'
+    - 'DOMAIN-SUFFIX,hxcdn.net,DIRECT'
+    - 'DOMAIN-SUFFIX,iciba.com,DIRECT'
+    - 'DOMAIN-SUFFIX,ifeng.com,DIRECT'
+    - 'DOMAIN-SUFFIX,ifengimg.com,DIRECT'
+    - 'DOMAIN-SUFFIX,ipip.net,DIRECT'
+    - 'DOMAIN-SUFFIX,iqiyi.com,DIRECT'
+    - 'DOMAIN-SUFFIX,jd.com,DIRECT'
+    - 'DOMAIN-SUFFIX,jianshu.com,DIRECT'
+    - 'DOMAIN-SUFFIX,knewone.com,DIRECT'
+    - 'DOMAIN-SUFFIX,le.com,DIRECT'
+    - 'DOMAIN-SUFFIX,lecloud.com,DIRECT'
+    - 'DOMAIN-SUFFIX,lemicp.com,DIRECT'
+    - 'DOMAIN-SUFFIX,licdn.com,DIRECT'
+    - 'DOMAIN-SUFFIX,luoo.net,DIRECT'
+    - 'DOMAIN-SUFFIX,meituan.com,DIRECT'
+    - 'DOMAIN-SUFFIX,meituan.net,DIRECT'
+    - 'DOMAIN-SUFFIX,mi.com,DIRECT'
+    - 'DOMAIN-SUFFIX,miaopai.com,DIRECT'
+    - 'DOMAIN-SUFFIX,microsoft.com,DIRECT'
+    - 'DOMAIN-SUFFIX,microsoftonline.com,DIRECT'
+    - 'DOMAIN-SUFFIX,miui.com,DIRECT'
+    - 'DOMAIN-SUFFIX,miwifi.com,DIRECT'
+    - 'DOMAIN-SUFFIX,mob.com,DIRECT'
+    - 'DOMAIN-SUFFIX,netease.com,DIRECT'
+    - 'DOMAIN-SUFFIX,office.com,DIRECT'
+    - 'DOMAIN-SUFFIX,office365.com,DIRECT'
+    - 'DOMAIN-KEYWORD,officecdn,DIRECT'
+    - 'DOMAIN-SUFFIX,oschina.net,DIRECT'
+    - 'DOMAIN-SUFFIX,ppsimg.com,DIRECT'
+    - 'DOMAIN-SUFFIX,pstatp.com,DIRECT'
+    - 'DOMAIN-SUFFIX,qcloud.com,DIRECT'
+    - 'DOMAIN-SUFFIX,qdaily.com,DIRECT'
+    - 'DOMAIN-SUFFIX,qdmm.com,DIRECT'
+    - 'DOMAIN-SUFFIX,qhimg.com,DIRECT'
+    - 'DOMAIN-SUFFIX,qhres.com,DIRECT'
+    - 'DOMAIN-SUFFIX,qidian.com,DIRECT'
+    - 'DOMAIN-SUFFIX,qihucdn.com,DIRECT'
+    - 'DOMAIN-SUFFIX,qiniu.com,DIRECT'
+    - 'DOMAIN-SUFFIX,qiniucdn.com,DIRECT'
+    - 'DOMAIN-SUFFIX,qiyipic.com,DIRECT'
+    - 'DOMAIN-SUFFIX,qq.com,DIRECT'
+    - 'DOMAIN-SUFFIX,qqurl.com,DIRECT'
+    - 'DOMAIN-SUFFIX,rarbg.to,DIRECT'
+    - 'DOMAIN-SUFFIX,ruguoapp.com,DIRECT'
+    - 'DOMAIN-SUFFIX,segmentfault.com,DIRECT'
+    - 'DOMAIN-SUFFIX,sinaapp.com,DIRECT'
+    - 'DOMAIN-SUFFIX,smzdm.com,DIRECT'
+    - 'DOMAIN-SUFFIX,snapdrop.net,DIRECT'
+    - 'DOMAIN-SUFFIX,sogou.com,DIRECT'
+    - 'DOMAIN-SUFFIX,sogoucdn.com,DIRECT'
+    - 'DOMAIN-SUFFIX,sohu.com,DIRECT'
+    - 'DOMAIN-SUFFIX,soku.com,DIRECT'
+    - 'DOMAIN-SUFFIX,speedtest.net,DIRECT'
+    - 'DOMAIN-SUFFIX,sspai.com,DIRECT'
+    - 'DOMAIN-SUFFIX,suning.com,DIRECT'
+    - 'DOMAIN-SUFFIX,taobao.com,DIRECT'
+    - 'DOMAIN-SUFFIX,tencent.com,DIRECT'
+    - 'DOMAIN-SUFFIX,tenpay.com,DIRECT'
+    - 'DOMAIN-SUFFIX,tianyancha.com,DIRECT'
+    - 'DOMAIN-SUFFIX,tmall.com,DIRECT'
+    - 'DOMAIN-SUFFIX,tudou.com,DIRECT'
+    - 'DOMAIN-SUFFIX,umetrip.com,DIRECT'
+    - 'DOMAIN-SUFFIX,upaiyun.com,DIRECT'
+    - 'DOMAIN-SUFFIX,upyun.com,DIRECT'
+    - 'DOMAIN-SUFFIX,veryzhun.com,DIRECT'
+    - 'DOMAIN-SUFFIX,weather.com,DIRECT'
+    - 'DOMAIN-SUFFIX,weibo.com,DIRECT'
+    - 'DOMAIN-SUFFIX,xiami.com,DIRECT'
+    - 'DOMAIN-SUFFIX,xiami.net,DIRECT'
+    - 'DOMAIN-SUFFIX,xiaomicp.com,DIRECT'
+    - 'DOMAIN-SUFFIX,ximalaya.com,DIRECT'
+    - 'DOMAIN-SUFFIX,xmcdn.com,DIRECT'
+    - 'DOMAIN-SUFFIX,xunlei.com,DIRECT'
+    - 'DOMAIN-SUFFIX,yhd.com,DIRECT'
+    - 'DOMAIN-SUFFIX,yihaodianimg.com,DIRECT'
+    - 'DOMAIN-SUFFIX,yinxiang.com,DIRECT'
+    - 'DOMAIN-SUFFIX,ykimg.com,DIRECT'
+    - 'DOMAIN-SUFFIX,youdao.com,DIRECT'
+    - 'DOMAIN-SUFFIX,youku.com,DIRECT'
+    - 'DOMAIN-SUFFIX,zealer.com,DIRECT'
+    - 'DOMAIN-SUFFIX,zhihu.com,DIRECT'
+    - 'DOMAIN-SUFFIX,zhimg.com,DIRECT'
+    - 'DOMAIN-SUFFIX,zimuzu.tv,DIRECT'
+    - 'DOMAIN-SUFFIX,zoho.com,DIRECT'
+    - 'DOMAIN-KEYWORD,amazon,暴富云'
+    - 'DOMAIN-KEYWORD,google,暴富云'
+    - 'DOMAIN-KEYWORD,gmail,暴富云'
+    - 'DOMAIN-KEYWORD,youtube,暴富云'
+    - 'DOMAIN-KEYWORD,facebook,暴富云'
+    - 'DOMAIN-SUFFIX,fb.me,暴富云'
+    - 'DOMAIN-SUFFIX,fbcdn.net,暴富云'
+    - 'DOMAIN-KEYWORD,twitter,暴富云'
+    - 'DOMAIN-KEYWORD,instagram,暴富云'
+    - 'DOMAIN-KEYWORD,dropbox,暴富云'
+    - 'DOMAIN-SUFFIX,twimg.com,暴富云'
+    - 'DOMAIN-KEYWORD,blogspot,暴富云'
+    - 'DOMAIN-SUFFIX,youtu.be,暴富云'
+    - 'DOMAIN-KEYWORD,whatsapp,暴富云'
+    - 'DOMAIN-KEYWORD,admarvel,REJECT'
+    - 'DOMAIN-KEYWORD,admaster,REJECT'
+    - 'DOMAIN-KEYWORD,adsage,REJECT'
+    - 'DOMAIN-KEYWORD,adsmogo,REJECT'
+    - 'DOMAIN-KEYWORD,adsrvmedia,REJECT'
+    - 'DOMAIN-KEYWORD,adwords,REJECT'
+    - 'DOMAIN-KEYWORD,adservice,REJECT'
+    - 'DOMAIN-SUFFIX,appsflyer.com,REJECT'
+    - 'DOMAIN-KEYWORD,domob,REJECT'
+    - 'DOMAIN-SUFFIX,doubleclick.net,REJECT'
+    - 'DOMAIN-KEYWORD,duomeng,REJECT'
+    - 'DOMAIN-KEYWORD,dwtrack,REJECT'
+    - 'DOMAIN-KEYWORD,guanggao,REJECT'
+    - 'DOMAIN-KEYWORD,lianmeng,REJECT'
+    - 'DOMAIN-SUFFIX,mmstat.com,REJECT'
+    - 'DOMAIN-KEYWORD,mopub,REJECT'
+    - 'DOMAIN-KEYWORD,omgmta,REJECT'
+    - 'DOMAIN-KEYWORD,openx,REJECT'
+    - 'DOMAIN-KEYWORD,partnerad,REJECT'
+    - 'DOMAIN-KEYWORD,pingfore,REJECT'
+    - 'DOMAIN-KEYWORD,supersonicads,REJECT'
+    - 'DOMAIN-KEYWORD,uedas,REJECT'
+    - 'DOMAIN-KEYWORD,umeng,REJECT'
+    - 'DOMAIN-KEYWORD,usage,REJECT'
+    - 'DOMAIN-SUFFIX,vungle.com,REJECT'
+    - 'DOMAIN-KEYWORD,wlmonitor,REJECT'
+    - 'DOMAIN-KEYWORD,zjtoolbar,REJECT'
+    - 'DOMAIN-SUFFIX,9to5mac.com,暴富云'
+    - 'DOMAIN-SUFFIX,abpchina.org,暴富云'
+    - 'DOMAIN-SUFFIX,adblockplus.org,暴富云'
+    - 'DOMAIN-SUFFIX,adobe.com,暴富云'
+    - 'DOMAIN-SUFFIX,akamaized.net,暴富云'
+    - 'DOMAIN-SUFFIX,alfredapp.com,暴富云'
+    - 'DOMAIN-SUFFIX,amplitude.com,暴富云'
+    - 'DOMAIN-SUFFIX,ampproject.org,暴富云'
+    - 'DOMAIN-SUFFIX,android.com,暴富云'
+    - 'DOMAIN-SUFFIX,angularjs.org,暴富云'
+    - 'DOMAIN-SUFFIX,aolcdn.com,暴富云'
+    - 'DOMAIN-SUFFIX,apkpure.com,暴富云'
+    - 'DOMAIN-SUFFIX,appledaily.com,暴富云'
+    - 'DOMAIN-SUFFIX,appshopper.com,暴富云'
+    - 'DOMAIN-SUFFIX,appspot.com,暴富云'
+    - 'DOMAIN-SUFFIX,arcgis.com,暴富云'
+    - 'DOMAIN-SUFFIX,archive.org,暴富云'
+    - 'DOMAIN-SUFFIX,armorgames.com,暴富云'
+    - 'DOMAIN-SUFFIX,aspnetcdn.com,暴富云'
+    - 'DOMAIN-SUFFIX,att.com,暴富云'
+    - 'DOMAIN-SUFFIX,awsstatic.com,暴富云'
+    - 'DOMAIN-SUFFIX,azureedge.net,暴富云'
+    - 'DOMAIN-SUFFIX,azurewebsites.net,暴富云'
+    - 'DOMAIN-SUFFIX,bing.com,暴富云'
+    - 'DOMAIN-SUFFIX,bintray.com,暴富云'
+    - 'DOMAIN-SUFFIX,bit.com,暴富云'
+    - 'DOMAIN-SUFFIX,bit.ly,暴富云'
+    - 'DOMAIN-SUFFIX,bitbucket.org,暴富云'
+    - 'DOMAIN-SUFFIX,bjango.com,暴富云'
+    - 'DOMAIN-SUFFIX,bkrtx.com,暴富云'
+    - 'DOMAIN-SUFFIX,blog.com,暴富云'
+    - 'DOMAIN-SUFFIX,blogcdn.com,暴富云'
+    - 'DOMAIN-SUFFIX,blogger.com,暴富云'
+    - 'DOMAIN-SUFFIX,blogsmithmedia.com,暴富云'
+    - 'DOMAIN-SUFFIX,blogspot.com,暴富云'
+    - 'DOMAIN-SUFFIX,blogspot.hk,暴富云'
+    - 'DOMAIN-SUFFIX,bloomberg.com,暴富云'
+    - 'DOMAIN-SUFFIX,box.com,暴富云'
+    - 'DOMAIN-SUFFIX,box.net,暴富云'
+    - 'DOMAIN-SUFFIX,cachefly.net,暴富云'
+    - 'DOMAIN-SUFFIX,chromium.org,暴富云'
+    - 'DOMAIN-SUFFIX,cl.ly,暴富云'
+    - 'DOMAIN-SUFFIX,cloudflare.com,暴富云'
+    - 'DOMAIN-SUFFIX,cloudfront.net,暴富云'
+    - 'DOMAIN-SUFFIX,cloudmagic.com,暴富云'
+    - 'DOMAIN-SUFFIX,cmail19.com,暴富云'
+    - 'DOMAIN-SUFFIX,cnet.com,暴富云'
+    - 'DOMAIN-SUFFIX,cocoapods.org,暴富云'
+    - 'DOMAIN-SUFFIX,comodoca.com,暴富云'
+    - 'DOMAIN-SUFFIX,crashlytics.com,暴富云'
+    - 'DOMAIN-SUFFIX,culturedcode.com,暴富云'
+    - 'DOMAIN-SUFFIX,d.pr,暴富云'
+    - 'DOMAIN-SUFFIX,danilo.to,暴富云'
+    - 'DOMAIN-SUFFIX,dayone.me,暴富云'
+    - 'DOMAIN-SUFFIX,db.tt,暴富云'
+    - 'DOMAIN-SUFFIX,deskconnect.com,暴富云'
+    - 'DOMAIN-SUFFIX,disq.us,暴富云'
+    - 'DOMAIN-SUFFIX,disqus.com,暴富云'
+    - 'DOMAIN-SUFFIX,disquscdn.com,暴富云'
+    - 'DOMAIN-SUFFIX,dnsimple.com,暴富云'
+    - 'DOMAIN-SUFFIX,docker.com,暴富云'
+    - 'DOMAIN-SUFFIX,dribbble.com,暴富云'
+    - 'DOMAIN-SUFFIX,droplr.com,暴富云'
+    - 'DOMAIN-SUFFIX,duckduckgo.com,暴富云'
+    - 'DOMAIN-SUFFIX,dueapp.com,暴富云'
+    - 'DOMAIN-SUFFIX,dytt8.net,暴富云'
+    - 'DOMAIN-SUFFIX,edgecastcdn.net,暴富云'
+    - 'DOMAIN-SUFFIX,edgekey.net,暴富云'
+    - 'DOMAIN-SUFFIX,edgesuite.net,暴富云'
+    - 'DOMAIN-SUFFIX,engadget.com,暴富云'
+    - 'DOMAIN-SUFFIX,entrust.net,暴富云'
+    - 'DOMAIN-SUFFIX,eurekavpt.com,暴富云'
+    - 'DOMAIN-SUFFIX,evernote.com,暴富云'
+    - 'DOMAIN-SUFFIX,fabric.io,暴富云'
+    - 'DOMAIN-SUFFIX,fast.com,暴富云'
+    - 'DOMAIN-SUFFIX,fastly.net,暴富云'
+    - 'DOMAIN-SUFFIX,fc2.com,暴富云'
+    - 'DOMAIN-SUFFIX,feedburner.com,暴富云'
+    - 'DOMAIN-SUFFIX,feedly.com,暴富云'
+    - 'DOMAIN-SUFFIX,feedsportal.com,暴富云'
+    - 'DOMAIN-SUFFIX,fiftythree.com,暴富云'
+    - 'DOMAIN-SUFFIX,firebaseio.com,暴富云'
+    - 'DOMAIN-SUFFIX,flexibits.com,暴富云'
+    - 'DOMAIN-SUFFIX,flickr.com,暴富云'
+    - 'DOMAIN-SUFFIX,flipboard.com,暴富云'
+    - 'DOMAIN-SUFFIX,g.co,暴富云'
+    - 'DOMAIN-SUFFIX,gabia.net,暴富云'
+    - 'DOMAIN-SUFFIX,geni.us,暴富云'
+    - 'DOMAIN-SUFFIX,gfx.ms,暴富云'
+    - 'DOMAIN-SUFFIX,ggpht.com,暴富云'
+    - 'DOMAIN-SUFFIX,ghostnoteapp.com,暴富云'
+    - 'DOMAIN-SUFFIX,git.io,暴富云'
+    - 'DOMAIN-KEYWORD,github,暴富云'
+    - 'DOMAIN-SUFFIX,globalsign.com,暴富云'
+    - 'DOMAIN-SUFFIX,gmodules.com,暴富云'
+    - 'DOMAIN-SUFFIX,godaddy.com,暴富云'
+    - 'DOMAIN-SUFFIX,golang.org,暴富云'
+    - 'DOMAIN-SUFFIX,gongm.in,暴富云'
+    - 'DOMAIN-SUFFIX,goo.gl,暴富云'
+    - 'DOMAIN-SUFFIX,goodreaders.com,暴富云'
+    - 'DOMAIN-SUFFIX,goodreads.com,暴富云'
+    - 'DOMAIN-SUFFIX,gravatar.com,暴富云'
+    - 'DOMAIN-SUFFIX,gstatic.com,暴富云'
+    - 'DOMAIN-SUFFIX,gvt0.com,暴富云'
+    - 'DOMAIN-SUFFIX,hockeyapp.net,暴富云'
+    - 'DOMAIN-SUFFIX,hotmail.com,暴富云'
+    - 'DOMAIN-SUFFIX,icons8.com,暴富云'
+    - 'DOMAIN-SUFFIX,ifixit.com,暴富云'
+    - 'DOMAIN-SUFFIX,ift.tt,暴富云'
+    - 'DOMAIN-SUFFIX,ifttt.com,暴富云'
+    - 'DOMAIN-SUFFIX,iherb.com,暴富云'
+    - 'DOMAIN-SUFFIX,imageshack.us,暴富云'
+    - 'DOMAIN-SUFFIX,img.ly,暴富云'
+    - 'DOMAIN-SUFFIX,imgur.com,暴富云'
+    - 'DOMAIN-SUFFIX,imore.com,暴富云'
+    - 'DOMAIN-SUFFIX,instapaper.com,暴富云'
+    - 'DOMAIN-SUFFIX,ipn.li,暴富云'
+    - 'DOMAIN-SUFFIX,is.gd,暴富云'
+    - 'DOMAIN-SUFFIX,issuu.com,暴富云'
+    - 'DOMAIN-SUFFIX,itgonglun.com,暴富云'
+    - 'DOMAIN-SUFFIX,itun.es,暴富云'
+    - 'DOMAIN-SUFFIX,ixquick.com,暴富云'
+    - 'DOMAIN-SUFFIX,j.mp,暴富云'
+    - 'DOMAIN-SUFFIX,js.revsci.net,暴富云'
+    - 'DOMAIN-SUFFIX,jshint.com,暴富云'
+    - 'DOMAIN-SUFFIX,jtvnw.net,暴富云'
+    - 'DOMAIN-SUFFIX,justgetflux.com,暴富云'
+    - 'DOMAIN-SUFFIX,kat.cr,暴富云'
+    - 'DOMAIN-SUFFIX,klip.me,暴富云'
+    - 'DOMAIN-SUFFIX,libsyn.com,暴富云'
+    - 'DOMAIN-SUFFIX,linkedin.com,暴富云'
+    - 'DOMAIN-SUFFIX,line-apps.com,暴富云'
+    - 'DOMAIN-SUFFIX,linode.com,暴富云'
+    - 'DOMAIN-SUFFIX,lithium.com,暴富云'
+    - 'DOMAIN-SUFFIX,littlehj.com,暴富云'
+    - 'DOMAIN-SUFFIX,live.com,暴富云'
+    - 'DOMAIN-SUFFIX,live.net,暴富云'
+    - 'DOMAIN-SUFFIX,livefilestore.com,暴富云'
+    - 'DOMAIN-SUFFIX,llnwd.net,暴富云'
+    - 'DOMAIN-SUFFIX,macid.co,暴富云'
+    - 'DOMAIN-SUFFIX,macromedia.com,暴富云'
+    - 'DOMAIN-SUFFIX,macrumors.com,暴富云'
+    - 'DOMAIN-SUFFIX,mashable.com,暴富云'
+    - 'DOMAIN-SUFFIX,mathjax.org,暴富云'
+    - 'DOMAIN-SUFFIX,medium.com,暴富云'
+    - 'DOMAIN-SUFFIX,mega.co.nz,暴富云'
+    - 'DOMAIN-SUFFIX,mega.nz,暴富云'
+    - 'DOMAIN-SUFFIX,megaupload.com,暴富云'
+    - 'DOMAIN-SUFFIX,microsofttranslator.com,暴富云'
+    - 'DOMAIN-SUFFIX,mindnode.com,暴富云'
+    - 'DOMAIN-SUFFIX,mobile01.com,暴富云'
+    - 'DOMAIN-SUFFIX,modmyi.com,暴富云'
+    - 'DOMAIN-SUFFIX,msedge.net,暴富云'
+    - 'DOMAIN-SUFFIX,myfontastic.com,暴富云'
+    - 'DOMAIN-SUFFIX,name.com,暴富云'
+    - 'DOMAIN-SUFFIX,nextmedia.com,暴富云'
+    - 'DOMAIN-SUFFIX,nsstatic.net,暴富云'
+    - 'DOMAIN-SUFFIX,nssurge.com,暴富云'
+    - 'DOMAIN-SUFFIX,nyt.com,暴富云'
+    - 'DOMAIN-SUFFIX,nytimes.com,暴富云'
+    - 'DOMAIN-SUFFIX,omnigroup.com,暴富云'
+    - 'DOMAIN-SUFFIX,onedrive.com,暴富云'
+    - 'DOMAIN-SUFFIX,onenote.com,暴富云'
+    - 'DOMAIN-SUFFIX,ooyala.com,暴富云'
+    - 'DOMAIN-SUFFIX,openvpn.net,暴富云'
+    - 'DOMAIN-SUFFIX,openwrt.org,暴富云'
+    - 'DOMAIN-SUFFIX,orkut.com,暴富云'
+    - 'DOMAIN-SUFFIX,osxdaily.com,暴富云'
+    - 'DOMAIN-SUFFIX,outlook.com,暴富云'
+    - 'DOMAIN-SUFFIX,ow.ly,暴富云'
+    - 'DOMAIN-SUFFIX,paddleapi.com,暴富云'
+    - 'DOMAIN-SUFFIX,parallels.com,暴富云'
+    - 'DOMAIN-SUFFIX,parse.com,暴富云'
+    - 'DOMAIN-SUFFIX,pdfexpert.com,暴富云'
+    - 'DOMAIN-SUFFIX,periscope.tv,暴富云'
+    - 'DOMAIN-SUFFIX,pinboard.in,暴富云'
+    - 'DOMAIN-SUFFIX,pinterest.com,暴富云'
+    - 'DOMAIN-SUFFIX,pixelmator.com,暴富云'
+    - 'DOMAIN-SUFFIX,pixiv.net,暴富云'
+    - 'DOMAIN-SUFFIX,playpcesor.com,暴富云'
+    - 'DOMAIN-SUFFIX,playstation.com,暴富云'
+    - 'DOMAIN-SUFFIX,playstation.com.hk,暴富云'
+    - 'DOMAIN-SUFFIX,playstation.net,暴富云'
+    - 'DOMAIN-SUFFIX,playstationnetwork.com,暴富云'
+    - 'DOMAIN-SUFFIX,pushwoosh.com,暴富云'
+    - 'DOMAIN-SUFFIX,rime.im,暴富云'
+    - 'DOMAIN-SUFFIX,servebom.com,暴富云'
+    - 'DOMAIN-SUFFIX,sfx.ms,暴富云'
+    - 'DOMAIN-SUFFIX,shadowsocks.org,暴富云'
+    - 'DOMAIN-SUFFIX,sharethis.com,暴富云'
+    - 'DOMAIN-SUFFIX,shazam.com,暴富云'
+    - 'DOMAIN-SUFFIX,skype.com,暴富云'
+    - 'DOMAIN-SUFFIX,smartdns暴富云.com,暴富云'
+    - 'DOMAIN-SUFFIX,smartmailcloud.com,暴富云'
+    - 'DOMAIN-SUFFIX,sndcdn.com,暴富云'
+    - 'DOMAIN-SUFFIX,sony.com,暴富云'
+    - 'DOMAIN-SUFFIX,soundcloud.com,暴富云'
+    - 'DOMAIN-SUFFIX,sourceforge.net,暴富云'
+    - 'DOMAIN-SUFFIX,spotify.com,暴富云'
+    - 'DOMAIN-SUFFIX,squarespace.com,暴富云'
+    - 'DOMAIN-SUFFIX,sstatic.net,暴富云'
+    - 'DOMAIN-SUFFIX,st.luluku.pw,暴富云'
+    - 'DOMAIN-SUFFIX,stackoverflow.com,暴富云'
+    - 'DOMAIN-SUFFIX,startpage.com,暴富云'
+    - 'DOMAIN-SUFFIX,staticflickr.com,暴富云'
+    - 'DOMAIN-SUFFIX,steamcommunity.com,暴富云'
+    - 'DOMAIN-SUFFIX,symauth.com,暴富云'
+    - 'DOMAIN-SUFFIX,symcb.com,暴富云'
+    - 'DOMAIN-SUFFIX,symcd.com,暴富云'
+    - 'DOMAIN-SUFFIX,tapbots.com,暴富云'
+    - 'DOMAIN-SUFFIX,tapbots.net,暴富云'
+    - 'DOMAIN-SUFFIX,tdesktop.com,暴富云'
+    - 'DOMAIN-SUFFIX,techcrunch.com,暴富云'
+    - 'DOMAIN-SUFFIX,techsmith.com,暴富云'
+    - 'DOMAIN-SUFFIX,thepiratebay.org,暴富云'
+    - 'DOMAIN-SUFFIX,theverge.com,暴富云'
+    - 'DOMAIN-SUFFIX,time.com,暴富云'
+    - 'DOMAIN-SUFFIX,timeinc.net,暴富云'
+    - 'DOMAIN-SUFFIX,tiny.cc,暴富云'
+    - 'DOMAIN-SUFFIX,tinypic.com,暴富云'
+    - 'DOMAIN-SUFFIX,tmblr.co,暴富云'
+    - 'DOMAIN-SUFFIX,todoist.com,暴富云'
+    - 'DOMAIN-SUFFIX,trello.com,暴富云'
+    - 'DOMAIN-SUFFIX,trustasiassl.com,暴富云'
+    - 'DOMAIN-SUFFIX,tumblr.co,暴富云'
+    - 'DOMAIN-SUFFIX,tumblr.com,暴富云'
+    - 'DOMAIN-SUFFIX,tweetdeck.com,暴富云'
+    - 'DOMAIN-SUFFIX,tweetmarker.net,暴富云'
+    - 'DOMAIN-SUFFIX,twitch.tv,暴富云'
+    - 'DOMAIN-SUFFIX,txmblr.com,暴富云'
+    - 'DOMAIN-SUFFIX,typekit.net,暴富云'
+    - 'DOMAIN-SUFFIX,ubertags.com,暴富云'
+    - 'DOMAIN-SUFFIX,ublock.org,暴富云'
+    - 'DOMAIN-SUFFIX,ubnt.com,暴富云'
+    - 'DOMAIN-SUFFIX,ulyssesapp.com,暴富云'
+    - 'DOMAIN-SUFFIX,urchin.com,暴富云'
+    - 'DOMAIN-SUFFIX,usertrust.com,暴富云'
+    - 'DOMAIN-SUFFIX,v.gd,暴富云'
+    - 'DOMAIN-SUFFIX,v2ex.com,暴富云'
+    - 'DOMAIN-SUFFIX,vimeo.com,暴富云'
+    - 'DOMAIN-SUFFIX,vimeocdn.com,暴富云'
+    - 'DOMAIN-SUFFIX,vine.co,暴富云'
+    - 'DOMAIN-SUFFIX,vivaldi.com,暴富云'
+    - 'DOMAIN-SUFFIX,vox-cdn.com,暴富云'
+    - 'DOMAIN-SUFFIX,vsco.co,暴富云'
+    - 'DOMAIN-SUFFIX,vultr.com,暴富云'
+    - 'DOMAIN-SUFFIX,w.org,暴富云'
+    - 'DOMAIN-SUFFIX,w3schools.com,暴富云'
+    - 'DOMAIN-SUFFIX,webtype.com,暴富云'
+    - 'DOMAIN-SUFFIX,wikiwand.com,暴富云'
+    - 'DOMAIN-SUFFIX,wikileaks.org,暴富云'
+    - 'DOMAIN-SUFFIX,wikimedia.org,暴富云'
+    - 'DOMAIN-SUFFIX,wikipedia.com,暴富云'
+    - 'DOMAIN-SUFFIX,wikipedia.org,暴富云'
+    - 'DOMAIN-SUFFIX,windows.com,暴富云'
+    - 'DOMAIN-SUFFIX,windows.net,暴富云'
+    - 'DOMAIN-SUFFIX,wire.com,暴富云'
+    - 'DOMAIN-SUFFIX,wordpress.com,暴富云'
+    - 'DOMAIN-SUFFIX,workflowy.com,暴富云'
+    - 'DOMAIN-SUFFIX,wp.com,暴富云'
+    - 'DOMAIN-SUFFIX,wsj.com,暴富云'
+    - 'DOMAIN-SUFFIX,wsj.net,暴富云'
+    - 'DOMAIN-SUFFIX,xda-developers.com,暴富云'
+    - 'DOMAIN-SUFFIX,xeeno.com,暴富云'
+    - 'DOMAIN-SUFFIX,xiti.com,暴富云'
+    - 'DOMAIN-SUFFIX,yahoo.com,暴富云'
+    - 'DOMAIN-SUFFIX,yimg.com,暴富云'
+    - 'DOMAIN-SUFFIX,ying.com,暴富云'
+    - 'DOMAIN-SUFFIX,yoyo.org,暴富云'
+    - 'DOMAIN-SUFFIX,ytimg.com,暴富云'
+    - 'DOMAIN-SUFFIX,telegra.ph,暴富云'
+    - 'DOMAIN-SUFFIX,telegram.org,暴富云'
+    - 'IP-CIDR,91.108.4.0/22,暴富云,no-resolve'
+    - 'IP-CIDR,91.108.8.0/21,暴富云,no-resolve'
+    - 'IP-CIDR,91.108.16.0/22,暴富云,no-resolve'
+    - 'IP-CIDR,91.108.56.0/22,暴富云,no-resolve'
+    - 'IP-CIDR,149.154.160.0/20,暴富云,no-resolve'
+    - 'IP-CIDR6,2001:67c:4e8::/48,暴富云,no-resolve'
+    - 'IP-CIDR6,2001:b28:f23d::/48,暴富云,no-resolve'
+    - 'IP-CIDR6,2001:b28:f23f::/48,暴富云,no-resolve'
+    - 'IP-CIDR,120.232.181.162/32,暴富云,no-resolve'
+    - 'IP-CIDR,120.241.147.226/32,暴富云,no-resolve'
+    - 'IP-CIDR,120.253.253.226/32,暴富云,no-resolve'
+    - 'IP-CIDR,120.253.255.162/32,暴富云,no-resolve'
+    - 'IP-CIDR,120.253.255.34/32,暴富云,no-resolve'
+    - 'IP-CIDR,120.253.255.98/32,暴富云,no-resolve'
+    - 'IP-CIDR,180.163.150.162/32,暴富云,no-resolve'
+    - 'IP-CIDR,180.163.150.34/32,暴富云,no-resolve'
+    - 'IP-CIDR,180.163.151.162/32,暴富云,no-resolve'
+    - 'IP-CIDR,180.163.151.34/32,暴富云,no-resolve'
+    - 'IP-CIDR,203.208.39.0/24,暴富云,no-resolve'
+    - 'IP-CIDR,203.208.40.0/24,暴富云,no-resolve'
+    - 'IP-CIDR,203.208.41.0/24,暴富云,no-resolve'
+    - 'IP-CIDR,203.208.43.0/24,暴富云,no-resolve'
+    - 'IP-CIDR,203.208.50.0/24,暴富云,no-resolve'
+    - 'IP-CIDR,220.181.174.162/32,暴富云,no-resolve'
+    - 'IP-CIDR,220.181.174.226/32,暴富云,no-resolve'
+    - 'IP-CIDR,220.181.174.34/32,暴富云,no-resolve'
+    - 'DOMAIN,injections.adguard.org,DIRECT'
+    - 'DOMAIN,local.adguard.org,DIRECT'
+    - 'DOMAIN-SUFFIX,local,DIRECT'
+    - 'IP-CIDR,127.0.0.0/8,DIRECT'
+    - 'IP-CIDR,172.16.0.0/12,DIRECT'
+    - 'IP-CIDR,192.168.0.0/16,DIRECT'
+    - 'IP-CIDR,10.0.0.0/8,DIRECT'
+    - 'IP-CIDR,17.0.0.0/8,DIRECT'
+    - 'IP-CIDR,100.64.0.0/10,DIRECT'
+    - 'IP-CIDR,224.0.0.0/4,DIRECT'
+    - 'IP-CIDR6,fe80::/10,DIRECT'
+    - 'DOMAIN-SUFFIX,cn,DIRECT'
+    - 'DOMAIN-KEYWORD,-cn,DIRECT'
+    - 'GEOIP,CN,DIRECT'
+    - 'MATCH,暴富云'
