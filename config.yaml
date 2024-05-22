@@ -135,14 +135,6 @@ proxies:
   sni: null
   type: trojan
   udp: true
-- name: 2857dd159c835684f52c3f009c4da294
-  password: e03a8a33-3e62-4b99-82df-93cba82ae9c6
-  port: 443
-  server: 5.253.41.160
-  skip-cert-verify: 1
-  sni: null
-  type: trojan
-  udp: true
 - name: 9de930fad3c912a6bc97bd6780827c56
   password: wkmY1R4EcP
   port: 443
@@ -199,34 +191,10 @@ proxies:
   sni: null
   type: trojan
   udp: true
-- name: f23817efd4e34854181ecfb300922053
-  password: e6b2ef47-66ba-498f-9b51-ee0dec4eb994
-  port: 443
-  server: 172.105.179.18
-  skip-cert-verify: 1
-  sni: null
-  type: trojan
-  udp: true
-- name: da4c79d8898413b6956337f5496f0c5c
-  password: telegram-id-directvpn
-  port: 22222
-  server: 18.220.233.213
-  skip-cert-verify: 1
-  sni: trojan.burgerip.co.uk
-  type: trojan
-  udp: true
 - name: 40ce3ed14e2f1e2572b11a1b93c110f7
   password: a5c1b2f6-77a7-410b-be3d-163683665ba4
   port: 443
   server: 138.124.184.173
-  skip-cert-verify: 1
-  sni: null
-  type: trojan
-  udp: true
-- name: fdbe40f494bcf3fb9a4a8cd2193e8c18
-  password: e6b2ef47-66ba-498f-9b51-ee0dec4eb994
-  port: 443
-  server: au-full.privateip.net
   skip-cert-verify: 1
   sni: null
   type: trojan
@@ -237,22 +205,6 @@ proxies:
   server: 91.194.11.168
   skip-cert-verify: 1
   sni: null
-  type: trojan
-  udp: true
-- name: ee958b898dae273b4cedee746a996492
-  password: telegram-id-privatevpns
-  port: 22222
-  server: 18.175.9.70
-  skip-cert-verify: 0
-  sni: trojan.burgerip.co.uk
-  type: trojan
-  udp: true
-- name: e0525da750474c2949b20e064077c7fd
-  password: telegram-id-privatevpns
-  port: 22222
-  server: 18.185.151.212
-  skip-cert-verify: 1
-  sni: trojan.burgerip.co.uk
   type: trojan
   udp: true
 - name: 0e872f154ce036c5f1e513b1ca480aee
@@ -271,44 +223,12 @@ proxies:
   sni: 159.223.207.182
   type: trojan
   udp: true
-- name: 56d4820e259f40ee6db4d7b22b0cfd39
-  password: telegram-id-directvpn
-  port: 22222
-  server: 52.28.233.4
-  skip-cert-verify: 1
-  sni: trojan.burgerip.co.uk
-  type: trojan
-  udp: true
 - name: 472a5e129ecde52816189dc35ee3e95f
   password: telegram-id-privatevpns
   port: 22222
   server: 18.175.111.77
   skip-cert-verify: 1
   sni: trojan.burgerip.co.uk
-  type: trojan
-  udp: true
-- name: 76a7ae74da97a009e2eeef8680467f34
-  password: ebbf7922-f9c6-4e99-b588-edd68108f269
-  port: 20230
-  server: sg08.421421.xyz
-  skip-cert-verify: 0
-  sni: 421421.xyz
-  type: trojan
-  udp: true
-- name: 755cc63711be8dde9257be8eb6b7e6e8
-  password: 2155145a-b1b5-443a-8977-670f6bd10f02
-  port: 50001
-  server: bgroup.node1.t.nodelist-gfwairport2.top
-  skip-cert-verify: 1
-  sni: null
-  type: trojan
-  udp: true
-- name: 92f5171030d0242ceb268c3fefe53bc8
-  password: ebbf7922-f9c6-4e99-b588-edd68108f269
-  port: 20230
-  server: us04.421421.xyz
-  skip-cert-verify: 1
-  sni: 421421.xyz
   type: trojan
   udp: true
 - name: 973d035df57d4c76f62a08931d0e84d2
@@ -319,38 +239,6 @@ proxies:
   sni: 421421.xyz
   type: trojan
   udp: true
-- name: 75dbc1980b1d0c1d3a2e3cfe09a38c6b
-  password: e03a8a33-3e62-4b99-82df-93cba82ae9c6
-  port: 443
-  server: jp-full.privateip.net
-  skip-cert-verify: 1
-  sni: null
-  type: trojan
-  udp: true
-- name: 240265f65165ea10e595813ac8b42c6f
-  password: fcegeO1hwxJN
-  port: 14704
-  server: 13.212.219.213
-  skip-cert-verify: 1
-  sni: appsvs.shop
-  type: trojan
-  udp: true
-- name: b0a317d03927fca4831bf6d0e875865a
-  password: zIvR7ryOXv
-  port: 34428
-  server: drehitm.duckdns.org
-  skip-cert-verify: 1
-  sni: wrmelmwxlf.gktevlrqznwqqozy.fabpfs66gizmnojhcvqxwl.kytrcfzqla87gvgvs6c7kjnrubuh.cc
-  type: trojan
-  udp: true
-- name: 24d74a77f3c47f80eed9d20bf4e4f009
-  password: 952e564d-2394-4399-ae12-f5051004ed15
-  port: 36116
-  server: free.2weradf.xyz
-  skip-cert-verify: 0
-  sni: jp01.abpilot.xyz
-  type: trojan
-  udp: true
 - name: 30bc03b8f6cdf950eadb5c722c43c8cb
   password: 2155145a-b1b5-443a-8977-670f6bd10f02
   port: 50001
@@ -359,18 +247,74 @@ proxies:
   sni: null
   type: trojan
   udp: true
-- name: a39c2f3109375a3821ba9104fcae11ec
-  password: 2155145a-b1b5-443a-8977-670f6bd10f02
-  port: 50001
-  server: bgroup.node3.t.nodelist-gfwairport2.top
-  skip-cert-verify: 1
-  sni: null
+- name: 785d091476f4e742d041b640369b7e41
+  password: ebbf7922-f9c6-4e99-b588-edd68108f269
+  port: 20230
+  server: jp07.421421.xyz
+  skip-cert-verify: 0
+  sni: 421421.xyz
   type: trojan
   udp: true
-- name: 6f9c2cf3f4fdbbe91f1276efa928b1fe
+- name: 095f40a902d75fa2cb4233cffe541b75
+  password: cf13832b-4ca0-4fee-8e85-2b2411104e75
+  port: 20230
+  server: us03.421421.xyz
+  skip-cert-verify: 1
+  sni: 421421.xyz
+  type: trojan
+  udp: true
+- name: e1064592b13d97f95be388997b0132d5
   password: 4aa9ee7a-ffee-4ca4-a588-f5fa9e979c38
   port: 20230
-  server: sg07.421421.xyz
+  server: us04.421421.xyz
+  skip-cert-verify: 1
+  sni: 421421.xyz
+  type: trojan
+  udp: true
+- name: 5300eef32e50ff9d307e9e60f6eddd96
+  password: d2382a15-ae45-40ab-8925-84792b584bd8
+  port: 20230
+  server: jp08.421421.xyz
+  skip-cert-verify: 0
+  sni: 421421.xyz
+  type: trojan
+  udp: true
+- name: ffe71cf0a74d4ffacbb4b4c4ee335cae
+  password: telegram-id-privatevpns
+  port: 22222
+  server: 3.70.130.214
+  skip-cert-verify: 1
+  sni: trojan.burgerip.co.uk
+  type: trojan
+  udp: true
+- name: f206d7a959782b954844dea1c51950a7
+  password: telegram-id-privatevpns
+  port: 22222
+  server: 18.132.122.204
+  skip-cert-verify: 0
+  sni: trojan.burgerip.co.uk
+  type: trojan
+  udp: true
+- name: d67a508adec58d8e255e3ee03372f20c
+  password: telegram-id-privatevpns
+  port: 22222
+  server: 18.134.233.122
+  skip-cert-verify: 0
+  sni: trojan.burgerip.co.uk
+  type: trojan
+  udp: true
+- name: 001dad40c51c37908ccd08b7826178b4
+  password: 63PGyiol51RM
+  port: 14770
+  server: 54.238.233.65
+  skip-cert-verify: 1
+  sni: appsvs.shop
+  type: trojan
+  udp: true
+- name: b2ea9b7a17be3d61d8206c9d25b50198
+  password: d2382a15-ae45-40ab-8925-84792b584bd8
+  port: 20230
+  server: us03.421421.xyz
   skip-cert-verify: 1
   sni: 421421.xyz
   type: trojan
@@ -447,16 +391,6 @@ proxies:
   uuid: 6c764a03-bb1a-4bc6-baca-452453fce1ae
 - alterId: 0
   cipher: auto
-  name: 9d7c564b1e84a423ff73f5874a55710f
-  network: ws
-  port: 443
-  server: 61.227.230.17
-  tls: 0
-  type: vmess
-  udp: true
-  uuid: 4ccc923e-8452-418c-9222-87ee8f295e14
-- alterId: 0
-  cipher: auto
   name: 5b91c902f1b496c84066585f9fd64833
   network: ws
   port: 80
@@ -467,7 +401,7 @@ proxies:
   uuid: 5820093a-bb7d-4e15-8575-1a529f2d8282
 
 proxy-groups:
-    - { name: 暴富云, type: fallback, proxies: [0e872f154ce036c5f1e513b1ca480aee, 10d25667c69d0ce09f96714bf2a0c786, 1521d790054b29cb13e26c3d8e7cedad, 15f4641979c3d809b4e8890e69a2b6cb, 240265f65165ea10e595813ac8b42c6f, 24d74a77f3c47f80eed9d20bf4e4f009, 2857dd159c835684f52c3f009c4da294, 2c9e0021de6c729f47900e6161656011, 2d267f9c168ef559868a9810a7d3b2fb, 30bc03b8f6cdf950eadb5c722c43c8cb, 33c347cf6d1fd5ddaf91a0c80595e9cd, 349dc90faca2a647f5672c3b7c4f3e4d, 3998f3f232c2b9c807fd579942bba2f6, 40ce3ed14e2f1e2572b11a1b93c110f7, 472a5e129ecde52816189dc35ee3e95f, 4804975065e905fa4461d6cf3e3bb188, 5600c77580d90d52a035c7ef46502791, 568fe669b17b0a36171006056e1e73ee, 56d4820e259f40ee6db4d7b22b0cfd39, 5b91c902f1b496c84066585f9fd64833, 62c8e5767126e4e7e75d5d512206632a, 6f9c2cf3f4fdbbe91f1276efa928b1fe, 755cc63711be8dde9257be8eb6b7e6e8, 75dbc1980b1d0c1d3a2e3cfe09a38c6b, 76a7ae74da97a009e2eeef8680467f34, 78229b11c793e796655dc8a82cc42a24, 7c13407d53bd9dd496f5a883418e0c35, 829199a7af4a1c67c8e449e9f052bc15, 83ed7dc7697fe461a5686785fc9508ae, 872fc706d1b53b46cbeeeb4f6d2b896a, 8ed5f752b8b32652e8d704473294ad72, 92f5171030d0242ceb268c3fefe53bc8, 973d035df57d4c76f62a08931d0e84d2, 985ba581c8c70babb3ef16d0403ad9bf, 9a4515ae724977bf41891126124b33f5, 9cb9af0e61a38d91981c1d4fcd8af2e6, 9d7c564b1e84a423ff73f5874a55710f, 9de930fad3c912a6bc97bd6780827c56, a39c2f3109375a3821ba9104fcae11ec, a657adfe16818ab0da1814e2238d5573, aaf966ca81d6fd3f410639d6c1ca16be, b0a317d03927fca4831bf6d0e875865a, da4c79d8898413b6956337f5496f0c5c, dd360c17df91054d3996a92e35ca306f, e0525da750474c2949b20e064077c7fd, e936cbb4f7bd93e13c285f4d9a2a4c40, e9d33009cd99db8ca7b72789d82ced55, ee958b898dae273b4cedee746a996492, eedf46148dcd39852dc68edf056c7761, f199e19dadc7163222abe2646841fdac, f23817efd4e34854181ecfb300922053, faf79b3b99fd5a95397a9391cfc50f9d, fdbe40f494bcf3fb9a4a8cd2193e8c18, 30bc03b8f6cdf950eadb5c722c43c8cb, 9cb9af0e61a38d91981c1d4fcd8af2e6, 872fc706d1b53b46cbeeeb4f6d2b896a, 78229b11c793e796655dc8a82cc42a24, dd360c17df91054d3996a92e35ca306f, a39c2f3109375a3821ba9104fcae11ec, 349dc90faca2a647f5672c3b7c4f3e4d, 7c13407d53bd9dd496f5a883418e0c35, 3998f3f232c2b9c807fd579942bba2f6, 75dbc1980b1d0c1d3a2e3cfe09a38c6b, eedf46148dcd39852dc68edf056c7761, 829199a7af4a1c67c8e449e9f052bc15, 755cc63711be8dde9257be8eb6b7e6e8, 6f9c2cf3f4fdbbe91f1276efa928b1fe, 2857dd159c835684f52c3f009c4da294, f199e19dadc7163222abe2646841fdac, 10d25667c69d0ce09f96714bf2a0c786, fdbe40f494bcf3fb9a4a8cd2193e8c18, f23817efd4e34854181ecfb300922053, 33c347cf6d1fd5ddaf91a0c80595e9cd, 1521d790054b29cb13e26c3d8e7cedad, 5b91c902f1b496c84066585f9fd64833, 9d7c564b1e84a423ff73f5874a55710f, 9a4515ae724977bf41891126124b33f5, e936cbb4f7bd93e13c285f4d9a2a4c40, b0a317d03927fca4831bf6d0e875865a, 76a7ae74da97a009e2eeef8680467f34, 62c8e5767126e4e7e75d5d512206632a, 240265f65165ea10e595813ac8b42c6f, e9d33009cd99db8ca7b72789d82ced55, aaf966ca81d6fd3f410639d6c1ca16be, 83ed7dc7697fe461a5686785fc9508ae, 973d035df57d4c76f62a08931d0e84d2, 2d267f9c168ef559868a9810a7d3b2fb, 568fe669b17b0a36171006056e1e73ee, 2c9e0021de6c729f47900e6161656011, 40ce3ed14e2f1e2572b11a1b93c110f7, 8ed5f752b8b32652e8d704473294ad72, 4804975065e905fa4461d6cf3e3bb188, faf79b3b99fd5a95397a9391cfc50f9d, 15f4641979c3d809b4e8890e69a2b6cb, a657adfe16818ab0da1814e2238d5573, da4c79d8898413b6956337f5496f0c5c, 5600c77580d90d52a035c7ef46502791, 92f5171030d0242ceb268c3fefe53bc8, 985ba581c8c70babb3ef16d0403ad9bf, 9de930fad3c912a6bc97bd6780827c56, 472a5e129ecde52816189dc35ee3e95f, 0e872f154ce036c5f1e513b1ca480aee, 24d74a77f3c47f80eed9d20bf4e4f009, ee958b898dae273b4cedee746a996492, 56d4820e259f40ee6db4d7b22b0cfd39, e0525da750474c2949b20e064077c7fd], url: 'http://www.google.com/generate_204', interval: 5 }
+    - { name: 暴富云, type: fallback, proxies: [001dad40c51c37908ccd08b7826178b4, 095f40a902d75fa2cb4233cffe541b75, 0e872f154ce036c5f1e513b1ca480aee, 10d25667c69d0ce09f96714bf2a0c786, 1521d790054b29cb13e26c3d8e7cedad, 15f4641979c3d809b4e8890e69a2b6cb, 2c9e0021de6c729f47900e6161656011, 2d267f9c168ef559868a9810a7d3b2fb, 30bc03b8f6cdf950eadb5c722c43c8cb, 33c347cf6d1fd5ddaf91a0c80595e9cd, 349dc90faca2a647f5672c3b7c4f3e4d, 3998f3f232c2b9c807fd579942bba2f6, 40ce3ed14e2f1e2572b11a1b93c110f7, 472a5e129ecde52816189dc35ee3e95f, 4804975065e905fa4461d6cf3e3bb188, 5300eef32e50ff9d307e9e60f6eddd96, 5600c77580d90d52a035c7ef46502791, 568fe669b17b0a36171006056e1e73ee, 5b91c902f1b496c84066585f9fd64833, 62c8e5767126e4e7e75d5d512206632a, 78229b11c793e796655dc8a82cc42a24, 785d091476f4e742d041b640369b7e41, 7c13407d53bd9dd496f5a883418e0c35, 829199a7af4a1c67c8e449e9f052bc15, 83ed7dc7697fe461a5686785fc9508ae, 872fc706d1b53b46cbeeeb4f6d2b896a, 8ed5f752b8b32652e8d704473294ad72, 973d035df57d4c76f62a08931d0e84d2, 985ba581c8c70babb3ef16d0403ad9bf, 9a4515ae724977bf41891126124b33f5, 9cb9af0e61a38d91981c1d4fcd8af2e6, 9de930fad3c912a6bc97bd6780827c56, a657adfe16818ab0da1814e2238d5573, aaf966ca81d6fd3f410639d6c1ca16be, b2ea9b7a17be3d61d8206c9d25b50198, d67a508adec58d8e255e3ee03372f20c, dd360c17df91054d3996a92e35ca306f, e1064592b13d97f95be388997b0132d5, e936cbb4f7bd93e13c285f4d9a2a4c40, e9d33009cd99db8ca7b72789d82ced55, eedf46148dcd39852dc68edf056c7761, f199e19dadc7163222abe2646841fdac, f206d7a959782b954844dea1c51950a7, faf79b3b99fd5a95397a9391cfc50f9d, ffe71cf0a74d4ffacbb4b4c4ee335cae, 30bc03b8f6cdf950eadb5c722c43c8cb, 9cb9af0e61a38d91981c1d4fcd8af2e6, 872fc706d1b53b46cbeeeb4f6d2b896a, f199e19dadc7163222abe2646841fdac, dd360c17df91054d3996a92e35ca306f, 7c13407d53bd9dd496f5a883418e0c35, 349dc90faca2a647f5672c3b7c4f3e4d, 3998f3f232c2b9c807fd579942bba2f6, eedf46148dcd39852dc68edf056c7761, 829199a7af4a1c67c8e449e9f052bc15, 78229b11c793e796655dc8a82cc42a24, 10d25667c69d0ce09f96714bf2a0c786, 33c347cf6d1fd5ddaf91a0c80595e9cd, 1521d790054b29cb13e26c3d8e7cedad, 5b91c902f1b496c84066585f9fd64833, 9a4515ae724977bf41891126124b33f5, e9d33009cd99db8ca7b72789d82ced55, b2ea9b7a17be3d61d8206c9d25b50198, 5300eef32e50ff9d307e9e60f6eddd96, e936cbb4f7bd93e13c285f4d9a2a4c40, 83ed7dc7697fe461a5686785fc9508ae, aaf966ca81d6fd3f410639d6c1ca16be, faf79b3b99fd5a95397a9391cfc50f9d, 001dad40c51c37908ccd08b7826178b4, 568fe669b17b0a36171006056e1e73ee, 2d267f9c168ef559868a9810a7d3b2fb, 15f4641979c3d809b4e8890e69a2b6cb, a657adfe16818ab0da1814e2238d5573, 62c8e5767126e4e7e75d5d512206632a, 973d035df57d4c76f62a08931d0e84d2, 2c9e0021de6c729f47900e6161656011, 40ce3ed14e2f1e2572b11a1b93c110f7, 4804975065e905fa4461d6cf3e3bb188, 985ba581c8c70babb3ef16d0403ad9bf, 8ed5f752b8b32652e8d704473294ad72, e1064592b13d97f95be388997b0132d5, 472a5e129ecde52816189dc35ee3e95f, 5600c77580d90d52a035c7ef46502791, 9de930fad3c912a6bc97bd6780827c56, d67a508adec58d8e255e3ee03372f20c, 785d091476f4e742d041b640369b7e41, 095f40a902d75fa2cb4233cffe541b75, 0e872f154ce036c5f1e513b1ca480aee, ffe71cf0a74d4ffacbb4b4c4ee335cae, f206d7a959782b954844dea1c51950a7], url: 'http://www.google.com/generate_204', interval: 5 }
 rules:
     - 'DOMAIN,feiniaoyun.xyz,DIRECT'
     - 'DOMAIN-SUFFIX,services.googleapis.cn,暴富云'
